@@ -1234,7 +1234,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #6ee8c3;
+    background: #5c1cc7;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -2343,6 +2343,13 @@ mark.search-keyword {
   color: #ff2a2a;
   font-weight: bold;
 }
+mjx-container[jax='CHTML'][display='true'],
+.has-jax {
+  overflow: auto hidden;
+}
+mjx-container[display='true'] + br {
+  display: none;
+}
 .use-motion .animated {
   animation-fill-mode: none;
   visibility: inherit;
@@ -2603,4 +2610,61 @@ header.header {
   .sidebar {
     display: none;
   }
+}
+.statement.plain {
+  background-color: #afeeee;
+  padding: 0rem 0.6rem 0rem 0.6rem;
+  border-left: 5px solid #87ceeb;
+  margin: 0em 2em;
+  color: #000;
+}
+.statement.example.definition {
+  background-color: #c1ffc1;
+  padding: 0rem 0.6rem 0rem 0.6rem;
+  border-left: 5px solid #b4eeb4;
+  margin: 0em 2em;
+  color: #000;
+}
+.statement.definition {
+  background-color: #fdf5e6;
+  padding: 0rem 0.6rem 0rem 0.6rem;
+  border-left: 5px solid #ffe4c4;
+  margin: 0em 2em;
+  color: #000;
+}
+.statement.plain .statement-label {
+  font-weight: bold;
+}
+.statement.note.unnumbered {
+  margin: 2em auto;
+  padding: 0.5em;
+  font-size: 85%;
+  width: 90%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  border-radius: 5px;
+  padding: 10px;
+}
+.statement.definition .statement-label {
+  font-weight: bold;
+}
+.statement.proof .statement-label {
+  font-weight: bold;
+}
+.statement.plain p:first-child {
+  text-indent: 0pt;
+}
+.statement.plain .statement-info {
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+}
+.csl-entry {
+  border-left: 1px solid #777;
+  padding-left: 1em;
+  margin-left: 2em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+  margin-right: 0em;
+  font-size: 100%;
+  line-height: 150%;
 }
