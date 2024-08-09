@@ -184,7 +184,7 @@ body {
   background: var(--body-bg-color);
   box-sizing: border-box;
   color: var(--text-color);
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif Simplified Chinese, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1em;
   line-height: 2;
   min-height: 100%;
@@ -197,7 +197,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Microsoft YaHei, Noto Serif Simplified Chinese, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 30px 0 15px;
@@ -518,7 +518,7 @@ pre figcaption a:hover {
 }
 pre,
 code {
-  font-family: consolas, Menlo, monospace, 'PingFang SC', 'Microsoft YaHei';
+  font-family: consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
 }
 code {
   border-radius: 3px;
@@ -625,6 +625,39 @@ pre code {
 .blockquote-center p,
 .blockquote-center div {
   text-align: center;
+}
+.colorquote {
+  position: relative;
+  padding: 0.1em 1.5em;
+  color: #4a4a4a;
+  margin-bottom: 1em;
+  margin-left: 2em;
+  margin-right: 2em;
+}
+.colorquote.definition {
+  border-color: #ffe4c4;
+  background-color: #fdf5e6;
+}
+.colorquote.theorem {
+  border-color: #87ceeb;
+  background-color: #afeeee;
+}
+.colorquote.example {
+  border-color: #b4eeb4;
+  background-color: #c1ffc1;
+}
+.colorquote.warning {
+  border-color: #ff3860;
+  background-color: #ffb3c2;
+}
+.colorquote.algorithm {
+  border-color: #b5b5b5;
+  background-color: #f0f0f0;
+}
+.colorquote.pseudocode {
+  border-color: #b5b5b5;
+  background-color: #f0f0f0;
+  line-numbers: true;
 }
 .group-picture {
   margin-bottom: 20px;
@@ -1092,7 +1125,7 @@ pre code {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Microsoft YaHei, Noto Serif Simplified Chinese, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   line-height: 1.5;
@@ -1234,7 +1267,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #5c1cc7;
+    background: #ff2e0a;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1817,7 +1850,7 @@ pre code {
   width: 4px;
 }
 .post-body {
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif SC, Noto Serif Simplified Chinese, "PingFang SC", "Microsoft YaHei", sans-serif;
   overflow-wrap: break-word;
 }
 @media (min-width: 1200px) {
@@ -2003,7 +2036,7 @@ pre code {
 }
 .posts-expand .post-meta-container {
   color: #999;
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Noto Serif SC, Noto Serif Simplified Chinese, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 0.75em;
   margin-top: 3px;
 }

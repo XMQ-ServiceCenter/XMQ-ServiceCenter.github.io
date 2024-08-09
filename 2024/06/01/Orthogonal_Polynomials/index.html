@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+Simplified+Chinese:300,300italic,400,400italic,700,700italic%7CMicrosoft+YaHei:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xmq-servicecenter.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基于拉夫连季耶夫与沙巴特的《复变函数论方法》的第七章（特殊函数）第2节（正交多项式）做了一个简单的整理。所用记号与书内有所不同。  一般形式的正交多项式 我们来讨论如下问题：给定一个区间 \([a,b]\)，以及一个在 \([a,b]\) 上恒为非负的权重函数 \(\rho(x)\)，并且假定 \(\rho(x)\) 满足：  \(\dfrac{\rho&#39;(x)}{\rho(x)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正交多项式">
+<meta property="og:url" content="https://xmq-servicecenter.github.io/2024/06/01/Orthogonal_Polynomials/index.html">
+<meta property="og:site_name" content="XMQ-维修中心">
+<meta property="og:description" content="基于拉夫连季耶夫与沙巴特的《复变函数论方法》的第七章（特殊函数）第2节（正交多项式）做了一个简单的整理。所用记号与书内有所不同。  一般形式的正交多项式 我们来讨论如下问题：给定一个区间 \([a,b]\)，以及一个在 \([a,b]\) 上恒为非负的权重函数 \(\rho(x)\)，并且假定 \(\rho(x)\) 满足：  \(\dfrac{\rho&#39;(x)}{\rho(x)">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-18T02:40:29.936Z">
+<meta property="article:author" content="XMQ">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xmq-servicecenter.github.io/2024/06/01/Orthogonal_Polynomials/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xmq-servicecenter.github.io/2024/06/01/Orthogonal_Polynomials/","path":"2024/06/01/Orthogonal_Polynomials/","title":"正交多项式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>正交多项式 | XMQ-维修中心</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XMQ-维修中心</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-考前预习"><a href="/%E8%80%83%E5%89%8D%E9%A2%84%E4%B9%A0/" rel="section"><i class="fa fa-th fa-fw"></i>考前预习</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E8%88%AC%E5%BD%A2%E5%BC%8F%E7%9A%84%E6%AD%A3%E4%BA%A4%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">一般形式的正交多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E5%A4%87%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">完备性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%B6%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">零点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">微分方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">微分表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB"><span class="nav-number">1.5.</span> <span class="nav-text">递推关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0"><span class="nav-number">1.6.</span> <span class="nav-text">生成函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E7%9A%84%E6%AD%A3%E4%BA%A4%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">具体的正交多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%92%E8%AE%A9%E5%BE%B7%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">勒让德多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E6%95%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text">几个常数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B-1"><span class="nav-number">2.1.2.</span> <span class="nav-text">微分方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E8%A1%A8%E8%BE%BE%E5%BC%8F-1"><span class="nav-number">2.1.3.</span> <span class="nav-text">微分表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-1"><span class="nav-number">2.1.4.</span> <span class="nav-text">生成函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E4%B8%A4%E9%A1%B9%E7%9A%84%E7%B3%BB%E6%95%B0"><span class="nav-number">2.1.5.</span> <span class="nav-text">前两项的系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB-1"><span class="nav-number">2.1.6.</span> <span class="nav-text">递推关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%84%E7%B1%B3%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">2.2.</span> <span class="nav-text">厄米多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E6%95%B0-1"><span class="nav-number">2.2.1.</span> <span class="nav-text">几个常数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B-2"><span class="nav-number">2.2.2.</span> <span class="nav-text">微分方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E8%A1%A8%E8%BE%BE%E5%BC%8F-2"><span class="nav-number">2.2.3.</span> <span class="nav-text">微分表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-2"><span class="nav-number">2.2.4.</span> <span class="nav-text">生成函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E4%B8%A4%E9%A1%B9%E7%9A%84%E7%B3%BB%E6%95%B0-1"><span class="nav-number">2.2.5.</span> <span class="nav-text">前两项的系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB-2"><span class="nav-number">2.2.6.</span> <span class="nav-text">递推关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%89%E7%9B%96%E5%B0%94%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">拉盖尔多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E6%95%B0-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">几个常数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B-3"><span class="nav-number">2.3.2.</span> <span class="nav-text">微分方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E8%A1%A8%E8%BE%BE%E5%BC%8F-3"><span class="nav-number">2.3.3.</span> <span class="nav-text">微分表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-3"><span class="nav-number">2.3.4.</span> <span class="nav-text">生成函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E4%B8%A4%E9%A1%B9%E7%9A%84%E7%B3%BB%E6%95%B0-2"><span class="nav-number">2.3.5.</span> <span class="nav-text">前两项的系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB-3"><span class="nav-number">2.3.6.</span> <span class="nav-text">递推关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%AF%94%E9%9B%AA%E5%A4%AB%E5%A4%9A%E9%A1%B9%E5%BC%8Fn0-%E6%97%B6"><span class="nav-number">2.4.</span> <span class="nav-text">切比雪夫多项式（\(n&gt;0\) 时）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E6%95%B0n0-%E6%97%B6"><span class="nav-number">2.4.1.</span> <span class="nav-text">几个常数（\(n&gt;0\) 时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8Bn0-%E6%97%B6"><span class="nav-number">2.4.2.</span> <span class="nav-text">微分方程（\(n&gt;0\) 时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E8%A1%A8%E8%BE%BE%E5%BC%8Fn0-%E6%97%B6"><span class="nav-number">2.4.3.</span> <span class="nav-text">微分表达式（\(n&gt;0\) 时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E4%B8%A4%E9%A1%B9%E7%B3%BB%E6%95%B0n0-%E6%97%B6"><span class="nav-number">2.4.4.</span> <span class="nav-text">前两项系数（\(n&gt;0\) 时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BBn1-%E6%97%B6"><span class="nav-number">2.4.5.</span> <span class="nav-text">递推关系（\(n&gt;1\) 时）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-4"><span class="nav-number">2.4.6.</span> <span class="nav-text">生成函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%85%E5%8F%AF%E6%AF%94%E5%A4%9A%E9%A1%B9%E5%BC%8F"><span class="nav-number">2.5.</span> <span class="nav-text">雅可比多项式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%A0%E4%B8%AA%E5%B8%B8%E6%95%B0-3"><span class="nav-number">2.5.1.</span> <span class="nav-text">几个常数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B-4"><span class="nav-number">2.5.2.</span> <span class="nav-text">微分方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AE%E5%88%86%E8%A1%A8%E8%BE%BE%E5%BC%8F-4"><span class="nav-number">2.5.3.</span> <span class="nav-text">微分表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%87%BD%E6%95%B0-5"><span class="nav-number">2.5.4.</span> <span class="nav-text">生成函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E4%B8%A4%E9%A1%B9%E7%9A%84%E7%B3%BB%E6%95%B0-3"><span class="nav-number">2.5.5.</span> <span class="nav-text">前两项的系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E5%85%B3%E7%B3%BB-4"><span class="nav-number">2.5.6.</span> <span class="nav-text">递推关系</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">XMQ</p>
+  <div class="site-description" itemprop="description">奇怪的小网站</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xmq-servicecenter.github.io/2024/06/01/Orthogonal_Polynomials/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XMQ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XMQ-维修中心">
+      <meta itemprop="description" content="奇怪的小网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="正交多项式 | XMQ-维修中心">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          正交多项式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-06-01T00:00:00+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-18 10:40:29" itemprop="dateModified" datetime="2024-07-18T10:40:29+08:00">2024-07-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>基于拉夫连季耶夫与沙巴特的《复变函数论方法》的第七章（特殊函数）第2节（正交多项式）做了一个简单的整理。所用记号与书内有所不同。</p>
+<hr />
+<h1 id="一般形式的正交多项式">一般形式的正交多项式</h1>
+<p>我们来讨论如下问题：给定一个区间 <span
+class="math inline">\([a,b]\)</span>，以及一个在 <span
+class="math inline">\([a,b]\)</span> 上恒为非负的权重函数 <span
+class="math inline">\(\rho(x)\)</span>，并且假定 <span
+class="math inline">\(\rho(x)\)</span> 满足：</p>
+<ul>
+<li><span
+class="math inline">\(\dfrac{\rho&#39;(x)}{\rho(x)}=\dfrac{\alpha_0+\alpha_1x}{\beta_0+\beta_1x+\beta_2x^2}:=\dfrac{\alpha(x)}{\beta(x)}\)</span>,
+<span class="math inline">\(\,\\[1em]\)</span></li>
+<li><span
+class="math inline">\(\rho(a)\beta(a)=\rho(b)\beta(b)=0\)</span>, <span
+class="math inline">\(\,\\[1em]\)</span></li>
+<li><span class="math inline">\(\alpha_1\)</span> 与 <span
+class="math inline">\(\beta_2\)</span> 中至少一个不为 <span
+class="math inline">\(0\)</span>. <span
+class="math inline">\(\,\\[1em]\)</span></li>
+</ul>
+<p>然后求出 <span class="math inline">\(n\)</span> 次多项式 <span
+class="math inline">\(\varphi_n(x)\)</span>，使其满足： <span
+class="math display">\[\int_a^b\rho(x)\varphi_n(x)\varphi_m(x)\mathrm
+dx=\delta_{mn}w_n^2,\]</span> 并讨论 <span
+class="math inline">\(\varphi_n(x)\)</span> 的性质。</p>
+<p>我们还将归一化之后的 <span
+class="math inline">\(\varphi_n(x)\)</span> 记为 <span
+class="math inline">\(\varphi^0_n(x)\)</span>，并将它们的各向系数记为
+<span class="math inline">\(a_{n,i}\)</span> 与 <span
+class="math inline">\(a_{n,i,0}\)</span>： <span
+class="math display">\[\varphi_n(x)=\sum_{i=0}^na_{n,i}x^i,\quad
+\varphi^0_n(x):=\dfrac{1}{w_n}\varphi_n(x)=\sum_{i=0}^na^0_{n,i}x^i.\]</span>
+显然 <span class="math inline">\(a_{n,i}^0=a_{n,i}/w_n\)</span>。</p>
+<h2 id="完备性">完备性</h2>
+<p>不难想象，任何一个 <span class="math inline">\(n\)</span> 次多项式
+<span class="math inline">\(g_n\)</span> 都能写为 <span
+class="math inline">\(\varphi_1(x)\sim\varphi_n(x)\)</span> 的线性组合：
+<span
+class="math display">\[g_n(x)=\sum_{i=0}^ng_{n,i}\varphi_i(x),\quad
+g_{n,i}=\dfrac{1}{w_i}\int_a^b\rho(x)g_n(x)\varphi_i(x)\mathrm
+dx.\]</span> 因此，<span class="math inline">\(\varphi_n(x)\)</span>
+与所有次数小于等于 <span class="math inline">\((n-1)\)</span>
+的多项式正交。</p>
+<h2 id="零点">零点</h2>
+<p>正交多项式 <span class="math inline">\(\varphi_n(x)\)</span> 在 <span
+class="math inline">\((a,b)\)</span> 上有 <span
+class="math inline">\(n\)</span> 个零点。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>用反证法。</p>
+<p>假设 <span class="math inline">\(\varphi_n(x)\)</span> 在 <span
+class="math inline">\((a,b)\)</span> 上有 <span
+class="math inline">\(m\)</span> 个零点，且 <span
+class="math inline">\(m&lt;n\)</span>。将这些零点记为 <span
+class="math inline">\(x_1,x_2,\cdots,x_m\)</span>
+（重根也重复计入）。</p>
+<p>考虑 <span class="math inline">\(m\)</span> 次多项式 <span
+class="math display">\[R_m(x):=(x-x_1)(x-x_2)\cdots(x-x_m).\]</span>
+然后考虑： <span
+class="math display">\[\int_a^b\rho(x)\varphi_n(x)R_m(x)\mathrm
+dx.\]</span> 由于 <span class="math inline">\(R_m\)</span> 的次数为
+<span class="math inline">\(m\)</span>，所以它可写为 <span
+class="math inline">\(\varphi_1(x)\sim\varphi_m(x)\)</span>
+的线性组合。由于 <span class="math inline">\(m&lt;n\)</span> 所以 <span
+class="math inline">\(\varphi_1(x)\sim\varphi_m(x)\)</span> 与 <span
+class="math inline">\(\varphi_n(x)\)</span> 全部正交，进而上述积分为
+<span class="math inline">\(0\)</span>。</p>
+<p>但是，由于 <span class="math inline">\(R_m(x)\varphi_n(x)\)</span> 在
+<span class="math inline">\([a,b]\)</span>
+上始终不变号，所以这个积分应该大于 <span
+class="math inline">\(0\)</span>，这样就推出了矛盾，因此 <span
+class="math inline">\(m\)</span> 只能为 <span
+class="math inline">\(n\)</span>。</p>
+
+    </div>
+</div>
+<h2 id="微分方程">微分方程</h2>
+<p>正交多项式 <span class="math inline">\(\varphi_n(x)\)</span>
+满足微分方程： <span
+class="math display">\[\begin{align}\beta(x)\varphi&#39;&#39;_n(x)+[\alpha(x)+\beta&#39;(x)]\varphi&#39;_n(x)-n[\alpha_1+(n+1)\beta_2]\varphi_n(x)=0.\end{align}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>考虑积分 <span
+class="math display">\[\begin{align*}I_{n,k}:=&amp;\;\int_a^b[\beta(x)\rho(x)\varphi&#39;_n(x)]&#39;x^k\mathrm
+dx\\
+=&amp;\;[x^k\beta(x)\rho(x)\varphi&#39;_n(x)]^b_a-k\int_a^b\beta(x)\rho(x)\varphi&#39;_n(x)x^{k-1}\mathrm
+dx\\
+=&amp;-k\int_a^b\beta(x)\rho(x)x^{k-1}\cdot \varphi&#39;_n(x)\mathrm
+dx\\
+=&amp;-k[\beta(x)\rho(x)x^{k-1}\varphi_n(x)]^b_a+k\int_a^b[\beta(x)\rho(x)x^{k-1}]&#39;\varphi_n(x)\mathrm
+dx\\
+=&amp;\;k\int_a^b[\beta(x)\rho(x)x^{k-1}]&#39;\varphi_n(x)\mathrm dx\\
+=&amp;\;k\int_a^b[\beta&#39;(x)\rho(x)x^{k-1}+\alpha(x)\rho(x)x^{k-1}+(k-1)\beta(x)\rho(x)x^{k-2}]\varphi_n(x)\mathrm
+dx\\
+=&amp;\;\int_a^b\rho(x)
+[\beta&#39;(x)x^{k-1}+\alpha(x)x^{k-1}+(k-1)\beta(x)x^{k-2}]\varphi_n(x)\mathrm
+dx
+.\end{align*}\]</span> 不难看出，<span
+class="math inline">\([\cdots]\)</span> 中是一个 <span
+class="math inline">\(k\)</span> 次多项式，因此，只要 <span
+class="math inline">\(k=0\sim(n-1)\)</span>，就必有 <span
+class="math inline">\(I_{n,k}=0\)</span>。</p>
+<p>然后回到 <span class="math inline">\(I_{n,k}\)</span> 的原初定义：
+<span
+class="math display">\[\begin{align*}I_{n,k}:=&amp;\;\int_a^b[\beta(x)\rho(x)\varphi&#39;_n(x)]&#39;x^k\mathrm
+dx\\
+=&amp;\;\int_a^b[\beta&#39;(x)\rho(x)\varphi&#39;_n(x)+\alpha(x)\rho(x)\varphi&#39;_n(x)+\beta(x)\rho(x)\varphi&#39;&#39;_n(x)]x^k\mathrm
+dx\\
+=&amp;\;\int_a^b\rho(x)
+[\beta&#39;(x)\varphi&#39;_n(x)+\alpha(x)\varphi&#39;_n(x)+\beta(x)\varphi&#39;&#39;_n(x)]x^k\mathrm
+dx
+.\end{align*}\]</span> 由于 <span
+class="math inline">\(k=0\sim(n-1)\)</span> 时 <span
+class="math inline">\(I_{n,k}=0\)</span>，而 <span
+class="math inline">\(\varphi_0(x)\sim\varphi_{n-1}(x)\)</span> 都可写为
+<span class="math inline">\(x^0\sim x^{n-1}\)</span>
+的线性组合，所以我们发现 <span class="math inline">\([\cdots]\)</span>
+中的 <span class="math inline">\(n\)</span> 次多项式与 <span
+class="math inline">\(\varphi_0(x)\sim\varphi_{n-1}(x)\)</span>
+正交，显然，这个 <span class="math inline">\(n\)</span> 次多项式只可能是
+<span class="math inline">\(\varphi_n(x)\)</span> 乘以一个常数 <span
+class="math inline">\(\gamma_n\)</span>。对比一下 <span
+class="math inline">\(x^n\)</span> 项的系数就能发现： <span
+class="math display">\[\gamma_na_{n,n}=(2\beta_2+\alpha_1)\cdot
+na_{n,n}+\beta_2\cdot n(n-1)a_{n,n}.\]</span> 于是我们就得到了 <span
+class="math inline">\(\varphi_n(x)\)</span> 满足的微分方程： <span
+class="math display">\[\beta(x)\varphi&#39;&#39;_n(x)+[\alpha(x)+\beta&#39;(x)]\varphi&#39;_n(x)-n[\alpha_1+(n+1)\beta_2]\varphi_n(x)=0.\]</span></p>
+
+    </div>
+</div>
+<h2 id="微分表达式">微分表达式</h2>
+<p><span class="math inline">\(\varphi_n(x)\)</span> 满足： <span
+class="math display">\[\begin{align}
+\varphi_n(x)=A_n\dfrac{1}{\rho(x)}\dfrac{\mathrm d^n}{\mathrm
+dx^n}[\rho(x)\beta^n(x)].\end{align}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>首先证明等号右侧的确是一个 <span class="math inline">\(n\)</span>
+次多项式。</p>
+<hr />
+<p>考虑： <span
+class="math display">\[Q_{n,k}(x):=\dfrac{1}{\rho(x)\beta^{n-k}(x)}\dfrac{\mathrm
+d^k}{\mathrm dx^k}[\rho(x)\beta^n(x)].\]</span> <span
+class="math inline">\(k=1\)</span> 时 <span
+class="math inline">\(Q_{n,1}\)</span> 是 <span
+class="math inline">\(1\)</span> 次多项式： <span
+class="math display">\[\begin{align*}Q_{n,1}(x)=&amp;\;\dfrac{1}{\rho(x)\beta^{n-1}(x)}\dfrac{\mathrm
+d}{\mathrm
+dx}[\rho(x)\beta^n(x)]=\dfrac{\rho&#39;(x)\beta^n(x)+n\rho(x)\beta^{n-1}(x)\beta&#39;(x)}{\rho(x)\beta^{n-1}(x)}\\
+=&amp;\;\alpha(x)+n\beta&#39;(x).\end{align*}\]</span> <span
+class="math inline">\(k=2\)</span> 时 <span
+class="math inline">\(Q_{n,2}\)</span> 是 <span
+class="math inline">\(2\)</span> 次多项式： <span
+class="math display">\[\begin{align*}Q_{n,2}(x)=&amp;\;\dfrac{1}{\rho(x)\beta^{n-2}(x)}\dfrac{\mathrm
+d^2}{\mathrm dx^2}[\rho(x)\beta^n(x)]\\
+=&amp;\;\dfrac{\rho&#39;&#39;\beta^n+2n\rho&#39;\beta^{n-1}\beta&#39;+n(n-1)\rho\beta^{n-2}(\beta&#39;)^2+n\rho\beta^{n-1}\beta&#39;&#39;}{\rho\beta^{n-2}}\\
+=&amp;\;\beta^2\dfrac{\rho&#39;&#39;}{\rho}+2n\alpha\beta&#39;+n(n-1)(\beta&#39;)^2+n\beta\beta&#39;&#39;\\
+=&amp;\;\beta^2\dfrac{\rho&#39;&#39;}{\rho}+2n\alpha\beta&#39;+n(n-1)(\beta&#39;)^2+n\beta\beta&#39;&#39;\\
+=&amp;\;\alpha&#39;\beta+\alpha^2-\beta&#39;\alpha+2n\alpha\beta&#39;+n(n-1)(\beta&#39;)^2+n\beta\beta&#39;&#39;.\end{align*}\]</span>
+中间用到了： <span
+class="math display">\[\rho&#39;&#39;=(\alpha\rho/\beta)&#39;=\dfrac{\alpha&#39;\rho\beta+\alpha^2\rho-\beta&#39;\alpha\rho}{\beta^2}=\dfrac{\rho}{\beta^2}(\alpha&#39;\beta+\alpha^2-\beta&#39;\alpha).\]</span>
+然后考虑一般的 <span class="math inline">\(k\)</span>： <span
+class="math display">\[\begin{align*}
+Q_{n,k}(x)=&amp;\;\dfrac{1}{\rho(x)\beta^{n-k}(x)}\dfrac{\mathrm
+d^k}{\mathrm
+dx^k}[\rho(x)\beta^n(x)]=\dfrac{1}{\rho(x)\beta^{n-k}(x)}\dfrac{\mathrm
+d}{\mathrm dx}[\rho(x)\beta^{n-k+1}(x)Q_{n,k-1}(x)]\\
+=&amp;\;\dfrac{\rho&#39;\beta^{n-k+1}Q_{n,k-1}+(n-k+1)\rho\beta^{n-k}\beta&#39;Q_{n,k-1}+\rho\beta^{n-k+1}Q_{n,k-1}&#39;}{\rho\beta^{n-k}}\\
+=&amp;\;\alpha Q_{n,k-1}+(n-k+1)\beta&#39;Q_{n,k-1}+\beta
+Q_{n,k-1}&#39;.
+\end{align*}\]</span> 所以，用数学归纳法就能证明 <span
+class="math inline">\(Q_{n,k}(x)\)</span> 是 <span
+class="math inline">\(k\)</span> 次多项式。具体过程略。</p>
+<hr />
+<p>然后考虑积分 <span
+class="math display">\[I_{n,k}:=\int_a^b\rho(x)x^kQ_{n,n}(x)\mathrm
+dx.\]</span> 注意： <span
+class="math display">\[\rho\beta^{n-i}Q_{n,i}\mathrm dx=\mathrm
+d[(\rho\beta^n)^{(i-1)}].\]</span> 所以： <span
+class="math display">\[\begin{align*}
+I_{n,k}=&amp;\;\int_a^bx^k\mathrm
+d[(\rho\beta^n)^{(n-1)}]=-k\int_a^bx^{k-1}(\rho\beta^n)^{(n-1)}\mathrm
+dx\\
+=&amp;-k\int_a^bx^{k-1}\mathrm
+d[(\rho\beta^n)^{(n-2)}]=k(k-1)\int_a^bx^{k-2}(\rho\beta^n)^{(n-2)}\mathrm
+dx\\
+\vdots&amp;\\
+=&amp;\;(-1)^i\dfrac{k!}{(k-i)!}\int_a^bx^{k-i}(\rho\beta^n)^{(n-i)}\mathrm
+dx\\
+\vdots&amp;\\
+=&amp;\;(-1)^kk!\int_a^b(\rho\beta^n)^{(n-k)}\mathrm dx.
+\end{align*}\]</span> 中间多次利用了 <span
+class="math inline">\(\rho(a)\beta(a)=\rho(b)\beta(b)=0\)</span>
+的条件。因此只要 <span class="math inline">\(k&lt;n\)</span>，就有 <span
+class="math inline">\(I_{n,k}=0\)</span>。</p>
+<hr />
+<p>以上结论意味着 <span class="math inline">\(Q_{n,n}(x)\)</span> 与
+<span class="math inline">\(x^0\sim x^{n-1}\)</span> 正交，这意味着它与
+<span class="math inline">\(\varphi_0(x)\sim\varphi_{n-1}(x)\)</span>
+正交。由于 <span class="math inline">\(Q_{n,n}(x)\)</span> 是 <span
+class="math inline">\(n\)</span> 次多项式，所以 <span
+class="math inline">\(Q_{n,n}(x)\)</span> 与 <span
+class="math inline">\(\varphi_n(x)\)</span> 只相差一个常数。</p>
+
+    </div>
+</div>
+<p>然后我们可以证明： <span
+class="math display">\[A_n=\dfrac{(-1)^nw_n}{\sqrt{(-1)^nn!\tilde\delta_n\tilde
+a_n}}\]</span> 其中 <span
+class="math display">\[\tilde\delta_n=\int_a^b\rho(x)\beta^n(x)\mathrm
+dx,\quad \tilde a_n=\prod_{i=n+1}^{2n}(\alpha_1+i\beta_2).\]</span>
+这里的 <span class="math inline">\(\tilde a_n\)</span> 是 <span
+class="math inline">\(\varphi_n(x)/A_n\)</span> 的首项系数。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>我们先确定 <span class="math inline">\(Q_{n,n}\)</span>
+的最高次项系数，然后将 <span class="math inline">\(Q_{n,n}\)</span>
+归一化为 <span class="math inline">\(\varphi_{n}^0\)</span>，再确定
+<span class="math inline">\(\tilde a_n\)</span>。</p>
+<hr />
+<p>之前，我们已经得出： <span class="math display">\[\begin{align*}
+Q_{n,k}(x)=\alpha Q_{n,k-1}+(n-k+1)\beta&#39;Q_{n,k-1}+\beta
+Q_{n,k-1}&#39;.
+\end{align*}\]</span></p>
+<p>我们将 <span class="math inline">\(Q_{n,k}(x)\)</span> 的首项系数记为
+<span class="math inline">\(q_{1,n,k}\)</span>，那么 <span
+class="math inline">\(q_{1,n,k}\)</span> 满足： <span
+class="math display">\[\begin{align*}q_{1,n,k}=&amp;\;\alpha_1q_{1,n,k-1}+2\beta_2(n-k+1)q_{1,n,k-1}+(k-1)\beta_2q_{1,n,k-1}\\
+=&amp;\;q_{1,n,k-1}[\alpha_1+(2n-k+1)\beta_2].\end{align*}\]</span>
+考虑到 <span
+class="math inline">\(q_{1,n,1}=\alpha_1+2n\beta_2\)</span>，我们发现：
+<span
+class="math display">\[q_{1,n,k}=\prod_{i=1}^k[\alpha_1+(2n-i+1)\beta_2],\quad
+q_{1,n,n}=\prod_{i=n+1}^{2n}(\alpha_1+i\beta_2).\]</span> 我们将 <span
+class="math inline">\(q_{1,n,n}\)</span> 记为 <span
+class="math inline">\(\tilde a_n\)</span>。一般情况下，<span
+class="math inline">\(\beta_2\leqslant0\)</span>，因此 <span
+class="math inline">\(\tilde a_n\)</span> 总是有一个 <span
+class="math inline">\((-1)^n\)</span> 的因子。</p>
+<hr />
+<p>然后我们来计算 <span class="math inline">\(Q_{n,n}\)</span>
+与自己的内积： <span class="math display">\[\begin{align*}
+\|Q_{n,n}\|^2=\int_a^b\rho(x)Q_{n,n}(x)Q_{n,n}(x)\mathrm dx=\tilde
+a_n\int_a^b\rho(x)x^nQ_{n,n}(x)\mathrm dx.
+\end{align*}\]</span> 最后一个等号用是因为：<span
+class="math inline">\(Q_{n,n}\)</span> 与 <span
+class="math inline">\(\varphi_n(x)\)</span> 只相差一个相乘的常数，因此与
+<span class="math inline">\(x^0\sim x^{n-1}\)</span>
+正交。我们刚刚算出过： <span
+class="math display">\[\int_a^b\rho(x)x^kQ_{n,n}(x)\mathrm
+dx=(-1)^kk!\int_a^b(\rho\beta^n)^{(n-k)}\mathrm dx,\]</span> 这意味着：
+<span class="math display">\[\begin{align*}
+\|Q_{n,n}\|^2=\tilde a_n(-1)^nn!\int_a^b\rho(x)\beta^n(x)\mathrm dx.
+\end{align*}\]</span> 如果我们定义： <span
+class="math display">\[\tilde\delta_n:=\int_a^b\rho(x)\beta^n(x)\mathrm
+dx,\]</span> 就有： <span
+class="math display">\[\varphi_0(x)=\dfrac{(-1)^n}{\sqrt{(-1)^nn!\tilde
+a_n\tilde\delta_n}}Q_{n,n}(x).\]</span> 分子上的 <span
+class="math inline">\((-1)^n\)</span> 是因为 <span
+class="math inline">\(Q_{n,n}(x)\)</span> 的首项系数 <span
+class="math inline">\(\tilde a_n\)</span> 中总是有一个 <span
+class="math inline">\((-1)^n\)</span> 的因子，这样可以保证 <span
+class="math inline">\(\varphi_0(x)\)</span> 的首项系数为正的。</p>
+
+    </div>
+</div>
+<p>基于以上结论，我们可以证明： <span
+class="math display">\[a_{n,n}=A_n\tilde a_n=\dfrac{(-1)^nw_n\tilde
+a_n}{\sqrt{(-1)^nn!\tilde\delta_n\tilde a_n}},\]</span> 以及： <span
+class="math display">\[a_{n,n-1}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}a_{n,n}.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math inline">\(a_{n,n}\)</span> 已经算出来了，因此只计算
+<span class="math inline">\(a_{n,n-1}\)</span> 。</p>
+<p>之前，我们已经得出： <span class="math display">\[\begin{align*}
+Q_{n,k}(x)=\alpha Q_{n,k-1}+(n-k+1)\beta&#39;Q_{n,k-1}+\beta
+Q_{n,k-1}&#39;.
+\end{align*}\]</span></p>
+<p>我们将 <span class="math inline">\(Q_{n,k}(x)\)</span>
+的第二项的系数，也就是 <span class="math inline">\(x^{k-1}\)</span>
+项的系数，记为 <span class="math inline">\(q_{2,n,k}\)</span>，那么
+<span class="math inline">\(q_{2,n,k}\)</span> 满足： <span
+class="math display">\[\begin{align*}
+q_{2,n,k}=&amp;\;(\alpha_1q_{2,n,k-1}+\alpha_0q_{1,n,k-1})+(n-k+1)(2\beta_2q_{2,n,k-1}+\beta_1q_{1,n,k-1})+[\beta_1(k-1)q_{1,n,k-1}+\beta_2(k-2)q_{2,n,k-1}]\\
+=&amp;\;q_{1,n,k-1}[\alpha_0+(n-k+1)\beta_1+(k-1)\beta_1]+q_{2,n,k-1}[\alpha_1+2(n-k+1)\beta_2+(k-2)\beta_2]\\
+=&amp;\;q_{1,n,k-1}(\alpha_0+n\beta_1)+q_{2,n,k-1}[\alpha_1+(2n-k)\beta_2].\end{align*}\]</span></p>
+<p>一下子看不出结果，因此先写出几项观察规律。首先 <span
+class="math inline">\(q_{1,n,k}=\prod_{i=1}^k[\alpha_1+(2n-i+1)\beta_2]\)</span>，因此：
+<span class="math display">\[\begin{align*}
+k=1:\quad q_{2,n,1}=&amp;\;\alpha_0+n\beta_1,\\
+q_{1,n,1}=&amp;\;\alpha_1+2n\beta_2,\\
+k=2:\quad
+q_{2,n,2}=&amp;\;(\alpha_1+2n\beta_2)(\alpha_0+n\beta_1)+(\alpha_0+n\beta_1)
+[\alpha_1+(2n-2)\beta_2]\\
+=&amp;\;2(\alpha_0+n\beta_1) [\alpha_1+(2n-1)\beta_2],\\
+q_{1,n,2}=&amp;\;(\alpha_1+2n\beta_2) [\alpha_1+(2n-1)\beta_2]\\
+k=3:\quad q_{2,n,3}=&amp;\;(\alpha_1+2n\beta_2) [\alpha_1+(2n-1)\beta_2]
+(\alpha_0+n\beta_1)\\
+&amp;\;+2(\alpha_0+n\beta_1)
+[\alpha_1+(2n-1)\beta_2][\alpha_1+(2n-3)\beta_2]\\
+=&amp;\;3(\alpha_0+n\beta_1)
+[\alpha_1+(2n-1)\beta_2][\alpha_1+(2n-2)\beta_2]
+.\end{align*}\]</span></p>
+<p>我们猜测： <span
+class="math display">\[q_{2,n,k}=k(\alpha_0+n\beta_1)\prod_{i=1}^{k-1}[\alpha_1+(2n-i)\beta_2]=k\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}q_{1,n,k}.\]</span>
+然后可以发现： <span class="math display">\[\begin{align*}
+q_{2,n,k}=&amp;\;(\alpha_0+n\beta_1)q_{1,n,k-1}+(k-1)\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}q_{1,n,k-1}[\alpha_1+(2n-k)\beta_2]\\
+=&amp;\;\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}q_{1,n,k-1}\left\{(\alpha_1+2n\beta_2)+(k-1)
+[\alpha_1+(2n-k)\beta_2]\right\}\\
+=&amp;\;\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}q_{1,n,k-1}\left\{k\alpha_1+k\cdot
+2n\beta_2-k(k-1)\beta_2\right\}\\
+=&amp;\;k\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}q_{1,n,k-1}[\alpha_1+(2n-k+1)\beta_2]\\
+=&amp;\;k\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}q_{1,n,k}.\end{align*}\]</span>
+所以以上猜测确实成立。</p>
+<p>这样我们就证明了 <span
+class="math display">\[q_{2,n,n}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}q_{1,n,n},\]</span>
+也就是 <span
+class="math display">\[a_{n,n-1}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}a_{n,n}.\]</span></p>
+
+    </div>
+</div>
+<h2 id="递推关系">递推关系</h2>
+<p>正交多项式满足递推关系：</p>
+<p><span class="math display">\[\begin{align}
+x\varphi_n(x)=\dfrac{a_{n,n}}{a_{n+1,n+1}}\varphi_{n+1}(x)+\left(\dfrac{a_{n,n-1}}{a_{n,n}}-\dfrac{a_{n+1,n}}{a_{n+1,n+1}}\right)\varphi_{n}(x)+\dfrac{w_n^2a_{n-1,n-1}}{w_{n-1}^2a_{n,n}}\varphi_{n-1}(x)
+,\label{x-phi_n-expansion-4}\end{align}\]</span></p>
+<p>以及：</p>
+<p><span class="math display">\[\begin{align}
+x\varphi_n^0(x)=\dfrac{a_{n,n}^0}{a_{n+1,n+1}^0}\varphi_{n+1}^0(x)+\left(\dfrac{a^0_{n,n-1}}{a_{n,n}^0}-\dfrac{a_{n+1,n}^0}{a_{n+1,n+1}^0}\right)\varphi_{n}^0(x)+\dfrac{a_{n-1,n-1}^0}{a_{n,n}^0}\varphi_{n-1}^0(x)
+.\label{x-phi_n-expansion-3}\end{align}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>考虑 <span class="math inline">\(x\varphi^0_n(x)\)</span>。由于它是
+<span class="math inline">\((n+1)\)</span> 次多项式，所以它能写为 <span
+class="math inline">\(\varphi^0_1(x)\sim\varphi^0_{n+1}(x)\)</span>
+的线性组合： <span
+class="math display">\[\begin{align}x\varphi_n^0(x)=\sum_{i=0}^{n+1}X_{ni}\varphi_i^0(x),\label{x-phi_n-expansion-1}\end{align}\]</span>
+其中： <span
+class="math display">\[\begin{align}X_{ni}=\int_a^b\rho(x)x\varphi^0_n(x)\varphi_i^0(x)\mathrm
+dx.\label{x-phi_n-expansion-2}\end{align}\]</span> 不难看出，<span
+class="math inline">\(i&lt;n-1\)</span> 时的 <span
+class="math inline">\(X_{n,i}\)</span> 都为 <span
+class="math inline">\(0\)</span>，因为此时 <span
+class="math inline">\(x\varphi_i(x)\)</span> 的次数小于 <span
+class="math inline">\(n\)</span> 因此必然与 <span
+class="math inline">\(\varphi^0_n(x)\)</span> 正交。</p>
+<p><span class="math inline">\(i=n+1\)</span> 时，比较 (<span
+class="math inline">\(\ref{x-phi_n-expansion-1}\)</span>) 式 <span
+class="math inline">\(x^{n+1}\)</span> 次项系数可以发现 <span
+class="math inline">\(a_{n,n}x^{n+1}=X_{n,n+1}a_{n+1,n+1}x^{n+1}\)</span>，即：
+<span
+class="math display">\[X_{n,n+1}=\dfrac{a_{n,n}^0}{a_{n+1,n+1}^0}.\]</span>
+从 (<span class="math inline">\(\ref{x-phi_n-expansion-2}\)</span>)
+式可以发现 <span class="math inline">\(X_{ni}=X_{in}\)</span>，所以
+<span
+class="math display">\[X_{n,n-1}=X_{n-1,n}=\dfrac{a_{n-1,n-1}^0}{a_{n,n}^0}.\]</span>
+再比较 (<span class="math inline">\(\ref{x-phi_n-expansion-1}\)</span>)
+式等号两侧 <span class="math inline">\(x^n\)</span> 项的系数可以发现
+<span
+class="math inline">\(a_{n,n-1}x^n=(X_{n,n+1}a_{n+1,n}^0+X_{n,n}a_{n,n}^0)x^n\)</span>，即：
+<span
+class="math display">\[X_{n,n}=\dfrac{1}{a_{n,n}^0}\left(a_{n,n-1}^0-\dfrac{a_{n,n}^0}{a_{n+1,n+1}^0}a_{n+1,n}^0\right)=\left(\dfrac{a_{n,n-1}}{a_{n,n}^0}-\dfrac{a_{n+1,n}^0}{a_{n+1,n+1}^0}\right).\]</span></p>
+<p>这样一来我们就发现： <span class="math display">\[
+x\varphi_n^0(x)=\dfrac{a_{n,n}^0}{a_{n+1,n+1}^0}\varphi_{n+1}^0(x)+\left(\dfrac{a^0_{n,n-1}}{a_{n,n}^0}-\dfrac{a_{n+1,n}^0}{a_{n+1,n+1}^0}\right)\varphi_{n}^0(x)+\dfrac{a_{n-1,n-1}^0}{a_{n,n}^0}\varphi_{n-1}^0(x)
+,\]</span> 再利用 <span
+class="math inline">\(\varphi_n^0(x)=\varphi_n(x)/w_n\)</span>，<span
+class="math inline">\(a_{n,i}^0=a_{n,i}/w_n\)</span>，就能算出： <span
+class="math display">\[
+x\varphi_n(x)=\dfrac{a_{n,n}}{a_{n+1,n+1}}\varphi_{n+1}(x)+\left(\dfrac{a_{n,n-1}}{a_{n,n}}-\dfrac{a_{n+1,n}}{a_{n+1,n+1}}\right)\varphi_{n}(x)+\dfrac{w_n^2a_{n-1,n-1}}{w_{n-1}^2a_{n,n}}\varphi_{n-1}(x)
+.\]</span> 因此，只需要知道 <span class="math inline">\(a_{n,n}\)</span>
+与 <span class="math inline">\(a_{n-1}\)</span> 就能确定递推关系。</p>
+
+    </div>
+</div>
+<h2 id="生成函数">生成函数</h2>
+<p>我们考虑如下函数： <span
+class="math display">\[\varPsi(z,w):=\sum_{n=0}^\infty\dfrac{\varphi_n(z)}{A_nn!}w^n.\]</span>
+那么可以证明： <span
+class="math display">\[\varPsi(z,w)=\dfrac{1}{\rho(z)}\dfrac{\rho(\xi_w)}{1-w\beta&#39;(\xi_w)},\]</span>
+其中 <span class="math inline">\(\xi_w\)</span> 为关于 <span
+class="math inline">\(\xi\)</span> 的二次方程 <span
+class="math display">\[\xi-z-w\beta(\xi)=0.\]</span> 的在 <span
+class="math inline">\(w\)</span> 很小时接近于 <span
+class="math inline">\(z\)</span> 的根。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>利用柯西积分公式可以算出：</p>
+<p><span class="math display">\[\begin{align*}
+\varPsi(z,w)=&amp;\;\sum_{n=0}^\infty\dfrac{\varphi_n(z)}{A_nn!}w^n=\dfrac{1}{\rho(z)}\sum_{n=0}^\infty\dfrac{w^n}{n!}\dfrac{\mathrm
+d^n}{\mathrm dz^n}[\rho(z)\beta^n(z)]\\
+=&amp;\;\dfrac{1}{\rho(z)}\sum_{n=0}^\infty\dfrac{w^n}{n!}\cdot\dfrac{n!}{2\pi\mathrm
+i}\oint_{C_z}\dfrac{\rho(\xi)\beta^n(\xi)}{(\xi-z)^{n+1}}\mathrm d\xi\\
+=&amp;\;\dfrac{1}{\rho(z)}\dfrac{1}{2\pi\mathrm
+i}\oint_{C_z}\sum_{n=0}^\infty\dfrac{\rho(\xi)
+[w\beta(\xi)]^n}{(\xi-z)^{n+1}}\mathrm d\xi\\
+=&amp;\;\dfrac{1}{\rho(z)}\dfrac{1}{2\pi\mathrm
+i}\oint_{C_z}\dfrac{\rho(\xi)}{\xi-z}\dfrac{1}{1-w\beta(\xi)/(\xi-z)}\mathrm
+d\xi\\
+=&amp;\;\dfrac{1}{\rho(z)}\dfrac{1}{2\pi\mathrm
+i}\oint_{C_z}\dfrac{\rho(\xi)}{\xi-z-w\beta(\xi)}\mathrm d\xi.
+\end{align*}\]</span></p>
+<p>在计算 <span class="math inline">\(\sum_{n=0}^\infty
+w\beta(\xi)/(\xi-z)\)</span> 时，需要保证 <span
+class="math inline">\(w\beta(\xi)/(\xi-z)\)</span> 的模足够小。由于围道
+<span class="math inline">\(C_z\)</span> 的半径确定，所以当 <span
+class="math inline">\(w\)</span> 非常小时，这一点总是能够保障的。</p>
+<p>然后考虑方程 <span
+class="math inline">\(\xi-z-w\beta(\xi)=0\)</span>： <span
+class="math display">\[w\beta_2\xi^2+(w\beta_1-1)\xi+(w\beta_0+z)=0.\]</span></p>
+<hr />
+<p>在 <span class="math inline">\(\beta_2\neq0\)</span> 时，方程根是：
+<span class="math display">\[\begin{align*}
+\xi=&amp;\;\dfrac{-(w\beta_1-1)\pm\sqrt{(w\beta_1-1)^2-4w\beta_2(w\beta_0+z)}}{2w\beta_2}\\
+=&amp;\;\dfrac{1-w\beta_1\pm\sqrt{1-2w\beta_1+w^2\beta_1^2-4w\beta_2(w\beta_0+z)}}{2w\beta_2}\\
+=&amp;\;\dfrac{1-w\beta_1\pm\sqrt{1-2w(\beta_1+2z\beta_2)+w^2(\beta_1^2-4\beta_0\beta_2)}}{2w\beta_2}\\
+=&amp;\;\dfrac{1-w\beta_1\pm[1-w(\beta_1+2z\beta_2)+O(w^2)]}{2w\beta_2}.
+.\end{align*}\]</span> 于是它的两个根为： <span
+class="math display">\[\xi_+=\dfrac{1}{w\beta_2}-\dfrac{\beta_1+z\beta_2}{\beta_2}+O(w),\quad
+\xi_-=z+O(w).\]</span></p>
+<p>假设围道 <span class="math inline">\(C_z\)</span> 的半径为 <span
+class="math inline">\(R\)</span>，那么 <span
+class="math inline">\(w\beta(\xi)/(\xi-z)\sim \beta_2Rw\)</span>。只要
+<span class="math inline">\(w\)</span> 足够小以至于 <span
+class="math display">\[\beta_1 Rw\ll1\]</span> <span
+class="math inline">\(w\beta(\xi)/(\xi-z)\)</span> 的模就能远小于 <span
+class="math inline">\(1\)</span>，级数 <span
+class="math inline">\(\sum_{n=0}^\infty w\beta(\xi)/(\xi-z)\)</span>
+就能收敛。与此同时，<span class="math inline">\(\xi_-\)</span>
+也必定会落在 <span class="math inline">\(C_z\)</span> 中，并且 <span
+class="math inline">\(\xi_+=1/(w\beta_2)\gg R\)</span> 一定在 <span
+class="math inline">\(C_z\)</span> 外。</p>
+<p>这样一来，围道 <span class="math inline">\(C_z\)</span>
+也可视为时一个围绕 <span class="math inline">\(\xi_-\)</span>
+的围道，根据留数定理，其结果为： <span
+class="math display">\[\varPsi(z,w)=\dfrac{1}{\rho(z)}\dfrac{\rho(\xi_-)}{1-w\beta&#39;(\xi_-)},\]</span>
+这样就对 <span class="math inline">\(\beta_2\neq0\)</span>
+的情形完成了证明。</p>
+<hr />
+<p>在 <span class="math inline">\(\beta_2\neq0\)</span> 时，方程根是：
+<span
+class="math display">\[\xi=\dfrac{z+w\beta_0}{1-w\beta_1}=z+w(\beta_0+z\beta_1)+O(w^2).\]</span>
+假设围道 <span class="math inline">\(C_z\)</span> 的半径为 <span
+class="math inline">\(R\)</span>，那么 <span
+class="math inline">\(w\beta(\xi)/(\xi-z)\sim
+\beta_1w\)</span>。因此只要 <span class="math inline">\(w\)</span>
+足够小，<span class="math inline">\(w\beta(\xi)/(\xi-z)\)</span>
+的模就能小于 <span class="math inline">\(1\)</span> 使得级数收敛，同时
+<span class="math inline">\(\xi\)</span> 也落在 <span
+class="math inline">\(C_z\)</span> 中。</p>
+<p>这样一来，围道 <span class="math inline">\(C_z\)</span>
+也可视为时一个围绕 <span class="math inline">\(\xi\)</span>
+的围道，根据留数定理，其结果为： <span
+class="math display">\[\varPsi(z,w)=\dfrac{1}{\rho(z)}\dfrac{\rho(\xi_-)}{1-w\beta&#39;(\xi_-)},\]</span>
+这样就对 <span class="math inline">\(\beta_2=0\)</span>
+的情形完成了证明。</p>
+
+    </div>
+</div>
+<h1 id="具体的正交多项式">具体的正交多项式</h1>
+<h2 id="勒让德多项式">勒让德多项式</h2>
+<p>在上一部分的一般讨论中，取： <span
+class="math display">\[[a,b]=[-1,1],\quad\rho(x)=1,\quad
+\alpha(x)=0,\quad \beta(x)=1-x^2,\quad w_n^2=\dfrac{2}{2n+1}.\]</span>
+得到的多项式就是勒让德多项式 <span
+class="math inline">\(P_n(x)\)</span>。</p>
+<h3 id="几个常数">几个常数</h3>
+<p><span class="math display">\[\begin{align*}
+\tilde\delta_n=&amp;\;\int_a^b\rho(x)\beta^n(x)\mathrm
+dx=\int_{-1}^1(1-x^2)^n\mathrm dx\\
+=&amp;\;\int_0^\pi\sin^{2n+1}x\mathrm
+dx=2\int_0^{\pi/2}\sin^{2n+1}x\mathrm dx=2\dfrac{(2n)!!}{(2n+1)!!},\\
+\tilde
+a_n=&amp;\;\prod_{i=n+1}^{2n}(\alpha_1+i\beta_2)=(-1)^n\dfrac{(2n)!}{n!},\\
+A_n=&amp;\;\dfrac{(-1)^nw_n}{\sqrt{(-1)^nn!\tilde\delta_n\tilde
+a_n}}=\dfrac{(-1)^n\sqrt{2/(2n+1)}}{\sqrt{(2n)!\cdot2(2n)!!/(2n+1)!!}}\\
+=&amp;\;\dfrac{(-1)^n\sqrt{(2n+1)!!}}{\sqrt{(2n+1)!(2n)!!}}=\dfrac{(-1)^n}{(2n)!!}=\dfrac{(-1)^n}{n!2^n}
+.\end{align*}\]</span></p>
+<h3 id="微分方程-1">微分方程</h3>
+<p><span class="math display">\[
+\beta(x)\varphi&#39;&#39;_n(x)+[\alpha(x)+\beta&#39;(x)]\varphi&#39;_n(x)-n[\alpha_1+(n+1)\beta_2]\varphi_n(x)=0\]</span>
+<span class="math display">\[\Rightarrow\quad\quad
+(1-x^2)P&#39;&#39;_n(x)-2xP&#39;_n(x)+n(n+1)P_n(x)=0.\]</span></p>
+<h3 id="微分表达式-1">微分表达式</h3>
+<p><span
+class="math display">\[P_n(x)=A_n\dfrac{1}{\rho(x)}\dfrac{\mathrm
+d^n}{\mathrm
+dx^n}[\rho(x)\beta^n(x)]=\dfrac{(-1)^n}{n!2^n}\dfrac{\mathrm
+d^n}{\mathrm dx^n}(1-x^2)^n=\dfrac{1}{n!2^n}\dfrac{\mathrm d^n}{\mathrm
+dx^n}(x^2-1)^n.\]</span></p>
+<p>不难看出：<span
+class="math inline">\(P_n(x)=(-1)^nP_n(-x)\)</span>。</p>
+<h3 id="生成函数-1">生成函数</h3>
+<p><span class="math display">\[(1+w^2-2wz)^{-1/2}=\sum_{n=0}^\infty
+P_n(z)w^n.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math inline">\(\xi-z-w\beta(\xi)=0\)</span>，也就是
+<span class="math inline">\(\xi-z-w(1-\xi^2)=0\)</span> 的根为 <span
+class="math display">\[\xi_-=\dfrac{-(w\beta_1-1)-\sqrt{(w\beta_1-1)^2-4w\beta_2(w\beta_0+z)}}{2w\beta_2}=\dfrac{1-\sqrt{1+4w(w+z)}}{-2w},\]</span>
+于是： <span
+class="math display">\[\varPsi(z,w)=\dfrac{1}{\rho(z)}\dfrac{\rho(\xi_-)}{1-w\beta&#39;(\xi_-)}=\dfrac{1}{1+2w\xi_-}=\dfrac{1}{\sqrt{1+4w(w+z)}}.\]</span>
+它满足： <span
+class="math display">\[\varPsi(z,w)=\sum_{n=0}^\infty\dfrac{\varphi_n(z)}{A_nn!}w^n=\sum_{n=0}^\infty(-1)^nP_n(z)(2w)^n.\]</span>
+因此： <span
+class="math display">\[(1+w^2+2wz)^{-1/2}=\sum_{n=0}^\infty(-1)^nP_n(z)w^n,\]</span>
+也即： <span class="math display">\[(1+w^2-2wz)^{-1/2}=\sum_{n=0}^\infty
+P_n(z)w^n.\]</span></p>
+
+    </div>
+</div>
+<h3 id="前两项的系数">前两项的系数</h3>
+<p><span class="math display">\[a_{n,n}=A_n\tilde
+a_n=\dfrac{(-1)^n}{n!2^n}\cdot
+(-1)^n\dfrac{(2n)!}{n!}=\dfrac{(2n)!}{2^n(n!)^2},\]</span> 以及： <span
+class="math display">\[a_{n,n-1}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}a_{n,n}=0.\]</span></p>
+<h3 id="递推关系-1">递推关系</h3>
+<p><span class="math display">\[\begin{align*}
+xP_n(x)=&amp;\;\dfrac{n+1}{2n+1}P_{n+1}(x)+\dfrac{n}{2n+1}P_{n-1}(x)
+.\end{align*}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math display">\[\begin{align*}
+xP_n(x)=&amp;\;\dfrac{a_{n,n}}{a_{n+1,n+1}}P_{n+1}(x)+\left(\dfrac{a_{n,n-1}}{a_{n,n}}-\dfrac{a_{n+1,n}}{a_{n+1,n+1}}\right)P_{n}(x)+\dfrac{w_n^2a_{n-1,n-1}}{w_{n-1}^2a_{n,n}}P_{n-1}(x)\\
+=&amp;\;\dfrac{(2n)!}{2^n(n!)^2}\dfrac{2(n+1)^2\cdot
+2^n(n!)^2}{(2n+1)(2n+2)(2n)!}P_{n+1}(x)+\dfrac{2(n-1)+1}{2n+1}\dfrac{(2n-2)!}{2^{n-1}[(n-1)!]^2}\dfrac{2n^2\cdot
+2^{n-1}[(n-1)!]^2}{(2n-1)(2n) (2n-2)!}P_{n-1}(x)\\
+=&amp;\;\dfrac{n+1}{2n+1}P_{n+1}(x)+\dfrac{2n-1}{2n+1}\dfrac{n}{2n-1}P_{n-1}(x)\\
+=&amp;\;\dfrac{n+1}{2n+1}P_{n+1}(x)+\dfrac{n}{2n+1}P_{n-1}(x)
+.\end{align*}\]</span></p>
+
+    </div>
+</div>
+<h2 id="厄米多项式">厄米多项式</h2>
+<p>在上一部分的一般讨论中，取： <span
+class="math display">\[[a,b]=[-\infty,\infty],\quad\rho(x)=\mathrm
+e^{-x^2},\quad \alpha(x)=-2x,\quad \beta(x)=1,\quad
+w_n^2=2^nn!\sqrt{\pi}.\]</span> 得到的多项式就是厄米多项式 <span
+class="math inline">\(H_n(x)\)</span>。</p>
+<h3 id="几个常数-1">几个常数</h3>
+<p><span class="math display">\[\begin{align*}
+\tilde\delta_n=&amp;\;\int_a^b\rho(x)\beta^n(x)\mathrm
+dx=\int_{-\infty}^\infty\mathrm e^{-x^2}\mathrm dx=\sqrt{\pi},\\
+\tilde a_n=&amp;\;\prod_{i=n+1}^{2n}(\alpha_1+i\beta_2)=(-2)^n,\\
+A_n=&amp;\;\dfrac{(-1)^nw_n}{\sqrt{(-1)^nn!\tilde\delta_n\tilde
+a_n}}=\dfrac{(-1)^n\sqrt{2^nn!\sqrt{\pi}}}{\sqrt{2^nn!\sqrt{\pi}}}=(-1)^n
+.\end{align*}\]</span></p>
+<h3 id="微分方程-2">微分方程</h3>
+<p><span class="math display">\[
+\beta(x)\varphi&#39;&#39;_n(x)+[\alpha(x)+\beta&#39;(x)]\varphi&#39;_n(x)-n[\alpha_1+(n+1)\beta_2]\varphi_n(x)=0\]</span>
+<span class="math display">\[\Rightarrow\quad\quad
+H&#39;&#39;_n(x)-2xH&#39;_n(x)+2nH_n(x)=0.\]</span></p>
+<h3 id="微分表达式-2">微分表达式</h3>
+<p><span
+class="math display">\[H_n(x)=A_n\dfrac{1}{\rho(x)}\dfrac{\mathrm
+d^n}{\mathrm dx^n}[\rho(x)\beta^n(x)]=(-1)^n\mathrm
+e^{x^2}\dfrac{\mathrm d^n}{\mathrm dx^n}\mathrm e^{-x^2}.\]</span></p>
+<h3 id="生成函数-2">生成函数</h3>
+<p><span
+class="math display">\[\exp\left(-w^2+2wz\right)=\sum_{n=0}^\infty\dfrac{H_n(z)}{n!}w^n.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math inline">\(\xi-z-w\beta(\xi)=0\)</span> 的根为 <span
+class="math display">\[\xi_-=z+w,\]</span> 于是： <span
+class="math display">\[\varPsi(z,w)=\dfrac{1}{\rho(z)}\dfrac{\rho(\xi_-)}{1-w\beta&#39;(\xi_-)}=\exp\left[-(z+w)^2+z^2\right]=\exp\left(-w^2-2wz\right).\]</span>
+它满足： <span
+class="math display">\[\varPsi(z,w)=\sum_{n=0}^\infty\dfrac{\varphi_n(z)}{A_nn!}w^n=\sum_{n=0}^\infty(-1)^n\dfrac{H_n(z)}{n!}w^n.\]</span>
+也即： <span
+class="math display">\[\exp\left(-w^2+2wz\right)=\sum_{n=0}^\infty\dfrac{H_n(z)}{n!}w^n.\]</span></p>
+
+    </div>
+</div>
+<h3 id="前两项的系数-1">前两项的系数</h3>
+<p><span class="math display">\[a_{n,n}=A_n\tilde a_n=2^n,\quad
+a_{n,n-1}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}a_{n,n}=0.\]</span></p>
+<h3 id="递推关系-2">递推关系</h3>
+<p><span
+class="math display">\[H_{n+1}(x)=2xH_n(x)-2nH_{n-1}(x).\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math display">\[\begin{align*}
+xH_n(x)=&amp;\;\dfrac{a_{n,n}}{a_{n+1,n+1}}H_{n+1}(x)+\left(\dfrac{a_{n,n-1}}{a_{n,n}}-\dfrac{a_{n+1,n}}{a_{n+1,n+1}}\right)H_{n}(x)+\dfrac{w_n^2a_{n-1,n-1}}{w_{n-1}^2a_{n,n}}H_{n-1}(x)\\
+=&amp;\;\dfrac12H_{n+1}(x)+\dfrac{2^{n}n!\sqrt{\pi}}{2^{n-1}(n-1)!\sqrt{\pi}}\dfrac{1}{2}H_{n-1}(x)\\
+=&amp;\;\dfrac12H_{n+1}(x)+nH_{n-1}(x).\end{align*}\]</span></p>
+
+    </div>
+</div>
+<h2 id="拉盖尔多项式">拉盖尔多项式</h2>
+<p>在上一部分的一般讨论中，在 <span
+class="math inline">\(n&gt;0\)</span> 时取： <span
+class="math display">\[[a,b]=[0,\infty],\quad\rho(x)=x^\lambda\mathrm
+e^{-x},\quad \alpha(x)=\lambda-x,\quad \beta(x)=x,\quad
+w_n^2=\dfrac{\Gamma(\lambda+n+1)}{n!}.\]</span>
+得到的多项式就是拉盖尔多项式 <span
+class="math inline">\(L^{\lambda}_n(x)\)</span>。</p>
+<h3 id="几个常数-2">几个常数</h3>
+<p><span class="math display">\[\begin{align*}
+\tilde\delta_n=&amp;\;\int_a^b\rho(x)\beta^n(x)\mathrm
+dx=\int_{0}^\infty x^{n+\lambda}\mathrm e^{-x}\mathrm
+dx=\Gamma(\lambda+n+1).\\
+\tilde a_n=&amp;\;(-1)^n,\\
+A_n=&amp;\;\dfrac{(-1)^nw_n}{\sqrt{(-1)^nn!\tilde\delta_n\tilde
+a_n}}=\dfrac{(-1)^n\sqrt{\Gamma(\lambda+n+1)/n!}}{\sqrt{(-1)^n\cdot
+n!\cdot\Gamma(\lambda+n+1)\cdot(-1)^n}}=\dfrac{1}{n!}
+.\end{align*}\]</span></p>
+<h3 id="微分方程-3">微分方程</h3>
+<p><span class="math display">\[
+\beta(x)\varphi&#39;&#39;_n(x)+[\alpha(x)+\beta&#39;(x)]\varphi&#39;_n(x)-n[\alpha_1+(n+1)\beta_2]\varphi_n(x)=0\]</span>
+<span class="math display">\[\Rightarrow\quad\quad x\dfrac{\mathrm
+d^2L^\lambda_n(x)}{\mathrm dx^2}+(\lambda+1-x)\dfrac{\mathrm
+dL^\lambda_n(x)}{\mathrm dx}+nL^\lambda_n(x)=0.\]</span></p>
+<h3 id="微分表达式-3">微分表达式</h3>
+<p><span
+class="math display">\[L^\lambda_n(x)=A_n\dfrac{1}{\rho(x)}\dfrac{\mathrm
+d^n}{\mathrm dx^n}[\rho(x)\beta^n(x)]=\dfrac{1}{n!}x^{-\lambda}\mathrm
+e^{x}\dfrac{\mathrm d^n}{\mathrm dx^n}(x^{n+\lambda}\mathrm
+e^{-x}).\]</span></p>
+<h3 id="生成函数-3">生成函数</h3>
+<p><span
+class="math display">\[\dfrac{\exp[zw/(w-1)]}{(1-w)^{\lambda+1}}=\sum_{n=0}^\infty
+L_n^\lambda(z)w^n.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math inline">\(\xi-z-w\beta(\xi)=0\)</span>，也就是
+<span class="math inline">\(\xi-z-w\xi=0\)</span> 的根为 <span
+class="math display">\[\xi_-=\dfrac{z}{1-w},\quad
+\dfrac{\xi_-}{z}=\dfrac{1}{1-w},\quad z-\xi_-=\dfrac{zw}{w-1}.\]</span>
+于是： <span
+class="math display">\[\varPsi(z,w)=\dfrac{1}{\rho(z)}\dfrac{\rho(\xi_-)}{1-w\beta&#39;(\xi_-)}=\dfrac{\xi_-^\lambda\mathrm
+e^{-\xi_-}}{z^\lambda\mathrm
+e^{-z}}\dfrac{1}{1-w}=\dfrac{\exp[zw/(w-1)]}{(1-w)^{\lambda+1}}.\]</span>
+它满足： <span
+class="math display">\[\varPsi(z,w)=\sum_{n=0}^\infty\dfrac{\varphi_n(z)}{A_nn!}w^n=\sum_{n=0}^\infty
+L_n^\lambda(z)w^n.\]</span> 也即： <span
+class="math display">\[\dfrac{\exp[zw/(w-1)]}{(1-w)^{\lambda+1}}=\sum_{n=0}^\infty
+L_n^\lambda(z)w^n.\]</span></p>
+
+    </div>
+</div>
+<h3 id="前两项的系数-2">前两项的系数</h3>
+<p><span class="math display">\[a_{n,n}=A_n\tilde
+a_n=\dfrac{(-1)^n}{n!},\quad
+a_{n,n-1}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}a_{n,n}=n\dfrac{\lambda+n}{-1}a_{n,n}=(-1)^{n+1}\dfrac{\lambda+n}{(n-1)!}.\]</span></p>
+<h3 id="递推关系-3">递推关系</h3>
+<p><span
+class="math display">\[(n+1)L^\lambda_{n+1}(x)+\left[x-2n-(\lambda+1)\right]L^\lambda_n(x)+(\lambda+n)L^\lambda_{n-1}(x)=0.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math display">\[\begin{align*}
+xL^\lambda_n(x)=&amp;\;\dfrac{a_{n,n}}{a_{n+1,n+1}}L^\lambda_{n+1}(x)+\left(\dfrac{a_{n,n-1}}{a_{n,n}}-\dfrac{a_{n+1,n}}{a_{n+1,n+1}}\right)L^\lambda_{n}(x)+\dfrac{w_n^2a_{n-1,n-1}}{w_{n-1}^2a_{n,n}}L^\lambda_{n-1}(x)\\
+=&amp;-(n+1)L^\lambda_{n+1}(x)+\left[-n(\lambda+n)+(n+1)(\lambda+n+1)\right]L^\lambda_n(x)+\dfrac{\Gamma(\lambda+n+1)}{n!}\dfrac{(n-1)!}{\Gamma(\lambda+n)}(-n)L^\lambda_{n-1}(x)\\
+=&amp;-(n+1)L^\lambda_{n+1}(x)+\left[\lambda+n+n+1\right]L^\lambda_n(x)-(\lambda+n)L^\lambda_{n-1}(x)
+.\end{align*}\]</span></p>
+
+    </div>
+</div>
+<h2 id="切比雪夫多项式n0-时">切比雪夫多项式（<span
+class="math inline">\(n&gt;0\)</span> 时）</h2>
+<p>在上一部分的一般讨论中，在 <span
+class="math inline">\(n&gt;0\)</span> 时取： <span
+class="math display">\[[a,b]=[-1,1],\quad\rho(x)=\dfrac{1}{\sqrt{1-x^2}},\quad
+\alpha(x)=x,\quad \beta(x)=1-x^2,\quad w_n^2=\dfrac\pi2.\]</span>
+得到的多项式就是切比雪夫多项式 <span
+class="math inline">\(T_n(x)\)</span> (<span
+class="math inline">\(n&gt;0\)</span>)。</p>
+<h3 id="几个常数n0-时">几个常数（<span
+class="math inline">\(n&gt;0\)</span> 时）</h3>
+<p><span class="math display">\[\begin{align*}
+\tilde\delta_n=&amp;\;\int_a^b\rho(x)\beta^n(x)\mathrm
+dx=\int_{-1}^1(1-x^2)^{n-1/2}\mathrm dx\\
+=&amp;\;\int_0^\pi\sin^{2n}x\mathrm dx=2\int_0^{\pi/2}\sin^{2n}x\mathrm
+dx=\dfrac{(2n-1)!!}{(2n)!!}\pi.\\
+\tilde
+a_n=&amp;\;\prod_{i=n+1}^{2n}(\alpha_1+i\beta_2)=\prod_{i=n+1}^{2n}(1-i)=(-n)(-n-1)\cdots(-2n+1)\\
+=&amp;\;(-1)^n\dfrac{(2n-1)!}{(n-1)!}=(-1)^n\dfrac{n}{2n}\dfrac{(2n)!}{n!}=\dfrac{(-1)^n}{2}\dfrac{(2n)!}{n!},\\
+A_n=&amp;\;\dfrac{(-1)^nw_n}{\sqrt{(-1)^nn!\tilde\delta_n\tilde
+a_n}}=\dfrac{(-1)^n\sqrt{\pi/2}}{\sqrt{[(2n)!/2]\cdot[(2n-1)!!/(2n)!!]\cdot\pi}}\\
+=&amp;\;\dfrac{(-1)^n}{(2n-1)!!}=(-1)^n\dfrac{(2n)!!}{(2n)!}=\dfrac{(-1)^n2^{n}n!}{(2n)!}
+.\end{align*}\]</span></p>
+<h3 id="微分方程n0-时">微分方程（<span
+class="math inline">\(n&gt;0\)</span> 时）</h3>
+<p><span class="math display">\[
+\beta(x)\varphi&#39;&#39;_n(x)+[\alpha(x)+\beta&#39;(x)]\varphi&#39;_n(x)-n[\alpha_1+(n+1)\beta_2]\varphi_n(x)=0\]</span>
+<span class="math display">\[\Rightarrow\quad\quad
+(1-x^2)T&#39;&#39;_n(x)-xT&#39;_n(x)+n^2T_n(x)=0.\]</span></p>
+<h3 id="微分表达式n0-时">微分表达式（<span
+class="math inline">\(n&gt;0\)</span> 时）</h3>
+<p><span
+class="math display">\[T_n(x)=A_n\dfrac{1}{\rho(x)}\dfrac{\mathrm
+d^n}{\mathrm
+dx^n}[\rho(x)\beta^n(x)]=\dfrac{(-1)^n2^{n}n!}{(2n)!}\sqrt{1-x^2}\dfrac{\mathrm
+d^n}{\mathrm dx^n}(1-x^2)^{n-1/2}.\]</span></p>
+<h3 id="前两项系数n0-时">前两项系数（<span
+class="math inline">\(n&gt;0\)</span> 时）</h3>
+<p><span class="math display">\[a_{n,n}=A_n\tilde
+a_n=\dfrac{(-1)^n2^{n}n!}{(2n)!}\cdot\dfrac{(-1)^n}{2}\dfrac{(2n)!}{n!}=2^{n-1},\]</span>
+以及： <span
+class="math display">\[a_{n,n-1}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}a_{n,n}=0.\]</span></p>
+<h3 id="递推关系n1-时">递推关系（<span
+class="math inline">\(n&gt;1\)</span> 时）</h3>
+<p><span
+class="math display">\[T_{n+1}(x)=2xT_n(x)-T_{n-1}(x).\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math display">\[\begin{align*}
+xT_n(x)=&amp;\;\dfrac{a_{n,n}}{a_{n+1,n+1}}T_{n+1}(x)+\left(\dfrac{a_{n,n-1}}{a_{n,n}}-\dfrac{a_{n+1,n}}{a_{n+1,n+1}}\right)T_{n}(x)+\dfrac{w_n^2a_{n-1,n-1}}{w_{n-1}^2a_{n,n}}T_{n-1}(x)\\
+=&amp;\;\dfrac12T_{n+1}(x)+\dfrac{1}{2}T_{n-1}(x).\end{align*}\]</span></p>
+
+    </div>
+</div>
+<p>取 <span class="math inline">\(x=\cos\theta\)</span>，就不难发现
+<span class="math inline">\(n&gt;0\)</span> 时 <span
+class="math display">\[T_n(\cos\theta)=\cos(n\theta).\]</span>
+所以一般在 <span class="math inline">\(n=0\)</span> 时取 <span
+class="math inline">\(T_0(x)=1\)</span>。</p>
+<h3 id="生成函数-4">生成函数</h3>
+<p><span class="math display">\[\begin{align*}
+\dfrac{1-tx}{1+t^2-2tx}=\sum_{n=0}^\infty
+T_n(x)t^n.
+\end{align*}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>与一般理论中的生成函数并不相同</p>
+<p>假定 <span class="math inline">\(x=\cos\theta\)</span>，那么： <span
+class="math display">\[\begin{align*}
+\sum_{n=0}^\infty
+T_n(x)t^n=&amp;\;\sum_{n=0}^\infty\cos(n\theta)t^n=\dfrac12\sum_{n=0}^\infty
+t^n(\mathrm e^{\mathrm in\theta}+\mathrm e^{-\mathrm
+in\theta})=\dfrac12\sum_{n=0}^\infty[(t\mathrm e^{\mathrm
+i\theta})^n+(t\mathrm e^{-\mathrm i\theta})^n]\\
+=&amp;\;\dfrac12\left[\dfrac{1}{1-t\mathrm e^{\mathrm
+i\theta}}+\dfrac{1}{1-t\mathrm e^{-\mathrm
+i\theta}}\right]=\dfrac{1-t\cos\theta}{1+t^2-2t\cos\theta}=\dfrac{1-tx}{1+t^2-2tx}.
+\end{align*}\]</span></p>
+
+    </div>
+</div>
+<h2 id="雅可比多项式">雅可比多项式</h2>
+<p>在上一部分的一般讨论中，取： <span
+class="math display">\[[a,b]=[-1,1],\quad\rho(x)=(1-x)^\lambda(1+x)^\mu,\quad
+\alpha(x)=(\mu-\lambda)-(\lambda+\mu)x,\quad \beta(x)=1-x^2,\]</span>
+以及 <span class="math display">\[
+w_n^2=\dfrac{2^{\lambda+\mu+1}}{2n+\lambda+\mu+1}\dfrac{\Gamma(n+\lambda+1)\Gamma(n+\mu+1)}{n!\Gamma(n+\lambda+\mu+1)}.\]</span>
+得到的多项式就是雅可比多项式 <span
+class="math inline">\(P^{(\lambda,\mu)}_n(x)\)</span>。取 <span
+class="math inline">\(\lambda=\mu=0\)</span> 就能回到勒让德多项式。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        权重的导数的计算
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math display">\[\begin{align*}
+\dfrac{\rho&#39;(x)}{\rho(x)}=\dfrac{-\lambda}{1-x}+\dfrac{\mu}{1+x}=\dfrac{\mu-\lambda-(\mu+\lambda)x}{1-x^2}.\end{align*}\]</span></p>
+
+    </div>
+</div>
+<h3 id="几个常数-3">几个常数</h3>
+<p><span class="math display">\[\begin{align*}
+\tilde\delta_n=&amp;\;\int_a^b\rho(x)\beta^n(x)\mathrm
+dx=\int_{-1}^1(1-x)^{\lambda+n}(1+x)^{\mu+n}\mathrm dx\\
+=&amp;\;\int_0^1(2-2t)^{\lambda+n}(2t)^{\mu+n}\mathrm(2t-1)=2^{\lambda+\mu+2n+1}\int_0^1(1-t)^{\lambda+n}t^{\mu+n}\mathrm
+dt\\
+=&amp;\;2^{\lambda+\mu+2n+1}\dfrac{\Gamma(\mu+n+1)\Gamma(\lambda+n+1)}{\Gamma(\lambda+\mu+2n+2)},\\
+\tilde
+a_n=&amp;\;\prod_{i=n+1}^{2n}(\alpha_1+i\beta_2)=\prod_{i=n+1}^{2n}[-(\mu+\lambda)-i]=(-1)^n\dfrac{\Gamma(\lambda+\mu+2n+1)}{\Gamma(\lambda+\mu+n+1)},\\
+A_n=&amp;\;\dfrac{(-1)^nw_n}{\sqrt{(-1)^nn!\tilde\delta_n\tilde
+a_n}}=(-1)^n\dfrac{\sqrt{\dfrac{2^{\lambda+\mu+1}}{2n+\lambda+\mu+1}\dfrac{\Gamma(n+\lambda+1)\Gamma(n+\mu+1)}{n!\Gamma(n+\lambda+\mu+1)}}}{\sqrt{n!2^{\lambda+\mu+2n+1}\dfrac{\Gamma(\mu+n+1)\Gamma(\lambda+n+1)}{\Gamma(\lambda+\mu+2n+2)}\dfrac{\Gamma(\lambda+\mu+2n+1)}{\Gamma(\lambda+\mu+n+1)}}}\\
+=&amp;\;\dfrac{(-1)^n}{n!2^n}
+.\end{align*}\]</span></p>
+<h3 id="微分方程-4">微分方程</h3>
+<p><span class="math display">\[
+\beta(x)\varphi&#39;&#39;_n(x)+[\alpha(x)+\beta&#39;(x)]\varphi&#39;_n(x)-n[\alpha_1+(n+1)\beta_2]\varphi_n(x)=0\]</span>
+<span class="math display">\[\Rightarrow\quad\quad (1-x^2)\dfrac{\mathrm
+d^2}{\mathrm
+dx^2}P^{(\lambda,\mu)}_n(x)+[(\mu-\lambda)-(\lambda+\mu+2)x]\dfrac{\mathrm
+d}{\mathrm
+dx}P^{(\lambda,\mu)}_n(x)+n(\lambda+\mu+n+1)P^{(\lambda,\mu)}_n(x)=0.\]</span></p>
+<h3 id="微分表达式-4">微分表达式</h3>
+<p><span
+class="math display">\[P^{(\lambda,\mu)}_n(x)=A_n\dfrac{1}{\rho(x)}\dfrac{\mathrm
+d^n}{\mathrm
+dx^n}[\rho(x)\beta^n(x)]=\dfrac{(-1)^n}{n!2^n}(1-x)^{-\lambda}(1+x)^{-\mu}\dfrac{\mathrm
+d^n}{\mathrm dx^n}[(1-x)^{\lambda+n}(1+x)^{\mu+n}].\]</span></p>
+<h3 id="生成函数-5">生成函数</h3>
+<p><span
+class="math display">\[\dfrac{\left[w+1-\sqrt{1+w^2+2wz}\right]^\lambda\left[w-1+\sqrt{1+w^2+2wz}\right]^\mu}{w^{\lambda+\mu}(1-z)^\lambda(1+z)^\mu\sqrt{1+w^2+2wz}}=\sum_{n=0}^\infty(-1)^nP^{(\lambda,\mu)}_n(z)w^n.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math inline">\(\xi-z-w\beta(\xi)=0\)</span>，也就是
+<span class="math inline">\(\xi-z-w(1-\xi^2)=0\)</span> 的根为 <span
+class="math display">\[\xi_-=\dfrac{-(w\beta_1-1)-\sqrt{(w\beta_1-1)^2-4w\beta_2(w\beta_0+z)}}{2w\beta_2}=\dfrac{1-\sqrt{1+4w(w+z)}}{-2w},\]</span>
+于是： <span class="math display">\[\begin{align*}
+\varPsi(z,w)=&amp;\;\dfrac{1}{\rho(z)}\dfrac{\rho(\xi_-)}{1-w\beta&#39;(\xi_-)}=\dfrac{(1-\xi_-)^\lambda(1+\xi_-)^\mu}{(1-z)^\lambda(1+z)^\mu}\dfrac{1}{1+2w\xi_-}\\
+=&amp;\;\dfrac{(2w-2w\xi_-)^\lambda(2w+2w\xi_-)^\mu}{(2w)^{\lambda+\mu}(1-z)^\lambda(1+z)^\mu}\dfrac{1}{\sqrt{1+4w(w+z)}}\\
+=&amp;\;\dfrac{\left[2w+1-\sqrt{1+4w(w+z)}\right]^\lambda\left[2w-1+\sqrt{1+4w(w+z)}\right]^\mu}{(2w)^{\lambda+\mu}(1-z)^\lambda(1+z)^\mu\sqrt{1+4w(w+z)}}
+.\end{align*}\]</span> 它满足： <span
+class="math display">\[\varPsi(z,w)=\sum_{n=0}^\infty\dfrac{\varphi_n(z)}{A_nn!}w^n=\sum_{n=0}^\infty(-1)^nP^{(\lambda,\mu)}_n(z)(2w)^n.\]</span>
+也就是： <span
+class="math display">\[\dfrac{\left[w+1-\sqrt{1+w^2+2wz}\right]^\lambda\left[w-1+\sqrt{1+w^2+2wz}\right]^\mu}{w^{\lambda+\mu}(1-z)^\lambda(1+z)^\mu\sqrt{1+w^2+2wz}}=\sum_{n=0}^\infty(-1)^nP^{(\lambda,\mu)}_n(z)w^n.\]</span></p>
+
+    </div>
+</div>
+<h3 id="前两项的系数-3">前两项的系数</h3>
+<p><span class="math display">\[a_{n,n}=A_n\tilde
+a_n=\dfrac{\Gamma(\lambda+\mu+2n+1)}{n!2^n\Gamma(\lambda+\mu+n+1)},\]</span>
+以及： <span
+class="math display">\[a_{n,n-1}=n\dfrac{\alpha_0+n\beta_1}{\alpha_1+2n\beta_2}a_{n,n}=n\dfrac{\mu-\lambda}{-(\mu+\lambda)-2n}\dfrac{\Gamma(\lambda+\mu+2n+1)}{n!2^n\Gamma(\lambda+\mu+n+1)}=-\dfrac{\mu-\lambda}{(n-1)!2^n}\dfrac{\Gamma(\lambda+\mu+2n)}{\Gamma(\lambda+\mu+n+1)}.\]</span></p>
+<h3 id="递推关系-4">递推关系</h3>
+<p>略</p>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-ghost"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XMQ</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

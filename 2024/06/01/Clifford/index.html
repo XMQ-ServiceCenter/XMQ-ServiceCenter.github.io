@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+Simplified+Chinese:300,300italic,400,400italic,700,700italic%7CMicrosoft+YaHei:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xmq-servicecenter.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="\(\mathrm{SO}(p,q)\) 群与 \(\mathrm{Spin}(p,q)\) 群 \(\mathrm{SO}(p,q)\) 群 正交群 \(\mathrm{O}(N\)) 就是 \(\mathbb R^N\) 中的正交变换构成的群。作为它的推广，我们考虑 \(\mathbb R^{p+q}\)，并且在其中指定度规 \[\begin{align}\eta:&#x3D;\mathrm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spin 群与 Clifford 代数">
+<meta property="og:url" content="https://xmq-servicecenter.github.io/2024/06/01/Clifford/index.html">
+<meta property="og:site_name" content="XMQ-维修中心">
+<meta property="og:description" content="\(\mathrm{SO}(p,q)\) 群与 \(\mathrm{Spin}(p,q)\) 群 \(\mathrm{SO}(p,q)\) 群 正交群 \(\mathrm{O}(N\)) 就是 \(\mathbb R^N\) 中的正交变换构成的群。作为它的推广，我们考虑 \(\mathbb R^{p+q}\)，并且在其中指定度规 \[\begin{align}\eta:&#x3D;\mathrm">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-08-09T06:39:03.955Z">
+<meta property="article:author" content="XMQ">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xmq-servicecenter.github.io/2024/06/01/Clifford/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xmq-servicecenter.github.io/2024/06/01/Clifford/","path":"2024/06/01/Clifford/","title":"Spin 群与 Clifford 代数"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Spin 群与 Clifford 代数 | XMQ-维修中心</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XMQ-维修中心</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-考前预习"><a href="/%E8%80%83%E5%89%8D%E9%A2%84%E4%B9%A0/" rel="section"><i class="fa fa-th fa-fw"></i>考前预习</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mathrmsopq-%E7%BE%A4%E4%B8%8E-mathrmspinpq-%E7%BE%A4"><span class="nav-number">1.</span> <span class="nav-text">\(\mathrm{SO}(p,q)\) 群与 \(\mathrm{Spin}(p,q)\) 群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mathrmsopq-%E7%BE%A4"><span class="nav-number">1.1.</span> <span class="nav-text">\(\mathrm{SO}(p,q)\) 群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mathrmsopq-%E7%BE%A4%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7"><span class="nav-number">1.2.</span> <span class="nav-text">\(\mathrm{SO}(p,q)\) 群的连通性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mathrmspinpq-%E7%BE%A4"><span class="nav-number">1.3.</span> <span class="nav-text">\(\mathrm{Spin}(p,q)\) 群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mathrmsopq-%E7%BE%A4%E7%9A%84%E6%9D%8E%E4%BB%A3%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">\(\mathrm{SO}(p,q)\) 群的李代数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mathrmspinpq-%E7%BE%A4%E4%B8%8E%E5%AE%9E-clifford-%E4%BB%A3%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">\(\mathrm{Spin}(p,q)\) 群与实 Clifford
+代数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E-clifford-%E4%BB%A3%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">实 Clifford 代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mathrmspinpq-%E7%BE%A4%E7%9A%84%E6%9E%84%E9%80%A0"><span class="nav-number">2.2.</span> <span class="nav-text">\(\mathrm{Spin}(p,q)\) 群的构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clifford-%E4%BB%A3%E6%95%B0%E7%9A%84%E5%81%B6%E6%95%B0%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-number">2.3.</span> <span class="nav-text">Clifford 代数的偶数子空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gamma-%E7%9F%A9%E9%98%B5%E4%B8%8E%E5%AE%9E-clifford-%E4%BB%A3%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">3.</span> <span class="nav-text">\(\gamma\) 矩阵与实 Clifford 代数的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A8%E7%A4%BA%E7%9A%84%E7%BB%B4%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">表示的维数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">3.2.</span> <span class="nav-text">具体的表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E8%A1%A8%E7%A4%BA%E7%9A%84%E5%8F%AF%E8%83%BD%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">实表示的可能性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E-clifford-%E4%BB%A3%E6%95%B0%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">4.</span> <span class="nav-text">实 Clifford 代数的分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mathrmcl_textevenpq-%E7%9A%84%E8%A1%A8%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">\(\mathrm{Cl}_{\text{even}}(p,q)\)
+的表示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D"><span class="nav-number">6.</span> <span class="nav-text">参考书籍</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">XMQ</p>
+  <div class="site-description" itemprop="description">奇怪的小网站</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xmq-servicecenter.github.io/2024/06/01/Clifford/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XMQ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XMQ-维修中心">
+      <meta itemprop="description" content="奇怪的小网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Spin 群与 Clifford 代数 | XMQ-维修中心">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Spin 群与 Clifford 代数
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-06-01T00:00:00+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-09 14:39:03" itemprop="dateModified" datetime="2024-08-09T14:39:03+08:00">2024-08-09</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h1 id="mathrmsopq-群与-mathrmspinpq-群"><span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 群与 <span
+class="math inline">\(\mathrm{Spin}(p,q)\)</span> 群</h1>
+<h2 id="mathrmsopq-群"><span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 群</h2>
+<p>正交群 <span class="math inline">\(\mathrm{O}(N\)</span>) 就是 <span
+class="math inline">\(\mathbb R^N\)</span>
+中的正交变换构成的群。作为它的推广，我们考虑 <span
+class="math inline">\(\mathbb R^{p+q}\)</span>，并且在其中指定度规</p>
+<blockquote class="colorquote definition" ><p><span
+class="math display">\[\begin{align}\eta:=\mathrm{diag}\{\underbrace{+1,+1,\cdots,+1}_{p},\underbrace{-1,-1,\cdots,-1}_{q}\}.\label{metric}\end{align}\]</span></p>
+</blockquote>
+<p><span class="math inline">\(\mathrm{O}(p,q)\)</span>
+群就定义为全体保持 <span class="math inline">\(\eta\)</span>
+给出的二次型不变的线性变换构成的群，<span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 群就是 <span
+class="math inline">\(\mathrm{O}(p,q)\)</span> 群中行列式为 <span
+class="math inline">\(1\)</span> 的元素构成的群：</p>
+<blockquote class="colorquote definition" ><p><span class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{O}(p,q):=&amp;\;\{A\in M_{p+q}(\mathbb R):\;\;A^{\mathrm T}\eta
+A=\eta\},\\
+\mathrm{SO}(p,q):=&amp;\;\{A\in M_{p+q}(\mathbb R):\;\;A^{\mathrm T}\eta
+A=\eta,\;\det(A)=1\}.
+\end{split}
+\end{align*}\]</span></p>
+</blockquote>
+<p>不难想象，<span
+class="math inline">\(\mathrm{O}(p,q)\simeq\mathrm{O}(q,p)\)</span>，以及
+<span
+class="math inline">\(\mathrm{SO}(p,q)\simeq\mathrm{SO}(q,p)\)</span>。当
+<span class="math inline">\(q=0\)</span> 或 <span
+class="math inline">\(q=0\)</span> 时，<span
+class="math inline">\(\mathrm{O}(p,q)\)</span>
+就回到了我们熟悉的正交群：<span
+class="math inline">\(\mathrm{O}(p,0)=\mathrm{O}(0,p)=\mathrm{O}(p)\)</span>
+以及 <span
+class="math inline">\(\mathrm{SO}(p,0)=\mathrm{SO}(0,p)=\mathrm{SO}(p)\)</span>。这个宇宙的洛伦兹群就是
+<span class="math inline">\(\mathrm{O}(1,3)\)</span>。</p>
+<p>我们一般都将 <span class="math inline">\(\mathrm{O}(p,q)\)</span> 与
+<span class="math inline">\(\mathrm{SO}(p,q)\)</span> 视为 <span
+class="math inline">\(\mathbb R^{p+q}\)</span> 而非 <span
+class="math inline">\(\mathbb C^{p+q}\)</span> 上的变换群，这是因为
+<span class="math inline">\(\mathrm{O}(p,q;\mathbb
+C)=\mathrm{O}(p+q,\mathbb C)\)</span>：给某些坐标分量乘以 <span
+class="math inline">\(\mathrm{i}\)</span> 就能将 <span
+class="math inline">\(\eta\)</span> 变为 <span
+class="math inline">\(\mathrm{diag}\{+1,\cdots,+1\}\)</span>，这也意味着
+<span class="math inline">\(\mathrm{O}(p,q)\)</span> 的李代数与 <span
+class="math inline">\(\mathrm{o}(p+q)\)</span> 一样也是 <span
+class="math inline">\(\mathrm{o}(p+q,\mathbb C)\)</span> 的实形。</p>
+<h2 id="mathrmsopq-群的连通性"><span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 群的连通性</h2>
+<p>很显然，<span class="math inline">\(\mathrm{O}(p,q)\)</span>
+群并不是连通的。乍一看，就如同 <span class="math inline">\(\mathrm
+O(n)\)</span> 群一样，它可能有两个连通分量，一个是 <span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 群，另一个分量则由 <span
+class="math inline">\(\mathrm{O}(p,q)\)</span> 群中行列式为 <span
+class="math inline">\(-1\)</span> 的矩阵构成。但 <span
+class="math inline">\(\mathrm{SO}(p,q)\)</span>
+也不是连通的，它也有两个连通分量，因此 <span
+class="math inline">\(\mathrm{O}(p,q)\)</span> 实际上有 4
+个连通分量。实际上，如果将 <span
+class="math inline">\(\mathrm{O}(p,q)\)</span> 群中的矩阵写为 <span
+class="math display">\[\begin{align*}
+A=\begin{bmatrix}P_{p\times p}&amp;R_{p\times q}\\L_{q\times
+p}&amp;Q_{q\times q}\end{bmatrix}\in \mathrm{O}(p,q).
+\end{align*}\]</span> 的形式，那么我们可以证明 <span
+class="math inline">\(\det(P)\)</span> 必然不为 <span
+class="math inline">\(0\)</span>，并且 <span
+class="math inline">\(\det(P)&gt;0\)</span> 的矩阵也能形成一个群，记为
+<span class="math inline">\(\mathrm{O}_+(p,q)\)</span>。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>首先，我们将 O<span class="math inline">\((p,q)\)</span>
+群中的矩阵写为： <span class="math display">\[\begin{align*}
+A=\begin{bmatrix}P_{p\times p}&amp;R_{p\times q}\\L_{q\times
+p}&amp;Q_{q\times q}\end{bmatrix}.
+\end{align*}\]</span> 利用<a
+target="_blank" rel="noopener" href="https://mathoverflow.net/questions/87877/jacobis-equality-between-complementary-minors-of-inverse-matrices">逆矩阵子式的
+Jacobi 公式</a>以及 <span class="math inline">\(A^{-1}=\eta A^{\mathrm
+T}\eta\)</span> 不难发现，<span class="math inline">\(\det P=\det Q/\det
+A\)</span>。</p>
+<p>接下来我们证明 <span class="math inline">\(\det P\neq
+0\)</span>。利用 <span class="math inline">\(A^{\mathrm T}\eta
+A=\eta\)</span> 可以发现： <span class="math display">\[\begin{align*}
+\begin{split}
+\begin{bmatrix}1&amp;0\\0&amp;-1\end{bmatrix}=&amp;\;\begin{bmatrix}P^{\mathrm
+T}&amp;L^{\mathrm T}\\R^{\mathrm T}&amp;Q^{\mathrm
+T}\end{bmatrix}\begin{bmatrix}1&amp;0\\0&amp;-1\end{bmatrix}\begin{bmatrix}P&amp;R\\L&amp;Q\end{bmatrix}=\begin{bmatrix}P^{\mathrm
+T}&amp;-L^{\mathrm T}\\R^{\mathrm T}&amp;-Q^{\mathrm
+T}\end{bmatrix}\begin{bmatrix}P&amp;R\\L&amp;Q\end{bmatrix}\\
+=&amp;\;\begin{bmatrix}P^{\mathrm T}P-L^{\mathrm T}L&amp;P^{\mathrm
+T}R-L^{\mathrm T}Q\\R^{\mathrm T}P-Q^{\mathrm T}L&amp;R^{\mathrm
+T}R-Q^{\mathrm T}Q\end{bmatrix}.
+\end{split}
+\end{align*}\]</span> 利用 <span class="math inline">\(A\eta A^{\mathrm
+T}=\eta\)</span> 可以发现： <span class="math display">\[\begin{align*}
+\begin{split}
+\begin{bmatrix}1&amp;0\\0&amp;-1\end{bmatrix}=&amp;\;\begin{bmatrix}P&amp;R\\L&amp;Q\end{bmatrix}\begin{bmatrix}1&amp;0\\0&amp;-1\end{bmatrix}\begin{bmatrix}P^{\mathrm
+T}&amp;L^{\mathrm T}\\R^{\mathrm T}&amp;Q^{\mathrm
+T}\end{bmatrix}=\begin{bmatrix}P&amp;R\\L&amp;Q\end{bmatrix}\begin{bmatrix}P^{\mathrm
+T}&amp;L^{\mathrm T}\\-R^{\mathrm T}&amp;-Q^{\mathrm T}\end{bmatrix}\\
+=&amp;\;\begin{bmatrix}PP^{\mathrm T}-RR^{\mathrm T}&amp;PL^{\mathrm
+T}-RQ^{\mathrm T}\\LP^{\mathrm T}-QR^{\mathrm T}&amp;LL^{\mathrm
+T}-QQ^{\mathrm T}\end{bmatrix}.
+\end{split}
+\end{align*}\]</span> 这意味着： <span
+class="math display">\[\begin{align*}
+P^{\mathrm T}P&amp;=1+L^{\mathrm T}L,\\
+PP^{\mathrm T}&amp;=1+RR^{\mathrm T},\\
+QQ^{\mathrm T}&amp;=LL^{\mathrm T}+1,\\
+Q^{\mathrm T}Q&amp;=1+R^{\mathrm T}R.
+\end{align*}\]</span> 显然，<span
+class="math inline">\(\det(1+L^{\mathrm T}L)&gt;0\)</span>、<span
+class="math inline">\(\det(1+RR^{\mathrm T})&gt;0\)</span>，于是 <span
+class="math inline">\(\det(P)\neq 0\)</span>，同理 <span
+class="math inline">\(\det(Q)\neq 0\)</span>。</p>
+<p>现在我们考虑 <span class="math inline">\(A_1A_2\)</span>，不难算出：
+<span class="math display">\[\begin{align*}
+A_1A_2=\begin{bmatrix}P_1P_2+R_1L_2&amp;\cdots\\
+\cdots&amp;\cdots\end{bmatrix}.
+\end{align*}\]</span> 要证明 O<span
+class="math inline">\(_+(p,q)\)</span> 群是 O<span
+class="math inline">\((p,q)\)</span> 群的子群，就只需要证明 <span
+class="math inline">\(\det(P_{1,2})&gt;0\)</span> 时有 <span
+class="math inline">\(\det(P_1P_2+R_1L_2)&gt;0\)</span>。首先可以发现：
+<span class="math display">\[\begin{align*}
+\det(P_1P_2+R_1L_2)=(\det P_1)(\det P_2)\det(1+P_1^{-1}R_1L_2P_2^{-1}).
+\end{align*}\]</span> 我们只需要证明 <span
+class="math inline">\(\det(1+P_1^{-1}R_1L_2P_2^{-1})&gt;0\)</span>
+即可。我们定义 <span
+class="math inline">\(K=P_1^{-1}R_1L_2P_2^{-1}\)</span>，然后利用刚刚算出来的
+<span class="math inline">\(PL^{\mathrm T}=RQ^{\mathrm T}\)</span> 与
+<span class="math inline">\(P^{\mathrm T}R=L^{\mathrm T}Q\)</span>
+做一些化简： <span class="math display">\[\begin{align*}
+K=P_1^{-1}R_1L_2P_2^{-1}=L_1^{\mathrm T}(Q_1^{-1})^{\mathrm
+T}L_2P_2^{-1}.
+\end{align*}\]</span> 然后考虑 <span class="math inline">\(K^{\mathrm
+T}K\)</span>： <span class="math display">\[\begin{align*}
+\begin{split}
+K^{\mathrm T}K=&amp;\;(P_2^{\mathrm T})^{-1}L_2^{\mathrm
+T}Q_1^{-1}L_1L_1^{\mathrm T}(Q_1^{-1})^{\mathrm
+T}L_2P_2^{-1}=(P_2^{\mathrm T})^{-1}L_2^{\mathrm
+T}Q_1^{-1}(Q_1Q^{\mathrm T}_1-1)(Q_1^{-1})^{\mathrm T}L_2P_2^{-1}\\
+=&amp;\;(P_2^{\mathrm T})^{-1}L_2^{\mathrm
+T}[1-Q_1^{-1}(Q_1^{-1})^{\mathrm T}]L_2P_2^{-1}\\
+=&amp;\;(P_2^{\mathrm T})^{-1}L_2^{\mathrm
+T}L_2P_2^{-1}-[(Q_1^{-1})^{\mathrm T}L_2P_2^{-1}]^{\mathrm
+T}[(Q_1^{-1})^{\mathrm T}L_2P_2^{-1}]\\
+=&amp;\;(P_2^{\mathrm T})^{-1}(P_2^{\mathrm
+T}P_2-1)P_2^{-1}-[(Q_1^{-1})^{\mathrm T}L_2P_2^{-1}]^{\mathrm
+T}[(Q_1^{-1})^{\mathrm T}L_2P_2^{-1}]\\
+=&amp;\;1-(P_2^{-1})^{\mathrm T}P_2^{-1}-[(Q_1^{-1})^{\mathrm
+T}L_2P_2^{-1}]^{\mathrm T}[(Q_1^{-1})^{\mathrm T}L_2P_2^{-1}].
+\end{split}
+\end{align*}\]</span> 这意味着 <span class="math inline">\(K^{\mathrm
+T}K-1\)</span> 是负定的，也就是说 <span class="math inline">\(K^{\mathrm
+T}K\)</span> 的 <span class="math inline">\(2\)</span>-范数小于 <span
+class="math inline">\(1\)</span>，也就是最大特征值的绝对值不会超过 <span
+class="math inline">\(1\)</span>，因此 <span
+class="math inline">\(\det(1+K)\geqslant0\)</span>。之前已经证明过左上角的矩阵的行列式不可能为
+<span class="math inline">\(0\)</span>，所以 <span
+class="math inline">\(\det(1+K)&gt;0\)</span>，这样一来就完成了证明。</p>
+
+    </div>
+</div>
+<p>这样一来，<span class="math inline">\(\det(P)&lt;0\)</span> 的矩阵与
+<span class="math inline">\(\mathrm{O}_+(p,q)\)</span>
+群的群元就不会属于同一个连通分支，导致 <span
+class="math inline">\(\mathrm{O}(p,q)\)</span> 有 4 个连通分量。<span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 中满足 <span
+class="math inline">\(\det(P)&gt;0\)</span> 的群元可以形成 <span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span>
+群，在现实世界中，<span class="math inline">\(\mathrm{SO}(1,3)\)</span>
+就是恰当洛伦兹群，而 <span
+class="math inline">\(\mathrm{SO}_+(1,3)\)</span>
+就是恰当正时洛伦兹群。</p>
+<p>从直观上来说，<span class="math inline">\(\mathrm{O}(p,q)\)</span>
+群中的所有元素都可通过一系列反射变换得到。假设 <span
+class="math inline">\(v\)</span> 是 <span class="math inline">\(\mathbb
+R^{p+q}\)</span> 中的向量，且 <span class="math inline">\(\eta(v,v)\neq
+0\)</span>，那么以 <span class="math inline">\(v\)</span>
+为法向量的平面的镜面反射 <span class="math inline">\(\rho_v\)</span>
+作用于另一个向量 <span class="math inline">\(u\)</span>
+的结果可定义为：</p>
+<blockquote class="colorquote definition" ><p><span
+class="math display">\[\begin{align}\rho_v(u)=u-2\dfrac{\eta(u,v)}{\eta(v,v)}v.\label{reflection}\end{align}\]</span></p>
+</blockquote>
+<p><span class="math inline">\(\mathrm{O}(p,q)\)</span>
+中的所有元素一定可以写为若干个这样的 <span
+class="math inline">\(\rho_v\)</span> 的乘积：<span
+class="math inline">\(A=\rho_{v_1}\rho_{v_2}\cdots\rho_{v_k}\)</span>。<span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 群中的元素一定是偶数个
+<span class="math inline">\(\rho_{v_i}\)</span> 的乘积，而 <span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span> 群则对应于有偶数个
+<span class="math inline">\(v_i\)</span> 满足 <span
+class="math inline">\(\eta(v_i,v_i)&gt;0\)</span>、偶数个 <span
+class="math inline">\(v_i\)</span> 满足 <span
+class="math inline">\(\eta(v_i,v_i)&lt;0\)</span> 的情形。</p>
+<p>就如同 <span class="math inline">\(\mathrm{SO}(3)\)</span> 一样，
+<span class="math inline">\(\mathrm{SO}_+(p,q)\)</span>
+也不是单连通的。数学上可以证明，<span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span> 的基本群为：</p>
+<blockquote class="colorquote theorem" ><p><span
+class="math display">\[\pi_1[\mathrm{SO}_{+}(p,q)]=\pi_1[\mathrm{SO}(p)]\times\pi_1[\mathrm{SO}(q)],\]</span></p>
+</blockquote>
+<p>以及：</p>
+<blockquote class="colorquote theorem" ><p><span class="math display">\[\pi_1[\mathrm{SO}(1)]=\{e\},\quad
+\pi_1[\mathrm{SO}(2)]=\mathbb Z,\quad
+\pi_1[\mathrm{SO}(n\geqslant3)]=\mathbb Z_2.\]</span></p>
+</blockquote>
+<p>因此只要 <span class="math inline">\(p\)</span> 与 <span
+class="math inline">\(q\)</span> 中有一个大于 <span
+class="math inline">\(1\)</span>，<span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span>
+就不是单连通的。物理上各类场的变换群总应该是单连通的，但 <span
+class="math inline">\(\pi_1[\mathrm{SO}(3)]\)</span> 与 <span
+class="math inline">\(\pi_1[\mathrm{SO}_+(1,3)]\)</span> 都等于 <span
+class="math inline">\(\mathbb Z_2\)</span>，因此，物理上的变换群应该是
+<span class="math inline">\(\mathrm{SO}(3)\)</span> 与 <span
+class="math inline">\(\mathrm{SO}_+(1,3)\)</span>
+的某种单连通的覆盖群。</p>
+<h2 id="mathrmspinpq-群"><span
+class="math inline">\(\mathrm{Spin}(p,q)\)</span> 群</h2>
+<p>旋量群 <span class="math inline">\(\mathrm{Spin}(p,q)\)</span> 与
+<span class="math inline">\(\mathrm{Spin}_+(p,q)\)</span> 就定义为 <span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 与 <span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span> 的双重覆盖群。</p>
+<p>它们在一些情形下——如最重要的 <span
+class="math inline">\(\mathrm{Spin}(p,0)\)</span> 或 <span
+class="math inline">\(\mathrm{Spin}_+(1,3)\)</span>——是单连通的，所以人们也会关注
+<span class="math inline">\(\mathrm{Spin}(p,q)\)</span>
+的表示，这些表示就是 <span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 的旋量表示。</p>
+<h2 id="mathrmsopq-群的李代数"><span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 群的李代数</h2>
+<p>在明确了 <span class="math inline">\(\mathrm{SO}(p,q)\)</span>
+群的整体性质之后，我们来计算它们的李代数。</p>
+<p>考虑 <span class="math inline">\(\mathrm{SO}_+(p,q)\)</span> 中的群元
+<span class="math inline">\(A=\mathrm{e}^{-\mathrm{i} \varepsilon
+X}\)</span>，<span class="math inline">\(\varepsilon\)</span>
+为一个小量。<span class="math inline">\(A^{\mathrm T}\eta
+A=\eta\)</span> 的条件给出： <blockquote class="colorquote definition" ><p><span class="math display">\[\begin{align*}
+\mathrm{so}(p,q):=&amp;\;\{-\mathrm{i} X\in M_{p+q}(\mathbb
+R):\;\;X^{\mathrm T}\eta+\eta X=0\}.
+\end{align*}\]</span></p>
+</blockquote> 假设 <span
+class="math display">\[\begin{align*}
+X=\begin{bmatrix}P_{p\times p}&amp;R_{p\times q}\\L_{q\times
+p}&amp;Q_{q\times q}\end{bmatrix}\in \mathrm{so}(p,q),\quad X^{\mathrm
+T}=\begin{bmatrix}P^{\mathrm T}&amp;L^{\mathrm T}\\R^{\mathrm
+T}&amp;Q^{\mathrm T}\end{bmatrix}.
+\end{align*}\]</span> 那么不难发现 <span
+class="math inline">\(P+P^{\mathrm T}=0\)</span>、<span
+class="math inline">\(Q+Q^{\mathrm T}=0\)</span> 以及 <span
+class="math inline">\(R=L^{\mathrm T}\)</span>。从这些条件也可以看出
+<span class="math inline">\(\mathrm{tr}(X)=0\)</span>，以及 <span
+class="math inline">\(\dim
+\mathrm{so}(p,q)=(p+q)(p+q-1)/2\)</span>。</p>
+<p><span class="math inline">\(\mathrm{so}(p,q)\)</span> 常用的一组基为
+<span class="math inline">\(\{L_{\mu\nu}\}\)</span>： <blockquote class="colorquote definition" ><p><span class="math display">\[\begin{align*}
+{(L_{\mu\nu})^i}_j:=\mathrm{i}(\delta^i_\mu\eta_{\nu
+j}-\delta^i_\nu\eta_{\mu j}).
+\end{align*}\]</span></p>
+</blockquote>
+不难验证这一系列矩阵满足上述条件。然后其对易关系为： <blockquote class="colorquote theorem" ><p><span class="math display">\[\begin{align*}
+[L_{\mu\nu},L_{\rho\sigma}]=\mathrm{i}(\eta_{\nu\rho}L_{\mu\sigma}-\eta_{\rho\mu}L_{\nu\sigma}+\eta_{\sigma\nu}L_{\rho\mu}-\eta_{\sigma\mu}L_{\rho\nu}).
+\end{align*}\]</span></p>
+</blockquote></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>考虑 <span class="math display">\[\begin{align*}
+{(L_{\mu\nu})^i}_j=\mathrm{i}(\delta^i_\mu\eta_{\nu
+j}-\delta^i_\nu\eta_{\mu j})=-{(L_{\nu\mu})^i}_j.
+\end{align*}\]</span> 那么： <span class="math display">\[\begin{align*}
+\begin{split}
+{(L_{\mu\nu}L_{\rho\sigma})^i}_j=&amp;\;\sum_k{(L_{\mu\nu})^i}_k{(L_{\rho\sigma})^k}_j=-\sum_k(\delta^i_\mu\eta_{\nu
+k}-\delta^i_\nu\eta_{\mu k})(\delta^k_\rho\eta_{\sigma
+j}-\delta^k_\sigma\eta_{\rho j})\\
+=&amp;-\sum_k(\delta^i_\mu\eta_{\nu k}\delta^k_\rho\eta_{\sigma
+j}-\delta^i_\nu\eta_{\mu k}\delta^k_\rho\eta_{\sigma
+j}-\delta^i_\mu\eta_{\nu k}\delta^k_\sigma\eta_{\rho
+j}+\delta^i_\nu\eta_{\mu k}\delta^k_\sigma\eta_{\rho j})\\
+=&amp;-(\delta^i_\mu\eta_{\nu\rho}\eta_{\sigma
+j}-\delta^i_\nu\eta_{\mu\rho}\eta_{\sigma
+j}-\delta^i_\mu\eta_{\nu\sigma}\eta_{\rho
+j}+\delta^i_\nu\eta_{\mu\sigma}\eta_{\rho j}).
+\end{split}
+\end{align*}\]</span> 同理： <span class="math display">\[\begin{align*}
+\begin{split}
+{(L_{\rho\sigma}L_{\mu\nu})^i}_j=&amp;-(\delta^i_\rho\eta_{\sigma\mu}\eta_{\nu
+j}-\delta^i_\sigma\eta_{\rho\mu}\eta_{\nu
+j}-\delta^i_\rho\eta_{\sigma\nu}\eta_{\mu
+j}+\delta^i_\sigma\eta_{\rho\nu}\eta_{\mu j})\\
+=&amp;-(\delta^i_\sigma\eta_{\rho\nu}\eta_{\mu
+j}-\delta^i_\sigma\eta_{\rho\mu}\eta_{\nu
+j}-\delta^i_\rho\eta_{\sigma\nu}\eta_{\mu
+j}+\delta^i_\rho\eta_{\sigma\mu}\eta_{\nu j}).
+\end{split}
+\end{align*}\]</span> 所以： <span class="math display">\[\begin{align*}
+\begin{split}
+{(L_{\mu\nu}L_{\rho\sigma}-L_{\rho\sigma}L_{\mu\nu})^i}_j=&amp;\;(\delta^i_\sigma\eta_{\rho\nu}\eta_{\mu
+j}-\delta^i_\sigma\eta_{\rho\mu}\eta_{\nu
+j}-\delta^i_\rho\eta_{\sigma\nu}\eta_{\mu
+j}+\delta^i_\rho\eta_{\sigma\mu}\eta_{\nu j})\\
+&amp;-(\delta^i_\mu\eta_{\nu\rho}\eta_{\sigma
+j}-\delta^i_\nu\eta_{\mu\rho}\eta_{\sigma
+j}-\delta^i_\mu\eta_{\nu\sigma}\eta_{\rho
+j}+\delta^i_\nu\eta_{\mu\sigma}\eta_{\rho j})\\
+=&amp;\;\eta_{\rho\nu}(\delta^i_\sigma\eta_{\mu
+j}-\delta^i_\mu\eta_{\sigma j})-\eta_{\rho\mu}(\delta^i_\sigma\eta_{\nu
+j}-\delta^i_\nu\eta_{\sigma j})\\
+&amp;-\eta_{\sigma\nu}(\delta^i_\rho\eta_{\mu j}-\delta^i_\mu\eta_{\rho
+j})+\eta_{\sigma\mu}(\delta^i_\rho\eta_{\nu j}-\delta^i_\nu\eta_{\rho
+j}).
+\end{split}
+\end{align*}\]</span> 因此： <span class="math display">\[\begin{align*}
+\begin{split}
+[L_{\mu\nu},L_{\rho\sigma}]=&amp;-\mathrm{i}(\eta_{\rho\nu}L_{\sigma\mu}-\eta_{\rho\mu}L_{\sigma\nu}-\eta_{\sigma\nu}L_{\rho\mu}+\eta_{\sigma\mu}L_{\rho\nu})\\
+=&amp;\;\mathrm{i}(\eta_{\nu\rho}L_{\mu\sigma}-\eta_{\rho\mu}L_{\nu\sigma}+\eta_{\sigma\nu}L_{\rho\mu}-\eta_{\sigma\mu}L_{\rho\nu}).
+\end{split}
+\end{align*}\]</span></p>
+
+    </div>
+</div>
+<hr />
+<h1 id="mathrmspinpq-群与实-clifford-代数"><span
+class="math inline">\(\mathrm{Spin}(p,q)\)</span> 群与实 Clifford
+代数</h1>
+<h2 id="实-clifford-代数">实 Clifford 代数</h2>
+<p>在 <span class="math inline">\(p\)</span> 与 <span
+class="math inline">\(q\)</span> 较小时，旋量群 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span> 可以比较简单地通过
+<span class="math inline">\(\mathrm{SU}(N)\)</span>、<span
+class="math inline">\(\mathrm{Sp}(N)\)</span>
+等群经过简单的运算得到，最著名的例子就是三维转动群的 <span
+class="math inline">\(\mathrm{Spin}(3,0)=\mathrm{Spin}_+(3,0)\simeq\mathrm{SU}(2)\)</span>，以及洛伦兹群的
+<span
+class="math inline">\(\mathrm{Spin}_+(1,3)\simeq\mathrm{SL}(2,\mathbb
+C)\)</span>。但 <span class="math inline">\(p\)</span> 与 <span
+class="math inline">\(q\)</span> 较大时，<span
+class="math inline">\(\mathrm{Spin}(p,q)\)</span>
+需要想办法单独构造。此时就需要用到 Clifford 代数。</p>
+<p>首先，我们考虑 <span class="math inline">\(\mathbb K=\mathbb
+R\)</span> 上的线性空间 <span
+class="math inline">\(V\)</span>，并给它找一组基 <span
+class="math inline">\(\{e_\mu\}\)</span>， 然后给 <span
+class="math inline">\(V\)</span> 指定一个二次型 <span
+class="math inline">\(\eta\)</span>，使得在刚刚那组基下，二次型的度规张量的分量为
+<span class="math inline">\(\eta_{\mu\nu}:=
+\eta(e_\mu,e_\nu)\)</span>。粗略地来说，如果在 <span
+class="math inline">\(V\)</span>——严格说来应该是 <span
+class="math inline">\(\mathbb K\oplus V\oplus(V\otimes V)\oplus(V\otimes
+V\otimes V)\oplus\cdots\)</span>——中指定某种类似于“并矢”的运算 (Clifford
+积)，并且假定这一并矢运算满足： <blockquote class="colorquote definition" ><p><span class="math display">\[\begin{align*}
+e_\mu e_\nu+e_\nu e_\mu = 2\eta_{\mu\nu}.
+\end{align*}\]</span></p>
+</blockquote> 那么我们就能得到 <span
+class="math inline">\(V\)</span> 上的实 Clifford 代数 <span
+class="math inline">\(\mathrm{Cl}(V,\eta)\)</span>。不难验证，对于 <span
+class="math inline">\(V\)</span> 中任意两个向量都有： <span
+class="math display">\[\begin{align}
+uv+vu=2\eta(u,v),\quad vv=\eta(v,v).
+\label{Clifford}\end{align}\]</span> 很显然，<span
+class="math inline">\(\mathrm{Cl}(V,\eta)\)</span>
+也是一个实线性空间，它的一组基是： <span
+class="math display">\[\begin{align*}
+\{1,e_\mu,e_\mu e_\nu,e_\mu e_\nu e_\rho,\cdots\},\quad
+\mu&lt;\nu&lt;\rho&lt;\cdots.
+\end{align*}\]</span></p>
+<h2 id="mathrmspinpq-群的构造"><span
+class="math inline">\(\mathrm{Spin}(p,q)\)</span> 群的构造</h2>
+<p>现在我们考虑 <span class="math inline">\(\mathbb R\)</span>
+上的线性空间 <span class="math inline">\(V=\mathbb R^{p+q}\)</span>
+并选标准基使得度规张量为 (<span
+class="math inline">\(\ref{metric}\)</span>) 式的形式，此时的 Clifford
+代数记为 <span class="math inline">\(\mathrm{Cl}(p,q)\)</span>。在引入
+Clifford 代数之后，反射 (<span
+class="math inline">\(\ref{reflection}\)</span>) 式可由 Clifford
+积来表示： <span class="math display">\[\begin{align*}
+\rho_v(u)=-\dfrac{vuv}{\eta(v,v)}.
+\end{align*}\]</span> 要验证这一点，只需要利用 (<span
+class="math inline">\(\ref{Clifford}\)</span>) 式将 <span
+class="math inline">\(uv\)</span> 交换并将 <span
+class="math inline">\(vv\)</span> 转化为 <span
+class="math inline">\(\eta(v,v)\)</span> 即可。</p>
+<p>然后我们可以定义如下几个旋量群： <blockquote class="colorquote definition" ><p><span class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Pin}(p,q) &amp;= \{R=v_1v_2\cdots v_n\in\mathrm{Cl}(p,q):\;\;
+v_i\in\mathbb R^{p+q},\; v_iv_i=\pm1,\; n\text{ 为任意整数}\},\\
+\mathrm{Spin}(p,q) &amp;= \{R=v_1v_2\cdots v_n\in\mathrm{Cl}(p,q):\;\;
+v_i\in\mathbb R^{p+q},\; v_iv_i=\pm1,\; n\text{ 为偶数}\},\\
+\mathrm{Spin}_+(p,q) &amp;= \{R=v_1v_2\cdots v_n\in\mathrm{Cl}(p,q):\;\;
+v_i\in\mathbb R^{p+q},\;
+\text{且满足}\;v_iv_i=\pm1\;\text{的}\;v_i\;\text{都是偶数个}\}.
+\end{split}
+\end{align*}\]</span></p>
+</blockquote> 由于 <span
+class="math inline">\(v\)</span> 与 <span
+class="math inline">\(-v\)</span> 总是给出同一个 <span
+class="math inline">\(\rho_v\)</span>，所以 <span
+class="math inline">\(\mathrm{Spin}(p,q)\)</span> 与 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span> 分别是 <span
+class="math inline">\(\mathrm{SO}(p,q)\)</span> 与 <span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span>
+的双重覆盖群。基于这一原因，<span
+class="math inline">\(\mathrm{O}(p,q)\)</span> 的双重覆盖群被记为 <span
+class="math inline">\(\mathrm{Pin}(p,q)\)</span>。此外，<span
+class="math inline">\(\mathrm{Spin}_+(n,0)=\mathrm{Spin}(n,0)\)</span>，并且可被记为
+<span class="math inline">\(\mathrm{Spin}(n)\)</span>。</p>
+<p>数学上可以证明，只要 <span class="math inline">\(p\)</span> 或 <span
+class="math inline">\(q\)</span> 中有一个大于 <span
+class="math inline">\(1\)</span>，那么 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span>
+就是连通的。并且，只要 <span
+class="math inline">\(n\geqslant3\)</span>，<span
+class="math inline">\(\mathrm{Spin}(n)\)</span> 与 <span
+class="math inline">\(\mathrm{Spin}(n,1)\)</span> 都是单连通的——考虑到
+<span class="math inline">\(\mathrm{Spin}_+(p,q)\)</span> 是 <span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span> 的双重覆盖 以及 <span
+class="math inline">\(n\geqslant3\)</span> 时 <span
+class="math inline">\(\pi_1[\mathrm{SO}_+(n,0)]=\pi_1[\mathrm{SO}_+(n,1)]=\mathbb
+Z_2\)</span>，这一点也不难理解。特别地，3 维转动群 <span
+class="math inline">\(\mathrm{SO}(3)\)</span> 的双重覆盖群 <span
+class="math inline">\(\mathrm{Spin}(3)\)</span> 与恰当正时洛伦兹群 <span
+class="math inline">\(\mathrm{SO}_+(1,3)\)</span> 的双重覆盖 <span
+class="math inline">\(\mathrm{Spin}_+(1,3)\)</span> 都是单连通的。</p>
+<p>然后，我们来考虑 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span> 的李代数。我们定义
+<span class="math inline">\(L_{\mu\nu}:= \mathrm{i} e_\mu
+e_\nu/2\)</span>，就能发现它也符合 <span
+class="math inline">\(\mathrm{SO}_+(p,q)\)</span> 的李代数：
+<blockquote class="colorquote theorem" ><p><span class="math display">\[\begin{align*}
+\begin{split}
+[L_{\mu\nu},L_{\rho\sigma}]=\mathrm{i}(\eta_{\nu\rho}L_{\mu\sigma}-\eta_{\rho\mu}L_{\nu\sigma}+\eta_{\sigma\nu}L_{\rho\mu}-\eta_{\sigma\mu}L_{\rho\nu}).
+\end{split}
+\end{align*}\]</span></p>
+</blockquote></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>由于： <span class="math display">\[\begin{align*}
+e_\mu e_\nu + e_\nu e_\mu = 2\eta_{\mu\nu},
+\end{align*}\]</span> 然后我们计算 <span class="math inline">\([e_\mu
+e_\nu, e_\rho e_\sigma]\)</span>。首先，我们发现： <span
+class="math display">\[\begin{align*}
+\begin{split}
+e_\mu e_\nu e_\alpha =&amp;\;e_\mu (2\eta_{\nu\alpha}-e_\alpha
+e_\nu)=2\eta_{\nu\alpha}e_\mu-e_\mu e_\alpha e_\nu\\
+=&amp;\;2\eta_{\nu\alpha}e_\mu -(2\eta_{\mu\alpha}-e_\alpha
+e_\mu)  e_\nu =2\eta_{\nu\alpha}e_\mu -2\eta_{\mu\alpha}e_\nu +e_\alpha
+e_\mu  e_\nu.
+\end{split}
+\end{align*}\]</span> 因此： <span class="math display">\[\begin{align*}
+\begin{split}
+e_\mu e_\nu e_\rho e_\sigma=&amp;\;(e_\mu e_\nu e_\rho
+)e_\sigma=(2\eta_{\nu\rho}e_\mu -2\eta_{\mu\rho}e_\nu +e_\rho
+e_\mu  e_\nu )e_\sigma\\
+=&amp;\;2\eta_{\nu\rho}e_\mu e_\sigma-2\eta_{\mu\rho}e_\nu
+e_\sigma+e_\rho (e_\mu  e_\nu e_\sigma)\\
+=&amp;\;2\eta_{\nu\rho}e_\mu e_\sigma-2\eta_{\mu\rho}e_\nu
+e_\sigma+e_\rho(2\eta_{\nu\sigma}e_\mu -2\eta_{\mu\sigma}e_\nu +e_\sigma
+e_\mu  e_\nu)\\
+=&amp;\;2\eta_{\nu\rho}e_\mu e_\sigma-2\eta_{\mu\rho}e_\nu
+e_\sigma+2\eta_{\nu\sigma}e_\rho e_\mu -2\eta_{\mu\sigma}e_\rho e_\nu
++e_\rho e_\sigma e_\mu  e_\nu.
+\end{split}
+\end{align*}\]</span> 于是我们发现： <span
+class="math display">\[\begin{align*}
+\begin{split}
+[e_\mu e_\nu,e_\rho e_\sigma]=&amp;\;2\eta_{\nu\rho}e_\mu
+e_\sigma-2\eta_{\mu\rho}e_\nu e_\sigma+2\eta_{\nu\sigma}e_\rho e_\mu
+-2\eta_{\mu\sigma}e_\rho e_\nu.
+\end{split}
+\end{align*}\]</span> 两边同时乘以 <span
+class="math inline">\((\mathrm{i}/2)^2=-1/4\)</span>，并定义 <span
+class="math inline">\(L_{\mu\nu}:= \mathrm{i} e_\mu
+e_\nu/2\)</span>，我们发现： <span class="math display">\[\begin{align*}
+\begin{split}
+[L_{\mu\nu},L_{\rho\sigma}]=&amp;-\dfrac12(\eta_{\nu\rho}e_\mu
+e_\sigma-\eta_{\mu\rho}e_\nu e_\sigma+\eta_{\nu\sigma}e_\rho e_\mu
+-\eta_{\mu\sigma}e_\rho e_\nu)\\
+=&amp;\;\mathrm{i}\dfrac{\mathrm{i}}{2}(\eta_{\nu\rho}e_\mu
+e_\sigma-\eta_{\mu\rho}e_\nu e_\sigma+\eta_{\nu\sigma}e_\rho e_\mu
+-\eta_{\mu\sigma}e_\rho e_\nu)\\
+=&amp;\;\mathrm{i}(\eta_{\nu\rho}L_{\mu\sigma}-\eta_{\mu\rho}L_{\nu\sigma}+\eta_{\nu\sigma}L_{\rho\mu}
+-\eta_{\mu\sigma}L_{\rho\nu}).
+\end{split}
+\end{align*}\]</span> 这就是 <span
+class="math inline">\(\mathrm{so}(p,q)\)</span> 的对易关系。</p>
+
+    </div>
+</div>
+<p>实际上，<span
+class="math inline">\(\mathrm{e}^{\theta_{\mu\nu}L_{\mu\nu}}\)</span>
+可以生成 <span class="math inline">\(\mu\nu\)</span>
+平面内的旋转，因此所有 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span> 中的群元都能通过
+<span
+class="math inline">\(\mathrm{e}^{\theta_{\mu\nu}L_{\mu\nu}}\)</span>
+表示出来： <span class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{e}^{-\mathrm{i} \theta
+L_{\mu\nu}}e_\mu\mathrm{e}^{\mathrm{i}\theta
+L_{\mu\nu}}=&amp;\;e_\mu\cosh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right)+e_\nu\dfrac{-\eta_{\mu\mu}}{\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}}\sinh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right),\\
+\mathrm{e}^{-\mathrm{i} \theta
+L_{\mu\nu}}e_\nu\mathrm{e}^{\mathrm{i}\theta
+L_{\mu\nu}}=&amp;\;e_\nu\cosh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right)+e_\nu\dfrac{\eta_{\nu\nu}}{\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}}\sinh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right).
+\end{split}
+\end{align*}\]</span> 对于 <span
+class="math inline">\(\eta_{\mu\mu}\eta_{\nu\nu}=1\)</span> 的情形，利用
+<span
+class="math inline">\(\cosh\left(\sqrt{-1}\theta\right)=\cos(\theta)\)</span>
+以及 <span
+class="math inline">\(\sinh\left(\sqrt{-1}\theta\right)/\sqrt{-1}=\sin(\theta)\)</span>
+就能看出这是一个旋转，对于 <span
+class="math inline">\(\eta_{\mu\mu}\eta_{\nu\nu}=-1\)</span>
+的情形，这就与洛伦兹群中的 boost 类似。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>之前刚刚计算过： <span class="math display">\[\begin{align*}
+\begin{split}
+e_\mu e_\nu e_\alpha =&amp;\;e_\mu (2\eta_{\nu\alpha}-e_\alpha
+e_\nu)=2\eta_{\nu\alpha}e_\mu-e_\mu e_\alpha e_\nu\\
+=&amp;\;2\eta_{\nu\alpha}e_\mu -(2\eta_{\mu\alpha}-e_\alpha
+e_\mu)  e_\nu =2\eta_{\nu\alpha}e_\mu -2\eta_{\mu\alpha}e_\nu +e_\alpha
+e_\mu  e_\nu.
+\end{split}
+\end{align*}\]</span> 所以： <span class="math display">\[\begin{align*}
+\begin{split}
+[e_\mu e_\nu/2,e_\alpha ]=\eta_{\nu\alpha}e_\mu -\eta_{\mu\alpha}e_\nu,
+\end{split}
+\end{align*}\]</span> 我们可以算出： <span
+class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{e}^{-\mathrm{i} \theta
+L_{\mu\nu}}e_\mu\mathrm{e}^{\mathrm{i}\theta
+L_{\mu\nu}}=&amp;\;\mathrm{e}^{\theta e_\mu
+e_\nu/2}e_\mu\mathrm{e}^{-\theta e_\mu
+e_\nu/2}=e_\mu+\theta\left[\dfrac{e_\mu
+e_\nu}{2},e_\mu\right]+\dfrac{\theta^2}{2!}\left[\dfrac{e_\mu
+e_\nu}{2},\left[\dfrac{e_\mu e_\nu}{2},e_\mu\right]\right]+\cdots\\
+=&amp;\;e_\mu+\theta(-\eta_{\mu\mu}e_\nu)+\dfrac{\theta^2}{2!}\left[\dfrac{e_\mu
+e_\nu}{2},(-\eta_{\mu\mu}e_\nu)\right]+\dfrac{\theta^3}{3!}\left[\dfrac{e_\mu
+e_\nu}{2},\left[\dfrac{e_\mu
+e_\nu}{2},(-\eta_{\mu\mu}e_\nu)\right]\right]+\cdots\\
+=&amp;\;e_\mu+\theta(-\eta_{\mu\mu}e_\nu)+\dfrac{\theta^2}{2!}(-\eta_{\mu\mu}\eta_{\nu\nu}e_\mu)+\dfrac{\theta^3}{3!}\left[\dfrac{e_\mu
+e_\nu}{2},(-\eta_{\mu\mu}\eta_{\nu\nu}e_\mu)\right]+\cdots\\
+=&amp;\;e_\mu+\theta(-\eta_{\mu\mu}e_\nu)+\dfrac{\theta^2}{2!}(-\eta_{\mu\mu}\eta_{\nu\nu}e_\mu)+\dfrac{\theta^3}{3!}(-\eta_{\mu\mu})^2\eta_{\nu\nu}e_\nu+\cdots\\
+=&amp;\;e_\mu\cosh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right)+e_\nu\dfrac{-\eta_{\mu\mu}}{\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}}\sinh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right).
+\end{split}
+\end{align*}\]</span> 以及： <span class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{e}^{-\mathrm{i} \theta
+L_{\mu\nu}}e_\nu\mathrm{e}^{\mathrm{i}\theta
+L_{\mu\nu}}=&amp;\;\mathrm{e}^{\theta e_\mu
+e_\nu/2}e_\nu\mathrm{e}^{-\theta e_\mu
+e_\nu/2}=e_\nu+\theta\left[\dfrac{e_\mu
+e_\nu}{2},e_\nu\right]+\dfrac{\theta^2}{2!}\left[\dfrac{e_\mu
+e_\nu}{2},\left[\dfrac{e_\mu e_\nu}{2},e_\nu\right]\right]+\cdots\\
+=&amp;\;e_\nu+\theta(\eta_{\nu\nu}e_\mu)+\dfrac{\theta^2}{2!}\left[\dfrac{e_\mu
+e_\nu}{2},(\eta_{\nu\nu}e_\mu)\right]+\dfrac{\theta^3}{3!}\left[\dfrac{e_\mu
+e_\nu}{2},\left[\dfrac{e_\mu
+e_\nu}{2},(\eta_{\nu\nu}e_\mu)\right]\right]+\cdots\\
+=&amp;\;e_\nu+\theta(\eta_{\nu\nu}e_\mu)+\dfrac{\theta^2}{2!}(-\eta_{\mu\mu}\eta_{\nu\nu}e_\nu)+\dfrac{\theta^3}{3!}\left[\dfrac{e_\mu
+e_\nu}{2},(-\eta_{\mu\mu}\eta_{\nu\nu}e_\nu)\right]+\cdots\\
+=&amp;\;e_\nu+\theta(\eta_{\nu\nu}e_\mu)+\dfrac{\theta^2}{2!}(-\eta_{\mu\mu}\eta_{\nu\nu}e_\nu)+\dfrac{\theta^3}{3!}(-\eta_{\mu\mu})\eta_{\nu\nu}^2e_\mu+\cdots\\
+=&amp;\;e_\nu\cosh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right)+e_\nu\dfrac{\eta_{\nu\nu}}{\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}}\sinh\left(\sqrt{-\eta_{\mu\mu}\eta_{\nu\nu}}\theta\right).
+\end{split}
+\end{align*}\]</span></p>
+
+    </div>
+</div>
+<h2 id="clifford-代数的偶数子空间">Clifford 代数的偶数子空间</h2>
+<p>到此为止，寻找 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span>
+群的表示的问题就变成了寻找 <span
+class="math inline">\(\mathrm{Cl}(p,q)\)</span> 的表示的问题。</p>
+<p>但是需要指出的是，<span
+class="math inline">\(\mathrm{Cl}(p,q)\)</span> 的不可约表示给出的 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span>
+群的表示并不一定也是不可约的，因为 <span
+class="math inline">\(\mathrm{Spin}_+(p,q)\)</span> 群中的群元只是偶数个
+<span class="math inline">\(v_i\in\mathbb R^{p+q}\)</span> 的 Clifford
+积。实际上，如果将 <span class="math inline">\(\mathrm{Cl}(p,q)\)</span>
+中由偶数个 <span class="math inline">\(e_\mu\)</span> 的 Clifford
+积构成的子空间记为 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span>，那么就有：
+<blockquote class="colorquote theorem" ><p><span class="math display">\[\begin{align}\label{Clifford even}
+\mathrm{Cl}_{\text{even}}(p,q) \simeq \mathrm{Cl}(q,p-1) ,\quad
+\mathrm{Cl}_{\text{even}}(p,q) \simeq \mathrm{Cl}(p,q-1).
+\end{align}\]</span></p>
+</blockquote></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>第一个式子：假如 <span class="math inline">\(e_{1\sim
+p}^2=-e_{(p+1)\sim (p+q)}^2=1\)</span>，那么 <span
+class="math display">\[e&#39;_{i}:= e_1e_{p+i}\;(i=1\sim q),\quad
+e&#39;_{q+k}:= e_1e_{k}\;(k=2\sim p)\]</span> 将会构成 <span
+class="math inline">\(\mathrm{Cl}(q,p-1)\)</span> 的基。</p>
+<p>第二个式子：假如 <span class="math inline">\(e_{1\sim
+p}^2=-e_{(p+1)\sim (p+q)}^2=1\)</span>，那么 <span
+class="math display">\[e&#39;&#39;_{i}:= e_{p+1}e_{i}\;(i=1\sim p),\quad
+e&#39;&#39;_{p+k}:= e_{p+1}e_{p+k}\;(k=2\sim q)\]</span> 将会构成 <span
+class="math inline">\(\mathrm{Cl}(p,q-1)\)</span> 的基。</p>
+
+    </div>
+</div>
+<hr />
+<h1 id="gamma-矩阵与实-clifford-代数的表示"><span
+class="math inline">\(\gamma\)</span> 矩阵与实 Clifford 代数的表示</h1>
+<h2 id="表示的维数">表示的维数</h2>
+<p>只要我们能够找到一系列 <span
+class="math inline">\(\gamma_\mu\)</span> 矩阵使其满足 <span
+class="math display">\[\begin{align*}
+\gamma_\mu\gamma_\nu+\gamma_\nu\gamma_\mu=2\eta_{\mu\nu},\quad
+\eta=\mathrm{diag}\{\underbrace{+1,+1,\cdots,+1}_{p},\underbrace{-1,-1,\cdots,-1}_{q}\}
+\end{align*}\]</span> 并将 <span
+class="math inline">\(\gamma_\mu\)</span> 视为 <span
+class="math inline">\(e_\mu\)</span> 的表示矩阵，我们就能得到 <span
+class="math inline">\(\mathrm{Cl}(p,q)\)</span> 的表示。我们只考虑 <span
+class="math inline">\(d:p+q\geqslant 2\)</span> 的情形。</p>
+<p>不难想象： <span class="math display">\[\begin{align*}
+\Gamma_{p,q}:= \{\pm1,\pm e_\mu,\pm e_\mu e_\nu,\pm e_\mu e_\nu
+e_\rho,\cdots, \pm e_1 e_2\cdots e_{p+q}\},\quad
+\mu&lt;\nu&lt;\rho&lt;\cdots
+\end{align*}\]</span> 构成一个群，其群乘法就是 Clifford 积，群的阶数为
+<span class="math inline">\(2^{d+1}\)</span>，<span
+class="math inline">\(d=p+q\)</span>。找到这个群的表示就能得到 <span
+class="math inline">\(\mathrm{Cl}(p,q)\)</span> 的表示。</p>
+<p>可以证明 <span class="math inline">\(\Gamma_{p,q}\)</span> 的高于
+<span class="math inline">\(1\)</span> 维的不可约表示只可能是 <span
+class="math inline">\(2^{\lfloor d/2\rfloor}\)</span> 维的：<span
+class="math inline">\(d\)</span> 为偶数时仅有 <span
+class="math inline">\(1\)</span> 种 <span
+class="math inline">\(2^{\lfloor d/2\rfloor}\)</span> 维表示，<span
+class="math inline">\(d\)</span> 为奇数时则有 2 种。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>(step-1)<span class="math inline">\(\quad\)</span>我们定义 <span
+class="math inline">\(e_{d+1}\)</span>： <span
+class="math display">\[\begin{align*}
+e_{d+1}:= e_1 e_2\cdots e_{p+q}=e_1 e_2\cdots e_{d}.
+\end{align*}\]</span></p>
+<hr />
+<p>(step-2)<span class="math inline">\(\quad\)</span>我们先确定 <span
+class="math inline">\(\Gamma_{p,q}\)</span> 的共轭类。</p>
+<p>从 <span class="math inline">\(\Gamma_{p,q}\)</span> 中任取一个不为
+<span class="math inline">\(\pm1\)</span> 的群元 <span
+class="math inline">\(a\)</span>，假设其是由 <span
+class="math inline">\(n_a\)</span> 个 <span
+class="math inline">\(e_\mu\)</span> 构成的。然后再任取一个 <span
+class="math inline">\(b\)</span>，假设 <span
+class="math inline">\(b\)</span> 由 <span
+class="math inline">\(n_b\)</span> 个 <span
+class="math inline">\(e_\mu\)</span> 构成，并且其中有 <span
+class="math inline">\(s\)</span> 个与 <span
+class="math inline">\(a\)</span> 重复，那么根据 <span
+class="math inline">\(e_\mu e_\nu+e_\nu e_\mu=2\eta_{\mu\nu}\)</span>
+不难算出： <span
+class="math display">\[bab^{-1}=(-1)^{(n_b-s)n_a+s(n_a-1)}abb^{-1}=(-1)^{n_an_b-s}a.\]</span>
+这里的 <span class="math inline">\((n_b-s)n_a\)</span> 来源于将 <span
+class="math inline">\(b\)</span> 中不与 <span
+class="math inline">\(a\)</span> 重复的 <span
+class="math inline">\((n_b-s)\)</span> 个 <span
+class="math inline">\(e_\mu\)</span> 移动到 <span
+class="math inline">\(a\)</span> 的后面，<span
+class="math inline">\(s(n_a-1)\)</span> 来源于将 <span
+class="math inline">\(b\)</span> 中与 <span
+class="math inline">\(a\)</span> 重复的 <span
+class="math inline">\(s\)</span> 个 <span
+class="math inline">\(e_\mu\)</span> 移动到 <span
+class="math inline">\(a\)</span> 的后面。这一结果意味着 <span
+class="math inline">\(a\)</span> 要么自成一类，要么与 <span
+class="math inline">\(-a\)</span> 共成一类。</p>
+<p><span class="math inline">\(n_a=d\)</span> 即 <span
+class="math inline">\(a=e_{d+1}\)</span> 时，<span
+class="math inline">\(n_b=s\)</span>，<span
+class="math inline">\((-1)^{(d-1)s}=1\)</span>。因此 <span
+class="math inline">\(d\)</span> 为奇数时 <span
+class="math inline">\(e_{d+1}\)</span> 与 <span
+class="math inline">\(-e_{d+1}\)</span>
+各成一类，与所有群元都对易。<span class="math inline">\(d\)</span>
+为偶数时，<span class="math inline">\((-1)^{(d-1)s}\)</span> 取决于
+<span class="math inline">\(s\)</span> 即 <span
+class="math inline">\(n_b\)</span> 的奇偶性，因此 <span
+class="math inline">\(d\)</span> 为偶数时 <span
+class="math inline">\(\{\pm e_{d+1}\}\)</span> 构成一个共轭类。</p>
+<p>现在考虑 <span class="math inline">\(0&lt;n_a&lt;d\)</span>
+的情况，此时我们总是可以找到一个不参与构成 <span
+class="math inline">\(a\)</span> 的 <span
+class="math inline">\(e_\alpha\)</span> 与一个参与构成 <span
+class="math inline">\(a\)</span> 的 <span
+class="math inline">\(e_\beta\)</span>。<span
+class="math inline">\(n_a\)</span> 为奇数时，取 <span
+class="math inline">\(b=e_\alpha\)</span> 就有 <span
+class="math inline">\(b a b^{-1}=-a\)</span>，因此 <span
+class="math inline">\(\{\pm a\}\)</span> 构成一个共轭类。<span
+class="math inline">\(n_a\)</span> 为偶数时，取 <span
+class="math inline">\(b=e_\beta\)</span> 就有 <span
+class="math inline">\(b a b^{-1}=-a\)</span>，因此 <span
+class="math inline">\(\{\pm a\}\)</span> 构成一个共轭类。所以只要 <span
+class="math inline">\(0&lt;n_a&lt;d\)</span>，<span
+class="math inline">\(\{\pm a\}\)</span> 就构成一个共轭类。</p>
+<hr />
+<p>(step-3)<span class="math inline">\(\quad\)</span>然后我们先考虑
+<span class="math inline">\(\Gamma_{p,q}\)</span> 的一维表示。</p>
+<p>最简单的一维表示就是： <span class="math display">\[\begin{align*}
+\pm1\rightarrow1,\quad \pm e_{1\sim d}\rightarrow1.
+\end{align*}\]</span> 注意，<span class="math inline">\(e_\mu\)</span>
+与 <span class="math inline">\(-e_\mu\)</span>
+同属一个共轭类进而特征标相同，而它们的特征标又不是 <span
+class="math inline">\(0\)</span>，这导致 <span
+class="math inline">\(-1\)</span> 的表示只能为 <span
+class="math inline">\(1\)</span>。由于 <span
+class="math inline">\(\pm1\)</span> 的表示都为 <span
+class="math inline">\(1\)</span>，而 <span
+class="math inline">\(e_\mu^2=\pm1\)</span>，所以 <span
+class="math inline">\(e_\mu\)</span> 的表示只能为 <span
+class="math inline">\(\pm1\)</span> 不能为 <span
+class="math inline">\(\pm\mathrm{i}\)</span>。其余的一维表示可通过将某些
+<span class="math inline">\(\pm e_\mu\)</span> 的表示设为 <span
+class="math inline">\(-1\)</span> 来得到。这样的 <span
+class="math inline">\(1\)</span> 维表示共有 <span
+class="math inline">\(2^d\)</span> 个。</p>
+<hr />
+<p>(step-4)<span
+class="math inline">\(\quad\)</span>然后我们确定高于一维的表示的维数。</p>
+<p>我们知道，群论中有如下定理：有限群不等价不可约表示的个数等于其共轭类的个数，不等价不可约表示的维数的平方和等于群的阶数。</p>
+<p>对于 <span class="math inline">\(d\)</span> 为偶数的情形，<span
+class="math inline">\(\Gamma_{p,q}\)</span> 共有 <span
+class="math inline">\(2^{d}+1\)</span> 个共轭类（注意 <span
+class="math inline">\(\pm1\)</span> 是两个共轭类），因此有 <span
+class="math inline">\(2^{d}+1\)</span> 个不等价不可约表示，<span
+class="math inline">\(1\)</span> 维表示占了其中 <span
+class="math inline">\(2^d\)</span> 个，因此高于 <span
+class="math inline">\(1\)</span> 维的表示只有一个，其维数为 <span
+class="math inline">\(\sqrt{2^{d+1}-2^d}=2^{d/2}\)</span>。</p>
+<p>对于 <span class="math inline">\(d\)</span> 为奇数的情形，<span
+class="math inline">\(\Gamma_{p,q}\)</span> 共有 <span
+class="math inline">\(2^{d}+2\)</span> 个共轭类（注意 <span
+class="math inline">\(\pm1\)</span> 与 <span class="math inline">\(\pm
+e_{d+1}\)</span> 是四个共轭类），因此有 <span
+class="math inline">\(2^{d}+2\)</span> 个不等价不可约表示，<span
+class="math inline">\(1\)</span> 维表示占了其中 <span
+class="math inline">\(2^d\)</span> 个，因此高于 <span
+class="math inline">\(1\)</span> 维的表示有 <span
+class="math inline">\(2\)</span> 个。这两个表示的维数的平方和为 <span
+class="math inline">\(2^{d+1}-2^d=2^d\)</span>，而 <span
+class="math inline">\(d\geqslant2\)</span> 时 <span
+class="math inline">\(a^2+b^2=2^d\)</span> 的整数解只有 <span
+class="math inline">\(a=b=2^{(d-1)/2}\)</span>（证明放在下面）。</p>
+<p>综合以上两种情形，<span class="math inline">\(\Gamma_{p,q}\)</span>
+的高于 <span class="math inline">\(1\)</span>
+维的不等价不可约表示的维数只可能是 <span
+class="math inline">\(2^{\lfloor d/2\rfloor}\)</span>。</p>
+<hr />
+<p><span class="math inline">\(a^2+b^2=2^d\)</span> 的整数解只有 <span
+class="math inline">\(a=b=2^{(d-1)/2}\)</span> 的证明：</p>
+<p><span class="math inline">\(d=0\)</span> 时，<span
+class="math inline">\(a^2+b^2=2^d\)</span>
+的非负整数解只有两种可能：<span
+class="math inline">\(a=0\)</span>、<span
+class="math inline">\(b=1\)</span> 或 <span
+class="math inline">\(a=1\)</span>、<span
+class="math inline">\(b=0\)</span>。</p>
+<p><span class="math inline">\(d=1\)</span> 时，仅有的可能是 <span
+class="math inline">\(a=b=1\)</span>。</p>
+<p>然后我们考虑 <span class="math inline">\(d\geqslant2\)</span>
+的情况。 <span class="math inline">\(d\geqslant2\)</span> 时，<span
+class="math inline">\(a\)</span> 与 <span
+class="math inline">\(b\)</span> 奇偶性相同。</p>
+<p>先用反证法排除 <span class="math inline">\(a\)</span> 与 <span
+class="math inline">\(b\)</span> 都是奇数的情形：假设 <span
+class="math inline">\(a=2m+1\)</span>，<span
+class="math inline">\(b=2n+1\)</span>，那么 <span
+class="math display">\[a^2+b^2=4(m^2+n^2+m+n)+2,\]</span> 这意味着 <span
+class="math inline">\(2(m^2+n^2+m+n)+1=2^{d-1}\)</span>，左右两边的奇偶性就会不同，不可能有解，因此
+<span class="math inline">\(a\)</span> 与 <span
+class="math inline">\(b\)</span> 必须都是偶数。</p>
+<p>假设 <span class="math inline">\(a=m_a\times 2^{n_a}\)</span>，<span
+class="math inline">\(b=m_b\times 2^{n_b}\)</span>，<span
+class="math inline">\(m_a\)</span> 与 <span
+class="math inline">\(m_b\)</span> 为奇数。假设 <span
+class="math inline">\(n_a\leqslant n_b\)</span>，那么 <span
+class="math inline">\(a^2+b^2=2^d\)</span> 意味着 <span
+class="math display">\[m_a^2+(m_b\times
+2^{n_b-n_a})^2=2^{d-2n_a}.\]</span> 如果 <span
+class="math inline">\(n_b\neq
+n_a\)</span>，那么两边奇偶性不一致，所以只可能是 <span
+class="math inline">\(n_a=n_b\)</span>。这意味着 <span
+class="math inline">\(m_a^2+m_b^2=2^{d-2n_a}\)</span>，唯一的可能性是
+<span class="math inline">\(d-2n_a=1\)</span> 且 <span
+class="math inline">\(m_a=m_b=1\)</span>。</p>
+<p>因此 <span class="math inline">\(a^2+b^2=2^d\)</span> 的正整数解只有
+<span class="math inline">\(a=b=2^{(d-1)/2}\)</span>。</p>
+
+    </div>
+</div>
+<h2 id="具体的表示">具体的表示</h2>
+<p>对于 <span class="math inline">\(d\)</span>
+为偶数的情形，我们可以写出如下 <span
+class="math inline">\(2^{d/2}\)</span>
+维表示——许多结论可从这组表示中得到： <span
+class="math display">\[\begin{align}
+\begin{split}
+\gamma_1=&amp;\;\varepsilon_1\sigma^x\otimes I\otimes I\otimes I\otimes
+\cdots\\
+\gamma_2=&amp;\;\varepsilon_2\sigma^y\otimes I\otimes I\otimes I\otimes
+\cdots\\
+\gamma_3=&amp;\;\varepsilon_3\sigma^z\otimes\sigma^x\otimes I\otimes
+I\otimes \cdots\\
+\gamma_4=&amp;\;\varepsilon_4\sigma^z\otimes\sigma^y\otimes I\otimes
+I\otimes \cdots\\
+\gamma_5=&amp;\;\varepsilon_5\sigma^z\otimes\sigma^z\otimes\sigma^x\otimes
+I\otimes\cdots\\
+\gamma_6=&amp;\;\varepsilon_6\sigma^z\otimes\sigma^z\otimes\sigma^y\otimes
+I\otimes\cdots\\
+\vdots\;&amp;
+\end{split}
+\label{even_Clifford_repr}\end{align}\]</span> 其中 <span
+class="math inline">\(I\)</span> 为 <span
+class="math inline">\(2\times2\)</span> 单位矩阵。每一个 <span
+class="math inline">\(\gamma\)</span> 矩阵都由 <span
+class="math inline">\(d/2\)</span> 个 <span
+class="math inline">\(2\)</span> 维矩阵直积得来，因此这是一个 <span
+class="math inline">\(2^{d/2}\)</span> 维表示。每一个 <span
+class="math inline">\(\gamma\)</span> 矩阵前面的系数用于确保 <span
+class="math inline">\(\gamma_\mu^2=+1\)</span> 或 <span
+class="math inline">\(-1\)</span>。利用泡利矩阵的反对易性不难验证不同的
+<span class="math inline">\(\gamma_\mu\)</span>
+之间都是反对易的，因此它们的确能够构成偶数维实 Clifford
+代数的复表示。</p>
+<p>还是对于 <span class="math inline">\(d\)</span>
+为偶数的情形，假如已知一个 <span class="math inline">\((d-1)\)</span>
+维时的表示： <span class="math display">\[\begin{align*}
+\tilde\gamma_1,\tilde\gamma_2,\cdots,\tilde\gamma_{d-1},
+\end{align*}\]</span> 其中每一个 <span
+class="math inline">\(\tilde\gamma\)</span> 都是 <span
+class="math inline">\(2^{(d-2)/2}\)</span> 维矩阵，那么 <span
+class="math inline">\(d\)</span> 维情形的一种表示就是： <span
+class="math display">\[\begin{align}
+\begin{split}
+\gamma_i&amp;=\varepsilon_i\sigma^x\otimes\tilde\gamma_i=\begin{bmatrix}0&amp;\tilde\gamma_i\\
+\tilde\gamma_i&amp;0\end{bmatrix},\quad i=1\sim(d-1),\\
+\gamma_d&amp;=\varepsilon_d\begin{bmatrix}0&amp;I_{2^{(d-2)/2}\times2^{(d-2)/2}}\\-I_{2^{(d-2)/2}\times2^{(d-2)/2}}&amp;0\end{bmatrix}.
+\end{split}
+\label{odd_d_to_d+1_method1}\end{align}\]</span> 另一种表示是： <span
+class="math display">\[\begin{align}
+\begin{split}
+\gamma_i&amp;=\varepsilon_i\sigma^x\otimes\tilde\gamma_i=\begin{bmatrix}0&amp;\tilde\gamma_i\\
+\tilde\gamma_i&amp;0\end{bmatrix},\quad i=1\sim(d-1),\\
+\gamma_d&amp;=\varepsilon_d\begin{bmatrix}I_{2^{(d-2)/2}\times2^{(d-2)/2}}&amp;0\\0&amp;-I_{2^{(d-2)/2}\times2^{(d-2)/2}}\end{bmatrix}.
+\end{split}
+\label{odd_d_to_d+1_method2}\end{align}\]</span></p>
+<p>对于 <span class="math inline">\(d\)</span>
+为奇数的情形，假如我们能够找到 <span
+class="math inline">\((d-1)\)</span> 维 Clifford 代数的表示，即找到
+<span class="math inline">\(2^{(d-1)/2}\)</span> 个 <span
+class="math inline">\(\gamma\)</span> 矩阵 <span
+class="math inline">\(\gamma_{1\sim (d-1)}\)</span> 使其平方为 <span
+class="math inline">\(\pm1\)</span> 且互相之间反对易，那么我们可以选取：
+<span class="math display">\[\begin{align}
+\gamma_d=\pm\varepsilon_d\gamma_1\gamma_2\cdots\gamma_{d-1}.
+\label{gamma_d_from_gamma_1tod-1}\end{align}\]</span> 不难验证，<span
+class="math inline">\(\gamma_d\)</span> 的确与 <span
+class="math inline">\(\gamma_{1\sim(d-1)}\)</span>
+的每一个都反对易且平方为 <span
+class="math inline">\(\pm1\)</span>，因而能够与 <span
+class="math inline">\(\gamma_{1\sim(d-1)}\)</span> 一起构成 Clifford
+代数的表示。可以证明，(<span
+class="math inline">\(\ref{gamma_d_from_gamma_1tod-1}\)</span>)
+给出的两种 <span class="math inline">\(\gamma_d\)</span> 正好对应于此时
+Clifford 代数仅有的两个不等价不可约表示。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明（Clifford 代数表示的特征标）
+    </div>
+    <div class='spoiler-content'>
+        <p>对于 <span class="math inline">\(d:= p+q\)</span>
+为偶数的情形，不难想象所有的一维表示的特征标都满足正交关系：假设某个
+<span class="math inline">\(1\)</span> 维表示 <span
+class="math inline">\(\chi_1\)</span> 将 <span class="math inline">\(\pm
+e_\mu\)</span> 的表示设为 <span
+class="math inline">\(a_\mu\)</span>，另一个表示 <span
+class="math inline">\(\chi_2\)</span> 将 <span class="math inline">\(\pm
+e_\mu\)</span> 的表示设为 <span class="math inline">\(b_\mu\)</span>
+(<span class="math inline">\(a_\mu\)</span> 与 <span
+class="math inline">\(b_\mu\)</span> 的取值范围都为 <span
+class="math inline">\(\pm1\)</span>)，那么： <span
+class="math display">\[\sum_{g\in\Gamma_{p,q}}[\chi_1(g)]^\ast\chi_2(g)=\prod_{\mu=1}^d(1+a_\mu
+b_\mu).\]</span> 只要这两个表示不相同，就至少存在一个 <span
+class="math inline">\(\mu\)</span> 使得 <span
+class="math inline">\(a_\mu
+b_\mu=-1\)</span>，导致这两个表示的特征标正交。</p>
+<p>然后我们考虑 (<span
+class="math inline">\(\ref{even_Clifford_repr}\)</span>)
+式给出的不可约表示 <span class="math inline">\(\chi_0\)</span>。由于
+<span class="math inline">\(\mathrm{tr}(a\otimes
+b)=\mathrm{tr}(a)\mathrm{tr}(b)\)</span>，而 <span
+class="math inline">\(\mathrm{tr}(\sigma^{x,y,z})=0\)</span>，所以所有
+<span class="math inline">\(\mathrm{tr}(\gamma_\mu)=0\)</span>，因此：
+<span class="math display">\[\chi_0(1)=2^{d/2},\quad
+\chi_0(-1)=-2^{d/2},\quad \text{其余：}0.\]</span> 由于所有 <span
+class="math inline">\(1\)</span> 维表示都给出 <span
+class="math inline">\(\chi(\pm1)=1\)</span>，所以它也与所有 <span
+class="math inline">\(1\)</span> 维表示正交。</p>
+<hr />
+<p>对于 <span class="math inline">\(d:= p+q\)</span>
+为奇数的情形，一维表示彼此之间也是互相正交的。对于 <span
+class="math inline">\(&gt;1\)</span> 维的表示，我们先为 <span
+class="math inline">\(e_{1\sim(d-1)}\)</span> 构成的 Clifford
+代数找到一组表示，将表示矩阵记为 <span
+class="math inline">\(\gamma_{1\sim(d-1)}\)</span>。然后我们考虑 <span
+class="math display">\[e_{d+1}:= e_1e_2\cdots e_d.\]</span> 它与所有
+<span class="math inline">\(e_{1\sim(d-1)}\)</span> 都对易，因此在 <span
+class="math inline">\(e_{1\sim(d-1)}\)</span> 构成的 Clifford
+代数的表示中，<span class="math inline">\(\gamma_{d+1}\)</span>
+一定是一个常数矩阵： <span
+class="math display">\[\gamma_{d+1}=aI.\]</span> <span
+class="math inline">\(a\)</span> 的取值可从 <span
+class="math inline">\(e_{d+1}^2=\pm1\)</span> 得到：<span
+class="math inline">\(e_{d+1}^2=1\)</span> 时 <span
+class="math inline">\(a=\pm1\)</span>，而 <span
+class="math inline">\(e_{d+1}^2=-1\)</span> 时 <span
+class="math inline">\(a=\pm\mathrm{i}\)</span>，因此 <span
+class="math inline">\(\gamma_{d+1}\)</span>
+总是有两种取法，对应两个表示——这两个表示中 <span
+class="math inline">\(\pm\gamma_{d+1}\)</span>
+的特征标相反，因此互不等价。在确定 <span
+class="math inline">\(\gamma_{d+1}\)</span> 的形式后，结合 <span
+class="math inline">\(\gamma_{d+1}=\gamma_1\gamma_2\cdots\gamma_d\)</span>
+可以算出： <span class="math display">\[\gamma_d =
+\pm\varepsilon_d\gamma_1\gamma_2\cdots\gamma_{d-1}.\]</span>
+这样一来，我们就得到了 <span class="math inline">\(d:= p+q\)</span>
+为奇数时的两个表示。</p>
+<p>从 (<span class="math inline">\(\ref{even_Clifford_repr}\)</span>)
+式给出的表示可以看到，<span class="math inline">\(\gamma_d\)</span>
+将是一系列 <span class="math inline">\(\sigma^z\)</span> 的直积，因此
+<span
+class="math inline">\(\mathrm{tr}(\gamma_d)=0\)</span>。所以，在这两组表示中，只有
+<span class="math inline">\(\pm1\)</span> 与 <span
+class="math inline">\(\pm e_{d+1}\)</span> 这四个共轭类的特征标非零：
+<span class="math display">\[\begin{align*}
+\begin{array}{c|ccccc}
+                            &amp;\chi(1)&amp;\chi(-1)&amp;\chi(e_{d+1})&amp;\chi(-e_{d+1})&amp;\text{其它}\\
+\hline
+1\;\text{维表示}            &amp;1&amp;1&amp;x&amp;x&amp;\text{略}\\
+2^{(d-1)/2}\;\text{维表示 1}&amp;2^{(d-1)/2}&amp;-2^{(d-1)/2}&amp;a\cdot
+2^{(d-1)/2}&amp;-a\cdot 2^{(d-1)/2}&amp;0\\
+2^{(d-1)/2}\;\text{维表示
+2}&amp;2^{(d-1)/2}&amp;-2^{(d-1)/2}&amp;-a\cdot 2^{(d-1)/2}&amp;a\cdot
+2^{(d-1)/2}&amp;0
+\end{array}
+\end{align*}\]</span> 这也符合特征标的正交关系。</p>
+
+    </div>
+</div>
+<h2 id="实表示的可能性">实表示的可能性</h2>
+<p>以上得到的表示矩阵都是复表示，即表示矩阵都是复矩阵。现在我们来寻找实表示，即表示矩阵都是实数的表示。在
+(<span class="math inline">\(\ref{even_Clifford_repr}\)</span>)
+式中，虚数单位 <span class="math inline">\(\mathrm{i}\)</span> 出现在
+<span class="math inline">\(\sigma^y\)</span> 与 <span
+class="math inline">\(\varepsilon_i\)</span>
+上，因此，以下矩阵可以构成一组实表示： <span
+class="math display">\[\begin{align*}
+\begin{split}
+\gamma_1=&amp;\;\sigma^x\otimes I\otimes I\otimes I\otimes \cdots\\
+\gamma_2=&amp;\;\mathrm{i}\sigma^y\otimes I\otimes I\otimes I\otimes
+\cdots\\
+\gamma_3=&amp;\;\sigma^z\otimes\sigma^x\otimes I\otimes I\otimes
+\cdots\\
+\gamma_4=&amp;\;\sigma^z\otimes\mathrm{i}\sigma^y\otimes I\otimes
+I\otimes \cdots\\
+\gamma_5=&amp;\;\sigma^z\otimes\sigma^z\otimes\sigma^x\otimes
+I\otimes\cdots\\
+\gamma_6=&amp;\;\sigma^z\otimes\sigma^z\otimes\mathrm{i}\sigma^y\otimes
+I\otimes\cdots\\
+\vdots\;&amp;
+\end{split}
+\end{align*}\]</span> 它们是 <span
+class="math inline">\(\mathrm{Cl}(n,n)\)</span> 的表示，因此 <span
+class="math inline">\(\mathrm{Cl}(n,n)\)</span>
+的不可约复表示同时也是实表示。</p>
+<p>不难验证，这组 <span class="math inline">\(\gamma_\mu\)</span> 给出的
+<span class="math inline">\(\gamma_{2n+1}:=
+\gamma_1\gamma_2\cdots\gamma_{2n}\)</span> 满足 <span
+class="math inline">\(\gamma_{2n+1}^2=(-1)^{n+n(2n-1)}=1\)</span>，因此这里的
+<span class="math inline">\(\gamma_{1\sim (2n+1)}\)</span> 构成 <span
+class="math inline">\(\mathrm{Cl}(n+1,n)\)</span>
+的表示，它也是实表示。</p>
+<p>然后从 (<span
+class="math inline">\(\ref{odd_d_to_d+1_method1}\)</span>) 或 (<span
+class="math inline">\(\ref{odd_d_to_d+1_method2}\)</span>)
+出发，我们也能构造出 <span
+class="math inline">\(\mathrm{Cl}(n+2,n)\)</span> 的实表示。</p>
+<p>但是，从 <span class="math inline">\(\mathrm{Cl}(n+2,n)\)</span>
+的实表示出发，我们不能通过类似的方法构造 <span
+class="math inline">\(\mathrm{Cl}(n+3,n)\)</span>
+的实表示。实际上，数学上可以证明只有 <span
+class="math inline">\(\mathrm{Cl}(n,n)\)</span>、<span
+class="math inline">\(\mathrm{Cl}(n+1,n)\)</span>、<span
+class="math inline">\(\mathrm{Cl}(n+2,n)\)</span> 的 <span
+class="math inline">\(2^{\lfloor d/2\rfloor}\)</span>
+维不可约表示是实表示。</p>
+<hr />
+<h1 id="实-clifford-代数的分类">实 Clifford 代数的分类</h1>
+<p>上一节已经给出了如何构建 Clifford
+代数的表示。这一小节我们更加仔细地观察 Clifford
+代数，并给出其更具体的表示。我们用 <span
+class="math inline">\(M_{N}(\mathbb K)\)</span> 表示矩阵元在 <span
+class="math inline">\(\mathbb K\)</span> 中取值的 <span
+class="math inline">\(N\times N\)</span> 矩阵。</p>
+<p>几个低维的 Clifford 代数是： <span
+class="math display">\[\begin{align}\label{Cl_d=0,1}
+\begin{array}{lll}
+\mathrm{Cl}(0,0)=\mathbb R,\quad &amp;\mathrm{Cl}(1,0)=\mathbb
+R\oplus\mathbb R,\quad &amp;\mathrm{Cl}(0,1)=\mathbb C.
+\end{array}
+\end{align}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>首先，我们考虑的是实数域上的 Clifford 代数所以 <span
+class="math inline">\(\mathrm{Cl}(0,0)=\mathbb R\)</span>。</p>
+<p>对于 <span
+class="math inline">\(\mathrm{Cl}(1,0)\)</span>，我们可以从中挑出一个
+<span class="math inline">\(e\)</span> 使得 <span
+class="math inline">\(e^2=1\)</span> 且 <span
+class="math inline">\(e\neq 1\)</span>，那么 <span
+class="math inline">\(\mathrm{Cl}(1,0)\)</span> 中的任何一个元素都可写为
+<span class="math inline">\(x(1+e)/2+y(1-e)/2\)</span> 的形式，考虑到
+<span class="math inline">\(P_\pm:= (1\pm e)/2\)</span>
+实际上是两个投影算符，所以 <span
+class="math inline">\(\mathrm{Cl}(1,0)\)</span> 自然地就等同于 <span
+class="math inline">\(\mathbb R\oplus\mathbb R\)</span>。</p>
+<p>最后，对于 <span
+class="math inline">\(\mathrm{Cl}(0,1)\)</span>，我们注意到虚数单位
+<span class="math inline">\(\mathrm{i}\)</span> 自然地满足 <span
+class="math inline">\(\mathrm{i}^2=-1\)</span>，因此 <span
+class="math inline">\(\mathrm{Cl}(0,1)=\mathbb C\)</span>。</p>
+
+    </div>
+</div>
+<p>然后 <span class="math inline">\(2\)</span> 维情形的结果是： <span
+class="math display">\[\begin{align}\label{Cl, d=2}
+\mathrm{Cl}(2,0)=\mathrm{Cl}(1,1)=M_{2}(\mathbb R),\quad
+\mathrm{Cl}(0,2)=\mathbb H.
+\end{align}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math inline">\(\sigma^x\)</span>、<span
+class="math inline">\(\sigma^z\)</span>、<span
+class="math inline">\(\mathrm{i}\sigma^y\)</span> 与 <span
+class="math inline">\(I_{2\times2}\)</span> 构成了 <span
+class="math inline">\(M_{2}(\mathbb R)\)</span> 的一组基。</p>
+<p>对于 <span
+class="math inline">\(\mathrm{Cl}(2,0)\)</span>，我们可以选择 <span
+class="math inline">\(\gamma_1=\sigma^z\)</span>，<span
+class="math inline">\(\gamma_2=\sigma^x\)</span>。</p>
+<p>对于 <span
+class="math inline">\(\mathrm{Cl}(1,1)\)</span>，我们可以选择 <span
+class="math inline">\(\gamma_1=\sigma^x\)</span>，<span
+class="math inline">\(\gamma_2=\mathrm{i}\sigma^y\)</span>，这样就证明了
+<span
+class="math inline">\(\mathrm{Cl}(2,0)=\mathrm{Cl}(1,1)=M_{2}(\mathbb
+R)\)</span>。</p>
+<p>对于 <span class="math inline">\(\mathrm{Cl}(0,2)\)</span>，<span
+class="math inline">\(\gamma_1\)</span>、<span
+class="math inline">\(\gamma_2\)</span> 以及 <span
+class="math inline">\(\gamma_1\gamma_2\)</span> 可以起到四元数中 <span
+class="math inline">\(\mathrm{i,j,k}\)</span> 的作用，所以 <span
+class="math inline">\(\mathrm{Cl}(0,2)=\mathbb
+H\)</span>。更具体地，我们可以选择 <span
+class="math inline">\(\gamma_1=-\mathrm{i}\sigma^x\)</span>，<span
+class="math inline">\(\gamma_2=-\mathrm{i}\sigma^y\)</span>，这是因为，<span
+class="math inline">\(-\mathrm{i}\sigma^{x,y,z}\)</span>
+可以起到四元数中 <span class="math inline">\(\mathrm{i,j,k}\)</span>
+的作用。</p>
+
+    </div>
+</div>
+<p>然后我们高维的 Clifford 代数可从低维 Clifford 代数直积得到： <span
+class="math display">\[\begin{align}\label{Cl relation}
+\begin{split}
+\mathrm{Cl}(p,q)\otimes\mathrm{Cl}(2,0)&amp;\simeq\mathrm{Cl}(q+2,p),\\
+\mathrm{Cl}(p,q)\otimes\mathrm{Cl}(0,2)&amp;\simeq\mathrm{Cl}(q,p+2),\\
+\mathrm{Cl}(p,q)\otimes\mathrm{Cl}(1,1)&amp;\simeq\mathrm{Cl}(p+1,q+1).
+\end{split}
+\end{align}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>假设 <span class="math inline">\(\gamma_{1\sim(p+q)}\)</span> 构成
+<span class="math inline">\(\mathrm{Cl}(p,q)\)</span> 的表示，<span
+class="math inline">\(\gamma&#39;_{1,2}\)</span> 构成 <span
+class="math inline">\(\mathrm{Cl}(2,0)\)</span> 或 <span
+class="math inline">\(\mathrm{Cl}(0,2)\)</span> 或 <span
+class="math inline">\(\mathrm{Cl}(1,1)\)</span> 的表示，那么考虑 <span
+class="math inline">\(\{\gamma_{1\sim(p+q)}\otimes\gamma_1&#39;\gamma_2&#39;,1\otimes\gamma_1&#39;,1\otimes\gamma_2&#39;\}\)</span>，不难验证这组矩阵可以构成等号右侧的
+Clifford 代数的表示。</p>
+
+    </div>
+</div>
+<p>这样一来，假如 <span class="math inline">\(s&gt;t\)</span>，那么利用
+<span class="math inline">\(M_m(\mathbb R)\otimes M_n(\mathbb R)\simeq
+M_{mn}(\mathbb R)\)</span> 可以发现： <span
+class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(s,t)&amp;\simeq
+\mathrm{Cl}(s-t,0)\otimes\underbrace{\mathrm{Cl}(1,1)\otimes\mathrm{Cl}(1,1)\otimes\cdots\otimes\mathrm{Cl}(1,1)}_{t\text{个}}\simeq
+\mathrm{Cl}(s-t,0)\otimes M_{2^t}(\mathbb R),\\
+\mathrm{Cl}(t,s)&amp;\simeq
+\mathrm{Cl}(0,s-t)\otimes\underbrace{\mathrm{Cl}(1,1)\otimes\mathrm{Cl}(1,1)\otimes\cdots\otimes\mathrm{Cl}(1,1)}_{t\text{个}}\simeq
+\mathrm{Cl}(0,s-t)\otimes M_{2^t}(\mathbb R).
+\end{split}
+\end{align*}\]</span> 以及： <span class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(d,0)&amp;\simeq\mathrm{Cl}(d-4,0)\otimes\mathrm{Cl}(4,0)\simeq\mathrm{Cl}(d-8,0)\otimes\mathrm{Cl}(8,0),\\
+\mathrm{Cl}(0,d)&amp;\simeq\mathrm{Cl}(0,d-4)\otimes\mathrm{Cl}(0,4)\simeq\mathrm{Cl}(0,d-8)\otimes\mathrm{Cl}(0,8).
+\end{split}
+\end{align*}\]</span></p>
+<p>利用 <span class="math inline">\(M_m(\mathbb R)\otimes\mathbb K\simeq
+\mathbb K\otimes M_m(\mathbb R)\simeq M_m(\mathbb K)\)</span> 可以算出：
+<span class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(4,0)&amp;\simeq \mathrm{Cl}(0,2)\otimes
+\mathrm{Cl}(2,0)\simeq \mathbb H\otimes M_2(\mathbb R)\simeq M_2(\mathbb
+H),\\
+\mathrm{Cl}(0,4)&amp;\simeq \mathrm{Cl}(2,0)\otimes
+\mathrm{Cl}(0,2)\simeq M_2(\mathbb R)\otimes \mathbb H \simeq
+M_2(\mathbb H).
+\end{split}
+\end{align*}\]</span> 可以证明： <span class="math display">\[\mathbb
+H\otimes\mathbb H\simeq M_4(\mathbb R),\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>可以考虑四元数之间的映射 <span
+class="math inline">\(f_{q_1,q_2}\)</span>： <span
+class="math display">\[f_{q_1,q_2}(x)=q_1xq_2^{\dagger}.\]</span> 其中
+<span class="math inline">\(\bar q_2\)</span> 意为：如果 <span
+class="math inline">\(q=a+b\mathrm i+c\mathrm j+d\mathrm k\)</span> 那么
+<span class="math inline">\(q^\dagger=a-b\mathrm i-c\mathrm j-d\mathrm
+k\)</span>。如果用（<span class="math inline">\(-\mathrm{i}\)</span>
+乘以） 泡利矩阵将 <span class="math inline">\(\mathrm{ijk}\)</span>
+表示出来的话，<span class="math inline">\(\dagger\)</span>
+就是对矩阵做共轭转置，因此 <span class="math inline">\((ab)^\dagger
+=b^\dagger a^\dagger\)</span>。</p>
+<p>显然 <span class="math inline">\(f_{q_1,q_2}\)</span> 构成 <span
+class="math inline">\(\mathbb H\)</span> 的一个自同态，并且有 <span
+class="math inline">\(f_{p_1,p_2}f_{q_1,q_2}=f_{p_1q_1,p_2q_2}\)</span>，因此
+<span class="math inline">\(f_{q_1,q_2}\)</span> 构成的集合与 <span
+class="math inline">\(\mathbb H\otimes\mathbb H\)</span> 同构。由于
+<span class="math inline">\(\mathbb H\otimes\mathbb H\)</span> 是 <span
+class="math inline">\(16\)</span> 维实线性空间，因此 <span
+class="math inline">\(f_{q_1,q_2}\)</span> 构成的集合也是 <span
+class="math inline">\(16\)</span> 维实线性空间。由于四元数可视为 <span
+class="math inline">\(4\)</span>
+维实线性空间，所以四元数的全体自同态就等同于 <span
+class="math inline">\(M_{4}(\mathbb R)\)</span>，它也是 <span
+class="math inline">\(16\)</span> 维实线性空间，因此 <span
+class="math inline">\(f_{q_1,q_2}\)</span> 构成的集合等同于 <span
+class="math inline">\(M_{4}(\mathbb R)\)</span>，这也就意味着 <span
+class="math display">\[\mathbb H\otimes \mathbb H\simeq M_{4}(\mathbb
+R).\]</span></p>
+
+    </div>
+</div>
+<p>然后就可以算出： <span class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(8,0)&amp;\simeq \mathrm{Cl}(4,0)\otimes
+\mathrm{Cl}(4,0)\simeq M_{16}(\mathbb R),\\
+\mathrm{Cl}(0,8)&amp;\simeq \mathrm{Cl}(0,4)\otimes
+\mathrm{Cl}(0,4)\simeq M_{16}(\mathbb R).
+\end{split}
+\end{align*}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p><span class="math display">\[\begin{align*}
+\begin{split}
+M_2(\mathbb H)\otimes M_2(\mathbb H)&amp;\simeq M_2(\mathbb
+R)\otimes\mathbb H\otimes\mathbb H\otimes M_2(\mathbb R)\\
+&amp;\simeq M_2(\mathbb R)\otimes M_4(\mathbb R)\otimes M_2(\mathbb
+R)\simeq M_{16}(\mathbb R).
+\end{split}
+\end{align*}\]</span></p>
+
+    </div>
+</div>
+<p>因此，对于 <span class="math inline">\(\mathrm{Cl}(d,0)\)</span> 与
+<span class="math inline">\(\mathrm{Cl}(0,d)\)</span>，我们只需要考虑
+<span class="math inline">\(d=1\sim7\)</span> 的情况就足够了，它们可通过
+(<span class="math inline">\(\ref{Cl_d=0,1}\)</span>, <span
+class="math inline">\(\ref{Cl, d=2}\)</span>, <span
+class="math inline">\(\ref{Cl relation}\)</span>) 三式来计算。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>首先 是 <span class="math inline">\(d=3\)</span>： <span
+class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(3,0)&amp;\simeq\mathrm{Cl}(0,1)\otimes\mathrm{Cl}(2,0)\simeq
+\mathbb C\otimes M_2(\mathbb R)\simeq M_2(\mathbb C),\\
+\mathrm{Cl}(0,3)&amp;\simeq\mathrm{Cl}(1,0)\otimes\mathrm{Cl}(0,2)\simeq
+(\mathbb R\oplus\mathbb R)\otimes \mathbb H\simeq \mathbb H\oplus\mathbb
+H.
+\end{split}
+\end{align*}\]</span></p>
+<hr />
+<p>先证明一个小结论： <span class="math display">\[\mathbb C\otimes
+\mathbb H\simeq M_{2}(\mathbb C).\]</span> <span
+class="math inline">\(\mathbb C\)</span> 作为实线性空间时，它的一组基是
+<span class="math inline">\(\{0,\mathrm{i}\}\)</span>，<span
+class="math inline">\(\mathbb H\)</span> 作为实线性空间时，它的一组基是
+<span
+class="math inline">\(\{I,-\mathrm{i}\sigma^x,-\mathrm{i}\sigma^y,-\mathrm{i}\sigma^z\}\)</span>。直积之后就能得到
+<span class="math inline">\(8\)</span> 个线性无关的矩阵，构成 <span
+class="math inline">\(M_{2}(\mathbb C)\)</span> 的基。</p>
+<p>再结合 <span class="math inline">\(\mathbb H\otimes \mathbb H\simeq
+M_{4}(\mathbb R)\)</span> 我们可以证明： <span
+class="math display">\[M_2(\mathbb C)\otimes\mathbb H\simeq M_2(\mathbb
+R)\otimes\mathbb C\otimes\mathbb H\simeq M_2(\mathbb R)\otimes
+M_2(\mathbb C)\simeq M_4(\mathbb C).\]</span></p>
+<p>于是就可算出 <span class="math inline">\(d=5\)</span> 时： <span
+class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(5,0)&amp;\simeq\mathrm{Cl}(0,3)\otimes\mathrm{Cl}(2,0)\simeq
+(\mathbb H\oplus\mathbb H)\otimes M_2(\mathbb R)\simeq M_2(\mathbb
+H)\oplus M_2(\mathbb H),\\
+\mathrm{Cl}(0,5)&amp;\simeq\mathrm{Cl}(3,0)\otimes\mathrm{Cl}(0,2)\simeq
+M_2(\mathbb C)\otimes \mathbb H\simeq M_4(\mathbb C).
+\end{split}
+\end{align*}\]</span></p>
+<hr />
+<p>利用 <span class="math inline">\(\mathbb H\otimes \mathbb H\simeq
+M_{4}(\mathbb R)\)</span> 可以证明 <span
+class="math inline">\(d=6\)</span>： <span
+class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(6,0)&amp;\simeq\mathrm{Cl}(0,4)\otimes\mathrm{Cl}(2,0)\simeq
+M_2(\mathbb H)\otimes M_2(\mathbb R)\simeq M_4(\mathbb H),\\
+\mathrm{Cl}(0,6)&amp;\simeq\mathrm{Cl}(4,0)\otimes\mathrm{Cl}(0,2)\simeq
+M_2(\mathbb H)\otimes \mathbb H\simeq M_8(\mathbb R).
+\end{split}
+\end{align*}\]</span></p>
+<hr />
+<p>然后是 <span class="math inline">\(d=7\)</span>： <span
+class="math display">\[\begin{align*}
+\begin{split}
+\mathrm{Cl}(7,0)&amp;\simeq\mathrm{Cl}(0,5)\otimes\mathrm{Cl}(2,0)\simeq
+M_4(\mathbb C)\otimes M_2(\mathbb R)\simeq M_8(\mathbb C),\\
+\mathrm{Cl}(0,7)&amp;\simeq\mathrm{Cl}(5,0)\otimes\mathrm{Cl}(0,2)\simeq
+[M_2(\mathbb H)\oplus M_2(\mathbb H)]\otimes \mathbb H\simeq M_8(\mathbb
+R)\oplus M_8(\mathbb R).
+\end{split}
+\end{align*}\]</span></p>
+<hr />
+<p>注意到 <span class="math inline">\(\mathrm{Cl}(1,1)\simeq
+M_{2^{(1+1)/2}}(\mathbb R)\)</span>，以及 <span
+class="math inline">\(\mathrm{Cl}(8,0)\simeq\mathrm{Cl}(0,8)\simeq
+M_{2^{(8+0)/2}}(\mathbb R)\)</span>，因此，得到这些结果之后，对于 <span
+class="math inline">\(\mathrm{Cl}(s,t)\)</span>，我们只需要算出 <span
+class="math inline">\(r:= (s-t)\;\)</span>mod<span
+class="math inline">\(\,8\)</span>，找出相应的 <span
+class="math inline">\(\mathrm{Cl}(r,0)\)</span>，然后与 <span
+class="math inline">\(M_{2^{(d-r)/2}}(\mathbb R)\)</span>
+做直积即可，其中 <span class="math inline">\(d=s+t\)</span>。</p>
+
+    </div>
+</div>
+<p>最终的结果是： <blockquote class="colorquote theorem" ><p><span class="math display">\[\begin{align*}
+\begin{array}{c|cccc}
+\hline
+s-t\;\text{mod}\,8    &amp;  0&amp;  1&amp;  2&amp;  3\\
+\mathrm{Cl}(s,t)&amp;M_N(\mathbb R)&amp;M_N(\mathbb R)\oplus M_N(\mathbb
+R)&amp;M_N(\mathbb R)&amp;M_N(\mathbb C) \\
+N           &amp;2^{d/2}&amp;2^{(d-1)/2}&amp;2^{d/2}&amp;2^{(d-1)/2}\\
+\hline
+\hline
+s-t\;\text{mod}\,8    &amp;  4&amp;  5&amp;  6&amp;  7\\
+\mathrm{Cl}(s,t)&amp;M_N(\mathbb H)&amp;M_N(\mathbb H)\oplus M_N(\mathbb
+H)&amp;M_N(\mathbb H)&amp;M_N(\mathbb C)  \\
+N           &amp;2^{(d-2)/2}&amp;2^{(d-3)/2}&amp;2^{(d-2)/2}&amp;2^{(d-1)/2}\\
+\hline
+\end{array}
+\end{align*}\]</span> 其中 <span class="math inline">\(d:=
+s+t\)</span>。</p>
+</blockquote></p>
+<p>对于 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(s,t)\)</span>，利用
+<span class="math inline">\(\mathrm{Cl}_{\text{even}}(s,t)\simeq
+\mathrm{Cl}(s,t-1)\)</span> 可以算出： <blockquote class="colorquote theorem" ><p><span class="math display">\[\begin{align*}
+\begin{array}{c|cccc}
+\hline
+s-t\;\text{mod}\,8    &amp;  0&amp;  1&amp;  2&amp;  3\\
+\mathrm{Cl}_{\text{even}}(s,t)&amp;M_N(\mathbb R)\oplus M_N(\mathbb
+R)&amp;M_N(\mathbb R)&amp;M_N(\mathbb C) &amp;M_N(\mathbb H)\\
+N           &amp;2^{(d-2)/2}&amp;2^{(d-1)/2}&amp;2^{(d-2)/2}&amp;2^{(d-3)/2}\\
+\hline
+\hline
+s-t\;\text{mod}\,8    &amp;  4&amp;  5&amp;  6&amp;  7\\
+\mathrm{Cl}_{\text{even}}(s,t)&amp;M_N(\mathbb H)\oplus M_N(\mathbb
+H)&amp;M_N(\mathbb H)&amp;M_N(\mathbb C) &amp; M_N(\mathbb R) \\
+N           &amp;2^{(d-4)/2}&amp;2^{(d-3)/2}&amp;2^{(d-2)/2}&amp;2^{(d-1)/2}\\
+\hline
+\end{array}
+\end{align*}\]</span> 其中 <span class="math inline">\(d:=
+s+t\)</span>。</p>
+</blockquote></p>
+<h1 id="mathrmcl_textevenpq-的表示"><span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span>
+的表示</h1>
+<p>与旋量群 <span class="math inline">\(\mathrm{Spin}_+(p,q)\)</span>
+更为相关的是 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span>。如果将
+<span class="math inline">\(\mathrm{Cl}(p,q)\)</span> 的表示限定在 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span>
+上，就能得到 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span> 的一个
+<span class="math inline">\(2^{\lfloor (p+q)/2\rfloor}\)</span>
+维表示。</p>
+<p>由于 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span> 同构于
+<span class="math inline">\(\mathrm{Cl}(q,p-1)\)</span> 或 <span
+class="math inline">\(\mathrm{Cl}(p,q-1)\)</span>，后两者的 <span
+class="math inline">\(&gt;1\)</span> 维的不可约表示是 <span
+class="math inline">\(2^{\lfloor (p+q-1)/2\rfloor }\)</span>
+维的。因此，如果 <span class="math inline">\(p+q\)</span> 是奇数，那么
+<span class="math inline">\(2^{\lfloor (p+q)/2\rfloor}=2^{\lfloor
+(p+q-1)/2\rfloor }\)</span>，从 <span
+class="math inline">\(\mathrm{Cl}(p,q)\)</span>
+处得来的表示就是不可约的；如果 <span class="math inline">\(p+q\)</span>
+是偶数，那么 <span class="math inline">\(2^{\lfloor
+(p+q)/2\rfloor}=2\times2^{\lfloor (p+q-1)/2\rfloor}\)</span>，从 <span
+class="math inline">\(\mathrm{Cl}(p,q)\)</span>
+处得来的表示就是可约的。</p>
+<p>对于 <span class="math inline">\(d:= p+q\)</span>
+为偶数的情形，可以考虑 <span class="math inline">\(e_{d+1}:=
+e_1e_2\cdots e_d\)</span>。不难看出，<span
+class="math inline">\(e_{d+1}\)</span> 与 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span>
+中的所有元素都对易。我们可以选取一个 <span
+class="math inline">\(\varepsilon\)</span> 使得 <span
+class="math inline">\(\Gamma:=\varepsilon e_{d+1}\)</span> 满足 <span
+class="math inline">\(\Gamma^2=1\)</span>，然后定义： <span
+class="math display">\[P_\pm:=\dfrac{1}{2}(1\pm\Gamma).\]</span>
+不难验证 <span class="math inline">\(P_\pm^2=P_\pm\)</span>、<span
+class="math inline">\(P_+P_-=P_-P_+=0\)</span> 以及 <span
+class="math inline">\(P_++P_-=1\)</span>，因此 <span
+class="math inline">\(P_\pm\)</span> 是投影算子。这样一来，利用 <span
+class="math inline">\(P_\pm\)</span> 可以将 <span
+class="math inline">\(\mathrm{Cl}(p,q)\)</span> 的表示空间 <span
+class="math inline">\(V\)</span> 划分为 <span
+class="math inline">\(P_+V\)</span> 与 <span
+class="math inline">\(P_-V\)</span> 两部分，它们都在 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span>
+的作用下不变。从维数的角度来看，它们各自都承载了 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span>
+的不可约表示。</p>
+<p>然后考虑实表示。利用 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(p,q)\)</span> 同构于
+<span class="math inline">\(\mathrm{Cl}(q,p-1)\)</span> 或 <span
+class="math inline">\(\mathrm{Cl}(p,q-1)\)</span> 这一点可以发现，<span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(n,n)\)</span> 与 <span
+class="math inline">\(\mathrm{Cl}_{\text{even}}(n,n\pm1)\)</span> 的
+<span class="math inline">\(2^{\lfloor (p+q-1)/2\rfloor }\)</span>
+维表示都是实表示，其余情形都是复表示，它们对应于 <span
+class="math inline">\(2\times2^{\lfloor (p+q-1)/2\rfloor }\)</span>
+维的实表示。</p>
+<hr />
+<h1 id="参考书籍">参考书籍</h1>
+<ul>
+<li><p>《Clifford Algebras in Physics》M. Rausch de Traubenberg, <a
+target="_blank" rel="noopener" href="https://arxiv.org/abs/hep-th/0506011v1">arXiv:hep-th/0506011</a></p></li>
+<li><p>一个<a
+target="_blank" rel="noopener" href="https://www.cphysics.org">神奇的网站</a>，上有若干关于 Clifford
+代数的讲义：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cphysics.org/article/03910">Clifford Algebra,
+also called Geometric Algebra</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cphysics.org/article/08264">Clifford Algebra,
+Lorentz Transformations, and Spin Groups</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cphysics.org/article/86175">Matrix
+Representations of Clifford Algebras</a></li>
+</ul></li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-ghost"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XMQ</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

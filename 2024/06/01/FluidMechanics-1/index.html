@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+Simplified+Chinese:300,300italic,400,400italic,700,700italic%7CMicrosoft+YaHei:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xmq-servicecenter.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本概念 两种观点 有两种观点可用于描述流体的运动：“随波逐流”的拉格朗日观点与“冷眼旁观”的欧拉观点。 拉格朗日观点跟踪流体中的每一个粒子，它给每一个粒子贴上标签，然后研究标签为 \(\alpha\) 的粒子在 \(t\) 时刻的位置 \(\boldsymbol r_\alpha(t)\) 与速度 \(\boldsymbol v_\alpha(t):&#x3D;\mathrm{d}\bolds">
+<meta property="og:type" content="article">
+<meta property="og:title" content="流体力学">
+<meta property="og:url" content="https://xmq-servicecenter.github.io/2024/06/01/FluidMechanics-1/index.html">
+<meta property="og:site_name" content="XMQ-维修中心">
+<meta property="og:description" content="基本概念 两种观点 有两种观点可用于描述流体的运动：“随波逐流”的拉格朗日观点与“冷眼旁观”的欧拉观点。 拉格朗日观点跟踪流体中的每一个粒子，它给每一个粒子贴上标签，然后研究标签为 \(\alpha\) 的粒子在 \(t\) 时刻的位置 \(\boldsymbol r_\alpha(t)\) 与速度 \(\boldsymbol v_\alpha(t):&#x3D;\mathrm{d}\bolds">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xmq-servicecenter.github.io/picture/FluidMechanics-v_decomposition.png">
+<meta property="article:published_time" content="2024-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-22T13:33:02.266Z">
+<meta property="article:author" content="XMQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xmq-servicecenter.github.io/picture/FluidMechanics-v_decomposition.png">
+
+
+<link rel="canonical" href="https://xmq-servicecenter.github.io/2024/06/01/FluidMechanics-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xmq-servicecenter.github.io/2024/06/01/FluidMechanics-1/","path":"2024/06/01/FluidMechanics-1/","title":"流体力学"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>流体力学 | XMQ-维修中心</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XMQ-维修中心</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-考前预习"><a href="/%E8%80%83%E5%89%8D%E9%A2%84%E4%B9%A0/" rel="section"><i class="fa fa-th fa-fw"></i>考前预习</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E8%A7%82%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">两种观点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E5%AF%BC%E6%95%B0%E5%8D%95%E4%B8%AA%E8%B4%A8%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text">两种导数（单个质点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E5%AF%BC%E6%95%B0%E4%B8%80%E5%9B%A2%E8%B4%A8%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">两种导数（一团质点）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E5%8A%A8%E7%9A%84%E5%88%86%E8%A7%A3"><span class="nav-number">1.4.</span> <span class="nav-text">运动的分解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%B9%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">基本方程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%A8%E9%87%8F%E5%AE%88%E6%81%92%E6%96%B9%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">质量守恒方程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92%E6%96%B9%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">动量守恒方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%9B%E9%A1%BF%E7%AC%AC%E4%BA%8C%E5%AE%9A%E5%BE%8B"><span class="nav-number">2.2.1.</span> <span class="nav-text">牛顿第二定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F-overleftrightarrowboldsymbolvargamma-%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">张量 \(\overleftrightarrow{\boldsymbol{\varGamma}}\)
+的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%BF%E4%B9%89%E7%89%9B%E9%A1%BF%E9%BB%8F%E6%80%A7%E5%81%87%E8%AE%BE"><span class="nav-number">2.2.3.</span> <span class="nav-text">广义牛顿黏性假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#navier-stokes-%E6%96%B9%E7%A8%8B"><span class="nav-number">2.2.4.</span> <span class="nav-text">Navier-Stokes 方程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92"><span class="nav-number">2.3.</span> <span class="nav-text">角动量守恒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%BD%E9%87%8F%E5%AE%88%E6%81%92%E6%96%B9%E7%A8%8B"><span class="nav-number">2.4.</span> <span class="nav-text">能量守恒方程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%BD%E9%87%8F%E5%AE%88%E6%81%92%E5%AE%9A%E5%BE%8B"><span class="nav-number">2.4.1.</span> <span class="nav-text">能量守恒定律</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%82%85%E9%87%8C%E5%8F%B6%E7%83%AD%E4%BC%A0%E5%AF%BC%E5%AE%9A%E5%BE%8B"><span class="nav-number">2.4.2.</span> <span class="nav-text">傅里叶热传导定律</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%96%B9%E7%A8%8B%E7%9A%84%E7%89%B9%E6%AE%8A%E6%83%85%E5%BD%A2"><span class="nav-number">2.6.</span> <span class="nav-text">基本方程的特殊情形</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E5%8E%8B%E7%BC%A9%E6%B5%81%E4%BD%93"><span class="nav-number">2.6.1.</span> <span class="nav-text">不可压缩流体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%B2%98%E6%80%A7%E6%B5%81%E4%BD%93%E7%9A%84%E6%AC%A7%E6%8B%89%E8%BF%90%E5%8A%A8%E6%96%B9%E7%A8%8B"><span class="nav-number">2.6.2.</span> <span class="nav-text">无粘性流体的欧拉运动方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%99%E5%8A%9B%E5%B9%B3%E8%A1%A1%E6%96%B9%E7%A8%8B"><span class="nav-number">2.6.3.</span> <span class="nav-text">静力平衡方程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%AF%E5%8A%AA%E5%88%A9%E6%96%B9%E7%A8%8B"><span class="nav-number">2.6.4.</span> <span class="nav-text">伯努利方程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E4%B9%A6%E7%B1%8D"><span class="nav-number">3.</span> <span class="nav-text">参考书籍</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">XMQ</p>
+  <div class="site-description" itemprop="description">奇怪的小网站</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xmq-servicecenter.github.io/2024/06/01/FluidMechanics-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XMQ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XMQ-维修中心">
+      <meta itemprop="description" content="奇怪的小网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="流体力学 | XMQ-维修中心">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          流体力学
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-06-01T00:00:00+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-22 21:33:02" itemprop="dateModified" datetime="2024-07-22T21:33:02+08:00">2024-07-22</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h1 id="基本概念">基本概念</h1>
+<h2 id="两种观点">两种观点</h2>
+<p>有两种观点可用于描述流体的运动：“随波逐流”的拉格朗日观点与“冷眼旁观”的欧拉观点。</p>
+<p><strong>拉格朗日观点</strong>跟踪流体中的每一个粒子，它给每一个粒子贴上标签，然后研究标签为
+<span class="math inline">\(\alpha\)</span> 的粒子在 <span
+class="math inline">\(t\)</span> 时刻的位置 <span
+class="math inline">\(\boldsymbol r_\alpha(t)\)</span> 与速度 <span
+class="math inline">\(\boldsymbol v_\alpha(t):=\mathrm{d}\boldsymbol
+r_\alpha(t)/\mathrm{d}t\)</span> 等物理量。</p>
+<p><strong>欧拉观点</strong>则跟踪时空中的每一个点，研究在 <span
+class="math inline">\(t\)</span> 时刻经过空间坐标为 <span
+class="math inline">\((x,y,z)\)</span>
+的点的粒子的速度。也就是说，欧拉观点着眼于对<strong>速度场</strong>的分析。在很多教科书中，速度场常记为
+<span class="math inline">\(\boldsymbol
+v(x,y,z,t)\)</span>，如果需要将它的分量写出，那么 <span
+class="math inline">\(\boldsymbol v(x,y,z,t)\)</span> 在 <span
+class="math inline">\(x,y,z\)</span> 三个方向上的分量分别记为 <span
+class="math inline">\(u(x,y,z,t)\)</span>, <span
+class="math inline">\(v(x,y,z,t)\)</span>, <span
+class="math inline">\(w(x,y,z,t)\)</span>。由于追踪每一个粒子的做法过于困难，所以我们一般都采用欧拉观点。</p>
+<p>如果我们采用拉格朗日观点，将一个标签为 <span
+class="math inline">\(\alpha\)</span> 的粒子在空间中的运动轨迹 <span
+class="math inline">\(\boldsymbol r_\alpha(t)\)</span>
+画成一条曲线，这条曲线就称为粒子 <span
+class="math inline">\(\alpha\)</span>
+的<strong>迹线</strong>。如果我们采用欧拉观点，在 <span
+class="math inline">\(t\)</span>
+时刻画出一条曲线使其切线处处平行于切点处的速度场，就说这是 <span
+class="math inline">\(t\)</span>
+时刻的一条<strong>流线</strong>。注意流线是可以随时间变化的，因为速度场是可随时间变化的；而讨论迹线是否会随时间变化是没有意义的，因为迹线本身就是随时间运动的结果。</p>
+<h2 id="两种导数单个质点">两种导数（单个质点）</h2>
+<p>现在，我们假定每一个质点都携带了某个物理量 <span
+class="math inline">\(\phi\)</span>。</p>
+<p>在欧拉观点下，<span class="math inline">\(\phi(x,y,z,t)\)</span>
+就等同于在 <span class="math inline">\(t\)</span> 时刻位于 <span
+class="math inline">\((x,y,z)\)</span> 那一点的质点 <span
+class="math inline">\(\alpha\)</span> 所携带的物理量 <span
+class="math inline">\(\phi_\alpha(t)\)</span>。到了 <span
+class="math inline">\(t+\mathrm{d}t\)</span> 时刻，质点 <span
+class="math inline">\(\alpha\)</span> 离开 <span
+class="math inline">\((x,y,z)\)</span>，一个新的质点 <span
+class="math inline">\(\beta\)</span> 重新占据了 <span
+class="math inline">\((x,y,z)\)</span>，此时的 <span
+class="math inline">\(\phi(x,y,z,t+\mathrm dt)\)</span> 就是后来的 <span
+class="math inline">\(\beta\)</span> 所携带的物理量 <span
+class="math inline">\(\phi_\beta(t+\mathrm dt)\)</span>。</p>
+<p>不难想象，此时的质点 <span class="math inline">\(\alpha\)</span> 位于
+<span class="math inline">\((x+u\mathrm dt,y+v\mathrm dt,z+w\mathrm
+dt)\)</span> 处，其中 <span class="math inline">\(u,v,w\)</span>
+为速度场在 <span class="math inline">\((x,y,z)\)</span>
+处的速度分量。因此 <span class="math display">\[\phi_\alpha(t+\mathrm
+dt)=\phi(x+u\mathrm dt,y+v\mathrm dt,z+w\mathrm dt,t+\mathrm
+dt).\]</span> 通过简单的计算可以发现： <span
+class="math display">\[\begin{align}\begin{split}
+\dfrac{\mathrm d}{\mathrm
+dt}\phi_\alpha(t)=&amp;\;\left(u\dfrac{\partial}{\partial
+x}+v\dfrac{\partial}{\partial y}+w\dfrac{\partial}{\partial
+z}+\dfrac{\partial}{\partial t}\right)\phi(x,y,z,t)\\
+=&amp;\;\left(\boldsymbol v\cdot\nabla+\dfrac{\partial}{\partial
+t}\right)\phi(x,y,z,t).
+\end{split}\label{dt-vs-partial_t-1}\end{align}\]</span></p>
+<p>左侧的 <span class="math inline">\(\mathrm d/\mathrm dt\)</span>
+常称为<strong>物质导数</strong>或随体导数，它刻画了特定质点本身所携带的物理量随时间的变化，因而可视为是拉格朗日观点中的时间导数。物质导数有时也记为
+<span class="math inline">\(\mathrm D/\mathrm Dt\)</span>。</p>
+<p>右侧的 <span class="math inline">\(\partial/\partial t\)</span>
+称为<strong>局部导数</strong>，它刻画了空间中固定的某一个点感受到的物理量随时间的变化，因而可视为是欧拉观点中的时间导数。</p>
+<p><span class="math inline">\(\boldsymbol v\cdot\nabla\)</span>
+称为对流导数或平流导数，它反映了构成流体的质点的运动带来的物理量的变化。</p>
+<h2 id="两种导数一团质点">两种导数（一团质点）</h2>
+<p>以上我们考虑了单个质点所携带的物理量随时间的变化，现在我们讨论一团在空间中占据了有限大小体积的质点所携带的物理量随时间的变化。相对于单个质点的情形，一团质点因为有了体积这个东西而显得更为复杂。</p>
+<p>假设 <span class="math inline">\(t\)</span>
+时刻，这团质点在空间中占据的体积为 <span
+class="math inline">\(\Omega_t\)</span>，那么 <span
+class="math inline">\(t\)</span> 时刻，它们携带的物理量就是 <span
+class="math display">\[\Phi(t):=\int_{\Omega_t}\phi(\boldsymbol\xi_t,t)\mathrm
+d^3\boldsymbol\xi_t.\]</span> <span
+class="math inline">\(\phi(\boldsymbol\xi_t,t)\mathrm
+d^3\boldsymbol\xi_t\)</span> 为在 <span class="math inline">\(t\)</span>
+时刻空间坐标为 <span class="math inline">\(\boldsymbol\xi_t\)</span>
+的质点的所贡献的物理量。在 <span class="math inline">\(t+\mathrm
+dt\)</span> 时刻，原本位于 <span
+class="math inline">\(\boldsymbol\xi_t\)</span> 的质点运动到了 <span
+class="math inline">\(\boldsymbol\xi_{t+\mathrm
+dt}=\boldsymbol\xi_t+\boldsymbol v(\boldsymbol\xi_t,t)\mathrm
+dt\)</span> 处，然后： <span class="math display">\[\Phi(t+\mathrm
+dt)=\int_{\Omega_{t+\mathrm dt}}\phi(\boldsymbol\xi_{t+\mathrm
+dt},t+\mathrm dt)\mathrm d^3\boldsymbol\xi_{t+\mathrm dt}.\]</span>
+此时的质点在空间中占据的体积为 <span
+class="math inline">\(\Omega_{t+\mathrm dt}\)</span>，而非原来的 <span
+class="math inline">\(\Omega_t\)</span>。</p>
+<p><span class="math inline">\(\Phi(t)\)</span> 与 <span
+class="math inline">\(\Phi(t+\mathrm dt)\)</span> 的积分区间不同使得
+<span class="math inline">\(\Phi(t+\mathrm dt)-\Phi(t)\)</span>
+难以直接计算。但我们可以做积分变换，将 <span
+class="math inline">\(\boldsymbol\xi_{t+\mathrm dt}\)</span> 用原来的
+<span class="math inline">\(\boldsymbol\xi_t\)</span>
+写出，让两者的积分区间同为 <span
+class="math inline">\(\Omega_t\)</span>。这一过程涉及到雅可比行列式
+<span class="math inline">\(|\partial\boldsymbol\xi_{t+\mathrm
+dt}/\partial\boldsymbol\xi_{t}|\)</span> 的计算。</p>
+<p>利用公式 <span
+class="math inline">\(\det(1+A\varepsilon)=1+\mathrm{tr}(A)\varepsilon+O(\varepsilon^2)\)</span>
+不难算出体积元或者说测度满足 <span class="math display">\[\mathrm
+d^3\boldsymbol\xi_{t+\mathrm dt}=\left[1+\nabla\cdot\boldsymbol
+v(\boldsymbol\xi_t,t)\mathrm dt\right]\mathrm
+d^3\boldsymbol\xi_t.\]</span>
+这意味着，体积的变化也能影响物理量随时间的导数，同时流体中的体积元随时间的相对变化率由
+<span class="math inline">\(\nabla\cdot\boldsymbol v\)</span> 给出。</p>
+<p>然后我们就可以算出： <span class="math display">\[\Phi(t+\mathrm
+dt)=\int_{\Omega_t}\phi(\boldsymbol\xi_{t+\mathrm dt},t+\mathrm
+dt)\left[1+\nabla\cdot\boldsymbol v(\boldsymbol\xi_t,t)\mathrm
+dt\right]\mathrm d^3\boldsymbol\xi_t.\]</span>
+再通过简单的数学计算就可以得到： <span
+class="math display">\[\begin{align}\begin{split}
+\dfrac{\mathrm d}{\mathrm
+dt}\int_{\Omega_t}\phi(\boldsymbol\xi_t,t)\mathrm
+d^3\boldsymbol\xi_t&amp;=\int_{\Omega_t}\left[\dfrac{\mathrm
+d\phi(\boldsymbol\xi_t,t)}{\mathrm
+dt}+\phi(\boldsymbol\xi_t,t)\nabla\cdot\boldsymbol
+v(\boldsymbol\xi_t,t)\right]\mathrm d^3\boldsymbol\xi_t,\\
+&amp;=\int_{\Omega_t}\left[\dfrac{\partial\phi(\boldsymbol\xi_t,t)}{\partial
+t}+\nabla\cdot[\phi(\boldsymbol\xi_t,t)\boldsymbol
+v(\boldsymbol\xi_t,t)]\right]\mathrm d^3\boldsymbol\xi_t\\
+&amp;\neq\int_{\Omega_t}\left[\dfrac{\mathrm
+d\phi(\boldsymbol\xi_t,t)}{\mathrm dt}\right]\mathrm
+d^3\boldsymbol\xi_t.
+\end{split}\label{dt-vs-partial_t-2}\end{align}\]</span></p>
+<h2 id="运动的分解">运动的分解</h2>
+<p>在流体所处的空间中任取一点 <span
+class="math inline">\(\boldsymbol{r}_0\)</span>，那么 <span
+class="math inline">\(\boldsymbol{r}_0\)</span> 附近的速度场可以写为：
+<span class="math display">\[\begin{align*}
+\begin{bmatrix}u(\boldsymbol r_0+\mathrm d\boldsymbol r)\\v(\boldsymbol
+r_0+\mathrm d\boldsymbol r)\\w(\boldsymbol r_0+\mathrm d\boldsymbol
+r)\end{bmatrix}&amp;=\begin{bmatrix}u(\boldsymbol r_0)\\v(\boldsymbol
+r_0)\\w(\boldsymbol r_0)\end{bmatrix}
++\begin{bmatrix}
+\dfrac{\partial u}{\partial x}\Big|_{\boldsymbol
+r_0}&amp;\dfrac{\partial u}{\partial y}\Big|_{\boldsymbol
+r_0}&amp;\dfrac{\partial u}{\partial z}\Big|_{\boldsymbol r_0}\\[1em]
+\dfrac{\partial v}{\partial x}\Big|_{\boldsymbol
+r_0}&amp;\dfrac{\partial v}{\partial y}\Big|_{\boldsymbol
+r_0}&amp;\dfrac{\partial v}{\partial z}\Big|_{\boldsymbol r_0}\\[1em]
+\dfrac{\partial w}{\partial x}\Big|_{\boldsymbol
+r_0}&amp;\dfrac{\partial w}{\partial y}\Big|_{\boldsymbol
+r_0}&amp;\dfrac{\partial w}{\partial z}\Big|_{\boldsymbol r_0}\\
+\end{bmatrix}
+\begin{bmatrix}\mathrm d x\\ \mathrm d y\\ \mathrm d z\end{bmatrix}
+\end{align*}\]</span> 我们注意到等号右边的 <span
+class="math inline">\(3\times3\)</span> 矩阵可被写为： <span
+class="math display">\[\begin{align*}
+\begin{bmatrix}
+\dfrac{\partial u}{\partial x}&amp;\dfrac{\partial u}{\partial
+y}&amp;\dfrac{\partial u}{\partial z}\\[1em]
+\dfrac{\partial v}{\partial x}&amp;\dfrac{\partial v}{\partial
+y}&amp;\dfrac{\partial v}{\partial z}\\[1em]
+\dfrac{\partial w}{\partial x}&amp;\dfrac{\partial w}{\partial
+y}&amp;\dfrac{\partial w}{\partial z}
+\end{bmatrix}=&amp;\begin{bmatrix}
+0&amp;\dfrac12\left(\dfrac{\partial u}{\partial y}-\dfrac{\partial
+v}{\partial x}\right)&amp;\dfrac12\left(\dfrac{\partial u}{\partial
+z}-\dfrac{\partial w}{\partial x}\right)\\[1em]
+-\dfrac12\left(\dfrac{\partial u}{\partial y}-\dfrac{\partial
+v}{\partial x}\right)&amp;0&amp;\dfrac12\left(\dfrac{\partial
+v}{\partial z}-\dfrac{\partial w}{\partial y}\right)\\[1em]
+-\dfrac12\left(\dfrac{\partial u}{\partial z}-\dfrac{\partial
+w}{\partial x}\right)&amp;-\dfrac12\left(\dfrac{\partial v}{\partial
+z}-\dfrac{\partial w}{\partial y}\right)&amp;0
+\end{bmatrix}\\
+&amp;+\begin{bmatrix}
+\dfrac{\partial u}{\partial x}&amp;\dfrac12\left(\dfrac{\partial
+u}{\partial y}+\dfrac{\partial v}{\partial
+x}\right)&amp;\dfrac12\left(\dfrac{\partial u}{\partial
+z}+\dfrac{\partial w}{\partial x}\right)\\[1em]
+\dfrac12\left(\dfrac{\partial u}{\partial y}+\dfrac{\partial v}{\partial
+x}\right)&amp;\dfrac{\partial v}{\partial
+y}&amp;\dfrac12\left(\dfrac{\partial v}{\partial z}+\dfrac{\partial
+w}{\partial y}\right)\\[1em]
+\dfrac12\left(\dfrac{\partial u}{\partial z}+\dfrac{\partial w}{\partial
+x}\right)&amp;\dfrac12\left(\dfrac{\partial v}{\partial
+z}+\dfrac{\partial w}{\partial y}\right)&amp;\dfrac{\partial w}{\partial
+z}
+\end{bmatrix}
+\end{align*}\]</span> 我们将等号右侧的第二个矩阵记为 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol\varepsilon}\)</span>，而第一个矩阵的矩阵元暂时记为
+<span
+class="math inline">\(\overleftrightarrow{\boldsymbol\Omega}\)</span>。</p>
+<p>对于 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol\Omega}\)</span>，不难发现其矩阵元为
+<span
+class="math inline">\(\Omega_{ij}=-(\partial_iv_j-\partial_jv_i)/2\)</span>。利用公式
+<span
+class="math display">\[\sum_k\epsilon_{ijk}\epsilon_{lmk}=\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl}\]</span>
+可以算出： <span class="math display">\[\begin{align*}
+\sum_j\Omega_{ij}\mathrm
+dr_j=&amp;-\dfrac12\sum_j(\partial_iv_j-\partial_jv_i)\mathrm
+dr_j=-\dfrac12\sum_{jml}(\partial_lv_m)(\delta_{il}\delta_{jm}-\delta_{im}\delta_{jl})\mathrm
+dr_j\\
+=&amp;-\dfrac12\sum_{jkml}(\partial_lv_m)\epsilon_{lmk}\epsilon_{ijk}\mathrm
+dr_j=\dfrac12\sum_{jkml}\epsilon_{ikj}(\epsilon_{klm}\partial_lv_m)\mathrm
+dr_j\\
+=&amp;\;\left[\dfrac12(\nabla\times\boldsymbol v)\times\mathrm
+d\boldsymbol r\right]_i.
+\end{align*}\]</span> 这实际上是一个绕 <span
+class="math inline">\(\boldsymbol r_0\)</span> 的转动。因此，<span
+class="math inline">\(\boldsymbol v(\boldsymbol r_0+\mathrm d\boldsymbol
+r)\)</span> 还可写为： <span class="math display">\[\boldsymbol
+v(\boldsymbol r_0+\mathrm d\boldsymbol r)=\boldsymbol v(\boldsymbol
+r_0)+\dfrac12(\nabla\times\boldsymbol v)\times\mathrm d\boldsymbol
+r+\overleftrightarrow{\boldsymbol\varepsilon}\cdot\mathrm d\boldsymbol
+r.\]</span> 转动的效果如下图 (a) 所示，这是 <span
+class="math inline">\(\partial u/\partial y=-\partial v/\partial
+x&lt;0\)</span> 而其他偏导全为 <span class="math inline">\(0\)</span>
+时的结果。</p>
+<center>
+<img src="/picture/FluidMechanics-v_decomposition.png" width="75%">
+</center>
+<p>对于 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol\varepsilon}\)</span>，我们发现这是一个对称张量，它代表了流体的变形。
+<span
+class="math inline">\(\overleftrightarrow{\boldsymbol\varepsilon}\)</span>
+的对角项反映了流体的线变形，也即是拉伸或收缩。上图 (b) 反映的就是 <span
+class="math inline">\(\partial u/\partial x&gt;0\)</span> 而其他偏导全为
+<span class="math inline">\(0\)</span> 的结果。 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol\varepsilon}\)</span>
+的非对角项反映了流体的切向变形或角变形。上图 (c) 反映的就是 <span
+class="math inline">\(\partial u/\partial y=\partial v/\partial
+x&gt;0\)</span> 而其他偏导全为 <span class="math inline">\(0\)</span>
+的结果。</p>
+<p>从上面的图中也可以看出，<span
+class="math inline">\(\nabla\cdot\boldsymbol{v}\)</span>
+反映了流体体积的变化，而 <span
+class="math inline">\(\nabla\times\boldsymbol{v}\)</span>
+反映了流体是否有旋转。</p>
+<hr />
+<h1 id="基本方程">基本方程</h1>
+<h2 id="质量守恒方程">质量守恒方程</h2>
+<p>一般的流体力学中，质量总是守恒的。假设流体的密度分布为 <span
+class="math inline">\(\rho(x,y,z,t)\)</span>，那么一团质点的总质量是：
+<span class="math display">\[m(t)=\int\rho(x,y,z,t)\mathrm dx\mathrm
+dy\mathrm dz.\]</span> 从 (<span
+class="math inline">\(\ref{dt-vs-partial_t-2}\)</span>)
+式可以看出，<span class="math inline">\(\mathrm dm(t)/\mathrm
+dt=0\)</span> 意味着： <span
+class="math display">\[\begin{align}\dfrac{\mathrm d\rho}{\mathrm
+dt}+\rho\nabla\cdot\boldsymbol{v}=\dfrac{\partial\rho}{\partial
+t}+\nabla\cdot(\rho \boldsymbol
+v)=0.\label{mass-equation}\end{align}\]</span>
+这就是流体力学的质量守恒方程。</p>
+<p>质量守恒方程的一个重要的应用场景就是将 <span
+class="math inline">\(\mathrm d/\mathrm dt\)</span> 移到积分号内。利用
+(<span class="math inline">\(\ref{dt-vs-partial_t-2}\)</span>)
+式我们知道： <span class="math display">\[\begin{align*}\begin{split}
+\dfrac{\mathrm d}{\mathrm dt}\int\rho\phi\mathrm dx\mathrm dy\mathrm
+dz&amp;=\int\left[\dfrac{\mathrm d(\rho\phi)}{\mathrm
+dt}+\rho\phi\nabla\cdot\boldsymbol v\right]\mathrm dx\mathrm dy\mathrm
+dz.
+\end{split}\end{align*}\]</span> 而质量守恒方程 (<span
+class="math inline">\(\ref{mass-equation}\)</span>) 又告诉我们 <span
+class="math inline">\(\phi\mathrm d\rho/\mathrm
+dt+\rho\phi\nabla\cdot\boldsymbol{v}=0\)</span>，因此： <span
+class="math display">\[\begin{align}\begin{split}
+\dfrac{\mathrm d}{\mathrm dt}\int\rho\phi\mathrm dx\mathrm dy\mathrm
+dz&amp;=\int\rho\dfrac{\mathrm d\phi}{\mathrm dt}\mathrm dx\mathrm
+dy\mathrm dz.
+\end{split}\label{d_dt-and-mass-equation}\end{align}\]</span></p>
+<h2 id="动量守恒方程">动量守恒方程</h2>
+<h3 id="牛顿第二定律">牛顿第二定律</h3>
+<p>流体中的一团质点可能受到两种力：质量力与表面力。质量力的代表是重力、各类惯性力等等，他们作用于每一个流体微团上，其大小总是正比于流体的质量或体积；表面力的代表是流体的压力以及黏滞阻力等等，它们总是作用于流体微团之间的界面上。</p>
+<p>假设一团流体占据的空间体积为 <span
+class="math inline">\(\Omega\)</span>，其边界为 <span
+class="math inline">\(\partial\Omega\)</span>，<span
+class="math inline">\(\boldsymbol f_b\)</span>
+为单位质量的流体受到的质量力（或者这个力单独存在时引起的加速度），<span
+class="math inline">\(\mathrm
+d^2\boldsymbol{S}\cdot\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+为 <span class="math inline">\(\partial\Omega\)</span> 上的面积元 <span
+class="math inline">\(\mathrm d^2\boldsymbol{S}\)</span>
+受到的表面力，那么这团流体的动量守恒方程，即牛顿第二定律方程为： <span
+class="math display">\[\begin{align*}\dfrac{\mathrm d}{\mathrm
+dt}\int_\Omega\rho\boldsymbol{v}\mathrm dx\mathrm dy\mathrm
+dz=&amp;\;\int_\Omega\rho\boldsymbol f_b\mathrm dx\mathrm dy\mathrm
+dz+\int_{\partial\Omega}\mathrm
+d^2\boldsymbol{S}\cdot\overleftrightarrow{\boldsymbol{\varGamma}}\\
+=&amp;\;\int_\Omega\rho\boldsymbol f_b\mathrm dx\mathrm dy\mathrm
+dz+\int_{\Omega}(\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}})\mathrm
+dx\mathrm dy\mathrm dz,\end{align*}\]</span> 也即： <span
+class="math display">\[\begin{align}\dfrac{\mathrm d}{\mathrm d
+t}(\rho\boldsymbol v)+\rho (\nabla\cdot\boldsymbol v)\boldsymbol
+v=\rho\boldsymbol
+f_b+\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}}.\label{momentum-equation-1}\end{align}\]</span>
+(<span class="math inline">\(\ref{d_dt-and-mass-equation}\)</span>)
+式告诉我们，(<span
+class="math inline">\(\ref{momentum-equation-1}\)</span>) 式还可写为：
+<span class="math display">\[\begin{align}\rho\dfrac{\mathrm
+d\boldsymbol v}{\mathrm d t}=\rho\boldsymbol
+f_b+\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}}.\label{momentum-equation-2}\end{align}\]</span></p>
+<h3 id="张量-overleftrightarrowboldsymbolvargamma-的含义">张量 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+的含义</h3>
+<p>我们可以定义矢量 <span
+class="math display">\[\boldsymbol{\varGamma}_i:=\boldsymbol{e}_i\cdot\overleftrightarrow{\boldsymbol{\varGamma}},\]</span>
+其分量为 <span
+class="math inline">\((\boldsymbol{\varGamma}_i)_j=\sum_k\delta_{ik}(\overleftrightarrow{\boldsymbol{\varGamma}})_{kj}=(\overleftrightarrow{\boldsymbol{\varGamma}})_{ij}\)</span>
+，因此我们可以将 <span
+class="math inline">\((\boldsymbol{\varGamma}_i)_j\)</span> 和 <span
+class="math inline">\((\overleftrightarrow{\boldsymbol{\varGamma}})_{ij}\)</span>
+一起记为 <span class="math inline">\(\varGamma_{ij}\)</span> 。</p>
+<p>取 <span class="math inline">\(\mathrm
+d^2\boldsymbol{S}\parallel\boldsymbol{e}_i\)</span> 即可看出：<span
+class="math inline">\(\boldsymbol{\varGamma}_i\)</span>
+实际上刻画了一个垂直于 <span
+class="math inline">\(\boldsymbol{e}_i\)</span>
+的表面上单位面积的受力。因此 <span
+class="math inline">\(\varGamma_{ij}\)</span> 实际上就是垂直于 <span
+class="math inline">\(\boldsymbol{e}_i\)</span> 的表面感受到的 <span
+class="math inline">\(j\)</span> 方向的力。</p>
+<p>利用 <span
+class="math inline">\(\boldsymbol{\varGamma}_i\)</span>，(<span
+class="math inline">\(\ref{momentum-equation-2}\)</span>) 式还可写为：
+<span class="math display">\[\begin{align}\rho\dfrac{\mathrm
+d\boldsymbol v}{\mathrm d t}=\rho\boldsymbol
+f_b+\dfrac{\partial\boldsymbol{\varGamma}_x}{\partial
+x}+\dfrac{\partial\boldsymbol{\varGamma}_y}{\partial
+y}+\dfrac{\partial\boldsymbol{\varGamma}_z}{\partial
+z}.\label{momentum-equation-3}\end{align}\]</span></p>
+<h3 id="广义牛顿黏性假设">广义牛顿黏性假设</h3>
+<p>质量力 <span class="math inline">\(\boldsymbol f_b\)</span>
+相对而言比较简单，例如对于重力来说，<span
+class="math inline">\(\boldsymbol f_b=\boldsymbol
+g\)</span>，即重力加速度。</p>
+<p>表面力中的压力也比较简单：面积元 <span class="math inline">\(\mathrm
+d^2\boldsymbol{S}\)</span> 受到的压力的方向总是与 <span
+class="math inline">\(\mathrm d^2\boldsymbol{S}\)</span>
+相反，单位面积上的大小为 <span
+class="math inline">\(p\)</span>，因此压强对 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+的贡献为 <span
+class="math inline">\(-p\overleftrightarrow{\boldsymbol{I}}\)</span>，<span
+class="math inline">\(\overleftrightarrow{\boldsymbol{I}}\)</span> 为
+<span class="math inline">\(3\)</span> 阶单位张量。</p>
+<p>最复杂的是黏滞阻力。广义牛顿黏性假设认为，压强项与黏性对 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+的贡献总和为： <span
+class="math display">\[\begin{align}\overleftrightarrow{\boldsymbol{\varGamma}}=\mu\left[2\overleftrightarrow{\boldsymbol{\varepsilon}}-\dfrac23(\nabla\cdot\boldsymbol{v})\overleftrightarrow{\boldsymbol{I}}\right]-p\overleftrightarrow{\boldsymbol{I}}\label{generalized-Newton}\end{align}\]</span>
+当只有 <span class="math inline">\(\partial u/\partial y\neq0\)</span>
+时，<span class="math inline">\(\varGamma_{yx}\)</span>，即垂直于 <span
+class="math inline">\(y\)</span> 轴的表面在单位面积上受到的 <span
+class="math inline">\(x\)</span> 方向的黏滞阻力为： <span
+class="math display">\[\varGamma_{yx}:=\mu\left(\dfrac{\partial
+v}{\partial x}+\dfrac{\partial u}{\partial y}\right)=\mu\dfrac{\partial
+u}{\partial y}.\]</span>
+这就是牛顿黏性定律，它反映了流速快（慢）的流体对流速慢（快）的流体的牵拉（阻滞）作用。</p>
+<h3 id="navier-stokes-方程">Navier-Stokes 方程</h3>
+<p>将广义牛顿黏性假设 (<span
+class="math inline">\(\ref{generalized-Newton}\)</span>)
+式代入牛顿第二定律 (<span
+class="math inline">\(\ref{momentum-equation-2}\)</span>) 式，并假定
+<span class="math inline">\(\mu\)</span>
+是与时间和位置无关的常数，就得到了： <span
+class="math display">\[\begin{align*}\rho\dfrac{\mathrm d\boldsymbol
+v}{\mathrm d t}=\rho\boldsymbol
+f_b+\mu\left[2\nabla\cdot\overleftrightarrow{\boldsymbol{\varepsilon}}-\dfrac23\nabla(\nabla\cdot\boldsymbol{v})\right]-\nabla
+p.\end{align*}\]</span> 这一方程还可做进一步的化简：利用 <span
+class="math display">\[\begin{align*}
+(2\nabla\cdot\overleftrightarrow{\boldsymbol{\varepsilon}})_i=&amp;\;\sum_k\partial_k(\partial_kv_i+\partial_iv_k)=[\nabla^2\boldsymbol{v}+\nabla(\nabla\cdot\boldsymbol{v})]_i,
+\end{align*}\]</span> 可以将以上方程写为： <span
+class="math display">\[\begin{align}\rho\dfrac{\mathrm d\boldsymbol
+v}{\mathrm d t}=\rho\boldsymbol
+f_b+\mu\left[\nabla^2\boldsymbol{v}+\dfrac13\nabla(\nabla\cdot\boldsymbol{v})\right]-\nabla
+p.\label{Navier-Stokes}\end{align}\]</span> 这就是 Navier-Stokes
+方程。</p>
+<h2 id="角动量守恒">角动量守恒</h2>
+<p>最后我们来讨论角动量。角动量守恒的条件实际上保证了 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+一定是对称张量。</p>
+<p>我们将牛顿第二定律的方程略作修改即可得到角动量守恒方程： <span
+class="math display">\[\begin{align*}\dfrac{\mathrm d}{\mathrm
+dt}\int_\Omega\boldsymbol{r}\times\rho\boldsymbol{v}\mathrm dx\mathrm
+dy\mathrm dz=&amp;\;\int_\Omega\boldsymbol{r}\times\rho\boldsymbol
+f_b\mathrm dx\mathrm dy\mathrm
+dz+\int_{\partial\Omega}\boldsymbol{r}\times(\mathrm
+d^2\boldsymbol{S}\cdot\overleftrightarrow{\boldsymbol{\varGamma}}).\end{align*}\]</span></p>
+<p>注意到表面力的一项可化简为： <span
+class="math display">\[\begin{align*}\begin{split}\int_{\partial\Omega}[\boldsymbol{r}\times(\mathrm
+d^2\boldsymbol{S}\cdot\overleftrightarrow{\boldsymbol{\varGamma}})]_i=&amp;\;\sum_{jkm}\int_{\partial\Omega}\epsilon_{ijk}r_jn_m\varGamma_{mk}\mathrm
+d^2S=-\sum_{jkm}\int_{\partial\Omega}n_md^2S\epsilon_{ikj}\varGamma_{mk}r_j\\
+=&amp;-\sum_{jkm}\int_{\Omega}\mathrm dx\mathrm dy\mathrm
+dz[\partial_m(\epsilon_{ikj}\varGamma_{mk}r_j)]\\
+=&amp;-\sum_{jkm}\int_{\Omega}\mathrm dx\mathrm dy\mathrm
+dz[(\partial_m\varGamma_{mk})\epsilon_{ikj}r_j+\epsilon_{ikj}\varGamma_{mk}\delta_{mj}]\\
+=&amp;-\int_{\Omega}\mathrm dx\mathrm dy\mathrm
+dz[(\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}})\times\boldsymbol{r}]_i-\sum_{jk}\int_{\Omega}\mathrm
+dx\mathrm dy\mathrm dz\,\epsilon_{ikj}\varGamma_{jk}\\
+=&amp;\;\int_{\Omega}\mathrm dx\mathrm dy\mathrm
+dz[\boldsymbol{r}\times(\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}})]_i+\sum_{jk}\int_{\Omega}\mathrm
+dx\mathrm dy\mathrm dz\,\epsilon_{ijk}\varGamma_{jk}.
+\end{split}\end{align*}\]</span> 再结合 (<span
+class="math inline">\(\ref{d_dt-and-mass-equation}\)</span>) 式将 <span
+class="math inline">\(\mathrm d/\mathrm dt\)</span> 放入积分号内，就有：
+<span
+class="math display">\[\begin{align*}\int_\Omega\boldsymbol{r}\times\rho\dfrac{\mathrm
+d\boldsymbol{v}}{\mathrm dt}\mathrm dx\mathrm dy\mathrm
+dz=&amp;\;\int_\Omega\boldsymbol{r}\times\rho\boldsymbol f_b\mathrm
+dx\mathrm dy\mathrm
+dz+\int_{\Omega}\boldsymbol{r}\times(\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}})\mathrm
+dx\mathrm dy\mathrm dz\\
+&amp;\;+\sum_{ijk}\boldsymbol{e}_i\int_{\Omega}\mathrm dx\mathrm
+dy\mathrm dz\,\epsilon_{ijk}\varGamma_{jk}.\end{align*}\]</span>
+牛顿第二定律即 (<span
+class="math inline">\(\ref{momentum-equation-2}\)</span>)告诉我们：<span
+class="math inline">\(\rho\mathrm d\boldsymbol v/\mathrm
+dt=\rho\boldsymbol
+f_b+\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>，所以第一行的三项可以忽略，进而我们发现：
+<span
+class="math display">\[\sum_{jk}\epsilon_{ijk}\varGamma_{jk}=0,\]</span>
+这意味着 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+必须是对称张量。</p>
+<h2 id="能量守恒方程">能量守恒方程</h2>
+<h3 id="能量守恒定律">能量守恒定律</h3>
+<p>热力学第一定律告诉我们：流体内能只可能通过传热和做功这两种方式发生改变。在流体中，做功的力就是前述的质量力与表面力，而传热也有表面传热、辐射传热等方式，还有化学反应产热等等。</p>
+<p>我们仍然假设一团流体占据的空间体积为 <span
+class="math inline">\(\Omega\)</span>，其边界为 <span
+class="math inline">\(\partial\Omega\)</span>，<span
+class="math inline">\(\boldsymbol f_b\)</span>
+为单位质量的流体受到的质量力，<span class="math inline">\(\mathrm
+d^2\boldsymbol{S}\cdot\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+为 <span class="math inline">\(\partial\Omega\)</span> 上的面积元 <span
+class="math inline">\(\mathrm d^2\boldsymbol{S}\)</span>
+受到的表面力。</p>
+<p>我们还假设流体中单位质量的内能为 <span class="math inline">\(\tilde
+u\)</span>，注意 <span class="math inline">\(\tilde u\)</span>
+不含流体的宏观流动速度 <span
+class="math inline">\(\boldsymbol{v}\)</span> 总体动能；<span
+class="math inline">\(-\boldsymbol j_q\cdot\mathrm
+d^2\boldsymbol{S}\)</span> 为单位时间内穿过面积元 <span
+class="math inline">\(\mathrm d^2\boldsymbol{S}\)</span>
+进入流体内的热量，因为 <span class="math inline">\(\boldsymbol
+j_q\)</span> 从温度高的地方指向温度低的地方，<span
+class="math inline">\(\boldsymbol j_q\)</span> 与 <span
+class="math inline">\(\mathrm d^2\boldsymbol{S}\)</span>
+指向相同意味着热量的流出，指向相反才意味着流入；<span
+class="math inline">\(\dot q\)</span>
+为单位质量的流体在单位时间内通过热辐射等其他方式获得的热量。</p>
+<p>那么，不难想象，流体的能量守恒定律为： <span
+class="math display">\[\begin{align*}\dfrac{\mathrm d}{\mathrm
+dt}\int_\Omega\rho\left(\tilde u+\dfrac12\boldsymbol{v}^2\right)\mathrm
+dx\mathrm dy\mathrm dz=&amp;\;\int_\Omega\rho\boldsymbol f_b\cdot
+\boldsymbol{v}\mathrm dx\mathrm dy\mathrm
+dz+\int_{\partial\Omega}\mathrm
+d^2\boldsymbol{S}\cdot\overleftrightarrow{\boldsymbol{\varGamma}}\cdot
+\boldsymbol{v}\\
+&amp;-\int_{\partial\Omega}\mathrm d^2\boldsymbol{S}\cdot\boldsymbol
+j_q+\int_\Omega\rho\dot q\mathrm dx\mathrm dy\mathrm dz\\
+=&amp;\;\int_\Omega\rho\boldsymbol f_b\cdot \boldsymbol{v}\mathrm
+dx\mathrm dy\mathrm
+dz+\int_{\Omega}\nabla\cdot(\overleftrightarrow{\boldsymbol{\varGamma}}\cdot
+\boldsymbol{v})\mathrm dx\mathrm dy\mathrm dz\\
+&amp;-\int_{\Omega}\nabla\cdot\boldsymbol{j}_q\mathrm dx\mathrm
+dy\mathrm dz+\int_\Omega\rho\dot q\mathrm dx\mathrm dy\mathrm
+dz,\end{align*}\]</span> 利用连续性方程的结论 (<span
+class="math inline">\(\ref{d_dt-and-mass-equation}\)</span>)
+式，我们发现： <span class="math display">\[\begin{align}
+\rho\dfrac{\mathrm d}{\mathrm dt}\left(\tilde
+u+\dfrac12\boldsymbol{v}^2\right)=\rho\boldsymbol f_b\cdot
+\boldsymbol{v}+\nabla\cdot(\overleftrightarrow{\boldsymbol{\varGamma}}\cdot
+\boldsymbol{v})-\nabla\cdot\boldsymbol{j}_q+\rho\dot q.
+\label{energy-equation}\end{align}\]</span></p>
+<p><span
+class="math inline">\(\nabla\cdot(\overleftrightarrow{\boldsymbol{\varGamma}}\cdot
+\boldsymbol{v})\)</span> 项可做进一步的化简：如果 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+是对称张量，那么： <span
+class="math display">\[\begin{align*}\begin{split}
+\nabla\cdot(\overleftrightarrow{\boldsymbol{\varGamma}}\cdot
+\boldsymbol{v})=&amp;\;\sum_{ij}\partial_i(\varGamma_{ij}v_j)=\sum_{ij}\left[(\partial_i\varGamma_{ij})v_j+\varGamma_{ij}\partial_iv_j\right]\\
+=&amp;\;\sum_{ij}\left[(\partial_i\varGamma_{ij})v_j+\varGamma_{ij}\dfrac12\left(\partial_iv_j+\partial_jv_i\right)\right]\\
+=&amp;\;(\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}})\cdot\boldsymbol{v}+\overleftrightarrow{\boldsymbol{\varGamma}}:\overleftrightarrow{\boldsymbol{\varepsilon}}.
+\end{split}\end{align*}\]</span></p>
+<h3 id="傅里叶热传导定律">傅里叶热传导定律</h3>
+<p>傅里叶热传导定律告诉我们： <span
+class="math display">\[\boldsymbol{j}_q=-\overleftrightarrow{\boldsymbol{\lambda}}\cdot\nabla
+T.\]</span> 其中 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\lambda}}\)</span>
+为热导率张量，负号是因为热量总是倾向于从温度高的地方流向温度低的地方。</p>
+<p>在很多情况下有 <span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\lambda}}=\lambda\overleftrightarrow{\boldsymbol{I}}\)</span>，此时
+<span class="math inline">\(\boldsymbol{j}_q=-\lambda\nabla
+T\)</span>，能量守恒方程就变成了： <span
+class="math display">\[\begin{align*}
+\rho\dfrac{\mathrm d}{\mathrm dt}\left(\tilde
+u+\dfrac12\boldsymbol{v}^2\right)=\rho\boldsymbol f_b\cdot
+\boldsymbol{v}+\nabla\cdot(\overleftrightarrow{\boldsymbol{\varGamma}}\cdot
+\boldsymbol{v})+\nabla\cdot(\lambda\nabla T)+\rho\dot q.
+\end{align*}\]</span></p>
+<h2 id="总结">总结</h2>
+<p>总结一下：流体的质量守恒、动量守恒、能量守恒方程分别为：</p>
+<ul>
+<li><p>质量守恒：<span class="math inline">\(\dfrac{\mathrm
+d\rho}{\mathrm
+dt}+\rho\nabla\cdot\boldsymbol{v}=\dfrac{\partial\rho}{\partial
+t}+\nabla\cdot(\rho \boldsymbol v)=0.\)</span></p></li>
+<li><p>动量守恒：<span class="math inline">\(\rho\dfrac{\mathrm
+d\boldsymbol v}{\mathrm d t}=\rho\boldsymbol
+f_b+\nabla\cdot\overleftrightarrow{\boldsymbol{\varGamma}}.\)</span></p></li>
+<li><p>能量守恒：<span class="math inline">\(\rho\dfrac{\mathrm
+d}{\mathrm dt}\left(\tilde
+u+\dfrac12\boldsymbol{v}^2\right)=\rho\boldsymbol f_b\cdot
+\boldsymbol{v}+\nabla\cdot(\overleftrightarrow{\boldsymbol{\varGamma}}\cdot
+\boldsymbol{v})-\nabla\cdot\boldsymbol{j}_q+\rho\dot
+q.\)</span></p></li>
+</ul>
+<p>其中：</p>
+<ul>
+<li><p><span class="math inline">\(\boldsymbol f_b\)</span>
+为单位质量的流体受到的质量力。</p></li>
+<li><p><span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+为表面力，流体上的面积元 <span class="math inline">\(\mathrm
+d^2\boldsymbol{S}\)</span> 受到的表面力为 <span
+class="math inline">\(\mathrm
+d^2\boldsymbol{S}\cdot\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>，角动量守恒的条件保证了
+<span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}\)</span>
+为对称张量。</p></li>
+<li><p>流体中单位质量的内能为 <span class="math inline">\(\tilde
+u\)</span>，注意它不能包含宏观流动的动能。</p></li>
+<li><p><span class="math inline">\(\boldsymbol j_q\)</span>
+为热流，单位时间内穿过流体上的面积元 <span class="math inline">\(\mathrm
+d^2\boldsymbol{S}\)</span> 进入流体的热量为 <span
+class="math inline">\(-\mathrm d^2\boldsymbol{S}\cdot\boldsymbol
+j_q\)</span> 。</p></li>
+<li><p><span class="math inline">\(\dot q\)</span>
+为单位质量的流体在单位时间内通过热辐射等其他方式获得的热量。</p></li>
+</ul>
+<p>此外还有与流体具体材质相关的两个关系式：</p>
+<ul>
+<li><p>广义牛顿黏性假设：<span
+class="math inline">\(\overleftrightarrow{\boldsymbol{\varGamma}}=\mu\left[2\overleftrightarrow{\boldsymbol{\varepsilon}}-\dfrac23(\nabla\cdot\boldsymbol{v})\overleftrightarrow{\boldsymbol{I}}\right]-p\overleftrightarrow{\boldsymbol{I}}\)</span>。</p></li>
+<li><p>傅里叶热传导定律：<span
+class="math inline">\(\boldsymbol{j}_q=-\overleftrightarrow{\boldsymbol{\lambda}}\cdot\nabla
+T\)</span>。 <span class="math inline">\(\\[1.5em]\)</span></p></li>
+</ul>
+<p>在广义牛顿黏性假设下，动量守恒方程可变为 Navier-Stokes 方程： <span
+class="math display">\[\rho\dfrac{\mathrm d\boldsymbol v}{\mathrm d
+t}=\rho\boldsymbol
+f_b+\mu\left[\nabla^2\boldsymbol{v}+\dfrac13\nabla(\nabla\cdot\boldsymbol{v})\right]-\nabla
+p.\]</span></p>
+<hr />
+<h2 id="基本方程的特殊情形">基本方程的特殊情形</h2>
+<h3 id="不可压缩流体">不可压缩流体</h3>
+<p>我们已经知道，<span
+class="math inline">\(\nabla\cdot\boldsymbol{v}\)</span>
+是流体体积随时间的相对变化率，所以，<strong>不可压缩流体</strong>必然满足
+<span class="math display">\[\nabla\cdot\boldsymbol{v}=0.\]</span>
+此时的质量守恒方程就变为： <span class="math display">\[\dfrac{\mathrm
+d\rho}{\mathrm dt}=0,\]</span>
+即流体的密度恒定不变，这是一个很自然的结果。</p>
+<p>与此同时，Navier-Stokes 方程变为： <span
+class="math display">\[\rho\dfrac{\mathrm d\boldsymbol v}{\mathrm d
+t}=\rho\boldsymbol f_b+\mu\nabla^2\boldsymbol{v}-\nabla p.\]</span></p>
+<h3 id="无粘性流体的欧拉运动方程">无粘性流体的欧拉运动方程</h3>
+<p>流体没有黏性时，不管其是否可压缩，其动量守恒方程都能简化为如下欧拉方程：
+<span class="math display">\[\rho\dfrac{\mathrm d\boldsymbol v}{\mathrm
+d t}=\rho\boldsymbol f_b-\nabla p.\]</span></p>
+<h3 id="静力平衡方程">静力平衡方程</h3>
+<p>当流体不发生运动，即 <span
+class="math inline">\(\boldsymbol{v}\)</span> 恒为 <span
+class="math inline">\(0\)</span> 时，Navier-Stocks 方程简化为： <span
+class="math display">\[\rho\boldsymbol f_b-\nabla p=0.\]</span>
+这就是我们在初中学习的 <span class="math inline">\(p=\rho
+gh\)</span>。</p>
+<h3 id="伯努利方程">伯努利方程</h3>
+<p>考虑一个不可压缩（即 <span class="math inline">\(\rho\)</span>
+为常数）、无黏性（即 <span
+class="math inline">\(\mu=0\)</span>）、内能恒定不变（即 <span
+class="math inline">\(\mathrm d\tilde u/\mathrm
+dt=0\)</span>）没有热量传递（即 <span
+class="math inline">\(\boldsymbol{j}_q=\dot
+q=0\)</span>）、处于一个保守力场中（即 <span
+class="math inline">\(\boldsymbol
+f_b=-\nabla\Phi\)</span>）、且做定常流动（即 <span
+class="math inline">\(\partial\boldsymbol{v}/\partial t=\partial
+p/\partial t=0\)</span>）的流体。此时的欧拉方程变为： <span
+class="math display">\[\rho\dfrac{\mathrm d\boldsymbol v}{\mathrm d
+t}=-\rho\nabla\Phi-\nabla p.\]</span> 两边同时点乘 <span
+class="math inline">\(\boldsymbol{v}\)</span>，得到： <span
+class="math display">\[\dfrac{\mathrm d}{\mathrm d
+t}\left(\dfrac12\rho\boldsymbol v^2\right)=-\rho\boldsymbol
+v\cdot\nabla\Phi-\boldsymbol v\cdot\nabla p.\]</span> 利用 <span
+class="math inline">\(\partial\Phi/\partial t=0\)</span> 以及 <span
+class="math inline">\(\partial p/\partial t=0\)</span> 可以发现 <span
+class="math inline">\(\boldsymbol v\cdot\nabla\Phi=\mathrm d\Phi/\mathrm
+dt\)</span> 以及 <span class="math inline">\(\boldsymbol v\cdot\nabla
+p=\mathrm dp/\mathrm dt\)</span>。这样一来以上方程就变为： <span
+class="math display">\[\dfrac{\mathrm d}{\mathrm d
+t}\left(\dfrac12\rho\boldsymbol v^2+\rho\Phi+p\right)=0.\]</span>
+这就是伯努利方程。</p>
+<hr />
+<h1 id="参考书籍">参考书籍</h1>
+<ul>
+<li>《我所理解的流体力学》王洪伟.<span
+class="math inline">\(\quad\)</span>北京：国防工业出版社，2014.</li>
+<li>《计算流体力学基础及其应用》J. D. Anderson 著；吴颂平，刘赵淼
+译.<span
+class="math inline">\(\quad\)</span>北京：机械工业出版社，2007.</li>
+<li>《流体力学》余志豪，苗曼倩，蒋全荣，杨平章.<span
+class="math inline">\(\quad\)</span>北京：气象出版社，2004.</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-ghost"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XMQ</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

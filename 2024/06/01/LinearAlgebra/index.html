@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+Simplified+Chinese:300,300italic,400,400italic,700,700italic%7CMicrosoft+YaHei:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xmq-servicecenter.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一些行列式公式 范德蒙行列式 \[\begin{vmatrix} 1&amp;1&amp;\cdots&amp;1\\ x_1&amp;x_2&amp;\cdots&amp;x_n\\ x_1^2&amp;x_2^2&amp;\cdots&amp;x_n^2\\ \vdots&amp;\vdots&amp;\ddots&amp;\vdots\\ x_1^{n-1}&amp;x_2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性代数（杂乱的问题）">
+<meta property="og:url" content="https://xmq-servicecenter.github.io/2024/06/01/LinearAlgebra/index.html">
+<meta property="og:site_name" content="XMQ-维修中心">
+<meta property="og:description" content="一些行列式公式 范德蒙行列式 \[\begin{vmatrix} 1&amp;1&amp;\cdots&amp;1\\ x_1&amp;x_2&amp;\cdots&amp;x_n\\ x_1^2&amp;x_2^2&amp;\cdots&amp;x_n^2\\ \vdots&amp;\vdots&amp;\ddots&amp;\vdots\\ x_1^{n-1}&amp;x_2">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-26T12:25:16.336Z">
+<meta property="article:author" content="XMQ">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://xmq-servicecenter.github.io/2024/06/01/LinearAlgebra/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xmq-servicecenter.github.io/2024/06/01/LinearAlgebra/","path":"2024/06/01/LinearAlgebra/","title":"线性代数（杂乱的问题）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>线性代数（杂乱的问题） | XMQ-维修中心</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XMQ-维修中心</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-考前预习"><a href="/%E8%80%83%E5%89%8D%E9%A2%84%E4%B9%A0/" rel="section"><i class="fa fa-th fa-fw"></i>考前预习</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E8%A1%8C%E5%88%97%E5%BC%8F%E5%85%AC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">一些行列式公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%BE%B7%E8%92%99%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">范德蒙行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">循环行列式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#det1x_i-y_j-%E6%88%96-det1a_i-b_j"><span class="nav-number">1.3.</span> <span class="nav-text">\(\det[1&#x2F;(x_i-y_j)]\) 或 \(\det[1&#x2F;(a_i-b_j)]\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5%E7%9A%84%E8%A1%8C%E5%88%97%E5%BC%8Fschur-%E8%A1%A5%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">分块矩阵的行列式（Schur
+补的应用）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E9%80%86%E7%9F%A9%E9%98%B5%E5%85%AC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">一些逆矩阵公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AD%90%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">逆矩阵的子式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-xry--1-%E7%9A%84%E8%AE%A1%E7%AE%97schur-%E8%A1%A5%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">\((A +
+XRY )^{-1}\) 的计算（Schur 补的应用）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%85%AC%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">其他公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#baker-hausdorff-%E5%85%AC%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">Baker-Hausdorff 公式</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">XMQ</p>
+  <div class="site-description" itemprop="description">奇怪的小网站</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xmq-servicecenter.github.io/2024/06/01/LinearAlgebra/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XMQ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XMQ-维修中心">
+      <meta itemprop="description" content="奇怪的小网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="线性代数（杂乱的问题） | XMQ-维修中心">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          线性代数（杂乱的问题）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-06-01T00:00:00+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-07-26 20:25:16" itemprop="dateModified" datetime="2024-07-26T20:25:16+08:00">2024-07-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h1 id="一些行列式公式">一些行列式公式</h1>
+<h2 id="范德蒙行列式">范德蒙行列式</h2>
+<p><span class="math display">\[\begin{vmatrix}
+1&amp;1&amp;\cdots&amp;1\\
+x_1&amp;x_2&amp;\cdots&amp;x_n\\
+x_1^2&amp;x_2^2&amp;\cdots&amp;x_n^2\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+x_1^{n-1}&amp;x_2^{n-1}&amp;\cdots&amp;x_n^{n-1}
+\end{vmatrix}=\prod_{1\leqslant i&lt;j\leqslant
+n}(x_j-x_i).\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>数学归纳法。</p>
+<p><span class="math inline">\(n=1\)</span> 时行列式为 <span
+class="math inline">\(1\)</span>。<span
+class="math inline">\(n=2\)</span> 时为 <span
+class="math inline">\((x_2-x_1)\)</span>。</p>
+<p>假设 <span class="math inline">\(n\leqslant k-1\)</span>
+时结果成立。那么在 <span class="math inline">\(n=k\)</span>
+时，从最后一行开始，每一行减去上一行乘以 <span
+class="math inline">\(x_1\)</span>，得到的结果是：</p>
+<p><span class="math display">\[\begin{align*}
+\mathrm{LHS}&amp;=\begin{vmatrix}
+1&amp;1&amp;\cdots&amp;1\\
+0&amp;x_2-x_1&amp;\cdots&amp;x_k-x_1\\
+0&amp;x_2^2-x_1\cdot x_2&amp;\cdots&amp;x_k^2-x_1\cdot x_k\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+0&amp;x_2^{k-1}-x_1\cdot x_2^{k-2}&amp;\cdots&amp;x_k^{k-1}-x_1\cdot
+x_k^{k-2}
+\end{vmatrix}\\
+&amp;=\begin{vmatrix}
+x_2-x_1&amp;\cdots&amp;x_k-x_1\\
+x_2^2-x_1\cdot x_2&amp;\cdots&amp;x_k^2-x_1\cdot x_k\\
+\vdots&amp;\ddots&amp;\vdots\\
+x_2^{k-1}-x_1\cdot x_2^{k-2}&amp;\cdots&amp;x_k^{k-1}-x_1\cdot x_k^{k-2}
+\end{vmatrix}\\
+&amp;=\begin{vmatrix}
+x_2-x_1&amp;\cdots&amp;x_k-x_1\\
+x_2\cdot(x_2-x_1)&amp;\cdots&amp;x_k\cdot(x_k-x_1)\\
+\vdots&amp;\ddots&amp;\vdots\\
+x_2^{k-2}\cdot(x_2-x_1)&amp;\cdots&amp;x_k^{k-2}\cdot(x_k-x_1)
+\end{vmatrix}\\
+&amp;=(x_k-x_1)\cdots(x_2-x_1)\cdot\begin{vmatrix}
+1&amp;\cdots&amp;1\\
+x_2&amp;\cdots&amp;x_k\\
+\vdots&amp;\ddots&amp;\vdots\\
+x_2^{k-2}&amp;\cdots&amp;x_k^{k-2}
+\end{vmatrix}\\
+&amp;=(x_k-x_1)\cdots(x_2-x_1)\cdot\prod_{2\leqslant i&lt;j\leqslant
+k}(x_j-x_i)\\
+&amp;=\prod_{1\leqslant i&lt;j\leqslant k}(x_j-x_i).
+\end{align*}\]</span> 因此以上结论在 <span
+class="math inline">\(n=k\)</span> 时也成立。</p>
+
+    </div>
+</div>
+<h2 id="循环行列式">循环行列式</h2>
+<p><span class="math display">\[\begin{vmatrix}
+a_0&amp;a_1&amp;a_2&amp;\cdots&amp;a_{n-2}&amp;a_{n-1}\\
+a_{n-1}&amp;a_0&amp;a_1&amp;\cdots&amp;a_{n-3}&amp;a_{n-2}\\
+a_{n-2}&amp;a_{n-1}&amp;a_0&amp;\cdots&amp;a_{n-4}&amp;a_{n-3}\\
+\vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots&amp;\vdots\\
+a_2&amp;a_3&amp;a_4&amp;\cdots&amp;a_0&amp;a_1\\
+a_1&amp;a_2&amp;a_3&amp;\cdots&amp;a_{n-1}&amp;a_0
+\end{vmatrix}=\prod_{k=1}^nf(w_k)\]</span> 其中： <span
+class="math display">\[w_k=\mathrm e^{2\pi\mathrm i\cdot k/n},\quad
+f(x)=a_0+a_1x^1+\cdots+a_{n-1}x^{n-1}.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>取矩阵 <span class="math display">\[
+V=\begin{vmatrix}
+1&amp;1&amp;\cdots&amp;1\\
+w_1&amp;w_2&amp;\cdots&amp;w_n\\
+w_1^2&amp;w_2^2&amp;\cdots&amp;w_n^2\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+w_1^{n-1}&amp;w_2^{n-1}&amp;\cdots&amp;w_n^{n-1}
+\end{vmatrix},\quad w_k=\mathrm e^{2\pi\mathrm i\cdot k/n}.\]</span>
+然后不难算出： <span class="math display">\[\begin{align*}
+\mathrm{LHS}\cdot\det(V)&amp;=\begin{vmatrix}
+f(w_1)&amp;f(w_2)&amp;\cdots&amp;f(w_n)\\
+w_1f(w_1)&amp;w_2f(w_2)&amp;\cdots&amp;w_nf(w_n)\\
+w_1^2f(w_1)&amp;w_2^2f(w_2)&amp;\cdots&amp;w_n^2f(w_n)\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+w_1^{n-1}f(w_1)&amp;w_2^{n-1}f(w_2)&amp;\cdots&amp;w_n^{n-1}f(w_n)
+\end{vmatrix}\\
+&amp;=\left[\prod_{k=1}^nf(w_k)\right]\cdot\det(V).
+\end{align*}\]</span></p>
+
+    </div>
+</div>
+<h2 id="det1x_i-y_j-或-det1a_i-b_j"><span
+class="math inline">\(\det[1/(x_i-y_j)]\)</span> 或 <span
+class="math inline">\(\det[1/(a_i-b_j)]\)</span></h2>
+<p><span class="math display">\[\begin{vmatrix}
+\dfrac{1}{x_1-y_1}&amp;\dfrac{1}{x_1-y_2}&amp;\cdots&amp;\dfrac{1}{x_1-y_n}\\
+\dfrac{1}{x_2-y_1}&amp;\dfrac{1}{x_2-y_2}&amp;\cdots&amp;\dfrac{1}{x_2-y_n}\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+\dfrac{1}{x_n-y_1}&amp;\dfrac{1}{x_n-y_2}&amp;\cdots&amp;\dfrac{1}{x_n-y_n}\\
+\end{vmatrix}=\dfrac{(-1)^{n(n-1)/2}\displaystyle\prod_{i&lt;j}(x_j-x_i)(y_j-y_i)}{\displaystyle\prod_{i,j}(x_i-y_j)}.\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>一开始的时候根本不知道怎么算，几年后看到了 <a
+target="_blank" rel="noopener" href="https://journals.aps.org/prd/abstract/10.1103/PhysRevD.11.2088">一篇文献</a>
+的 (4.11) 与 (4.18)
+式，根据答案，自己凑了一个丑陋的证明。后来在和同学讨论的时候，被告知了一个机智的证明思路。</p>
+<hr />
+<p><strong>丑陋的证明</strong>：</p>
+<p>将左侧的矩阵记为 <span class="math inline">\(A_n\)</span>。由于 <span
+class="math display">\[\begin{align*}
+\dfrac{1}{x_i-y_j}&amp;=\dfrac{1}{(x_i-y_1)(x_i-y_2)\cdots(x_i-y_n)}\cdot\dfrac{(x_i-y_1)(x_i-y_2)\cdots(x_i-y_n)}{x_i-y_j}\\
+&amp;=\dfrac{1}{\prod_l(x_i-y_l)}\prod_{k=1\sim n}^{k\neq
+j}(x_i-y_k),\end{align*}\]</span></p>
+<p>所以可以对每一行都提出一个 <span
+class="math inline">\(1/[(x_i-y_1)\cdots(x_i-y_n)]\)</span>
+的因子，这样一来， <span class="math display">\[\det
+A=\dfrac{1}{\prod_{k,l}(x_k-y_l)}\det A&#39;,\quad
+A&#39;=\begin{bmatrix}
+\dfrac{\prod_{k}(x_1-y_k)}{x_1-y_1}&amp;\cdots&amp;\dfrac{\prod_{k}(x_1-y_k)}{x_1-y_n}\\
+\vdots&amp;\ddots&amp;\vdots\\
+\dfrac{\prod_{k}(x_n-y_k)}{x_n-y_1}&amp;\cdots&amp;\dfrac{\prod_{k}(x_n-y_k)}{x_n-y_n}\\
+\end{bmatrix}.\]</span> 问题就变成了计算 <span
+class="math inline">\(A&#39;\)</span>。</p>
+<p>通过简单的多项式展开不难算出： <span
+class="math display">\[\dfrac{\prod_{k}(x_i-y_k)}{x_i-y_j}=x_i^{n-1}+(-1)^1x_i^{n-2}\sum_k^{k\neq
+i}y_k+(-1)^2x_i^{n-3}\sum_{k&lt;l}^{k,l\neq
+i}y_ky_l+\cdots+(-1)^{n-1}\prod_{k}^{k\neq i}y_k\]</span></p>
+<p>这意味着： <span class="math display">\[ A&#39;=\begin{bmatrix}
+x_1^{n-1}&amp;x_1^{n-2}&amp;\cdots&amp;1\\
+x_2^{n-1}&amp;x_2^{n-2}&amp;\cdots&amp;1\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+x_n^{n-1}&amp;x_n^{n-2}&amp;\cdots&amp;1\\
+\end{bmatrix}
+\begin{bmatrix}
+1&amp; &amp; &amp; &amp; \\
+&amp;(-1)^1&amp;&amp;&amp;\\[1.3em]
+&amp;&amp;\ddots&amp;&amp;\\
+&amp;&amp;&amp;&amp;(-1)^{n-1}
+\end{bmatrix}
+\begin{bmatrix}
+1&amp;1&amp;\cdots&amp;1\\
+\displaystyle\sum_{k}^{k\neq 1}y_k&amp;\displaystyle\sum_{k}^{k\neq
+2}y_k&amp;\cdots&amp;\displaystyle\sum_{k}^{k\neq n}y_k\\[1.5em]
+\displaystyle\sum_{k&lt;l}^{k,l\neq
+1}y_ky_l&amp;\displaystyle\sum_{k&lt;l}^{k,l\neq
+2}y_ky_l&amp;\cdots&amp;\displaystyle\sum_{k&lt;l}^{k,l\neq n}y_ky_l\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
+\displaystyle\prod_{k}^{k\neq 1}y_k&amp;\displaystyle\prod_{k}^{k\neq
+2}y_k&amp;\cdots&amp;\displaystyle\prod_{k}^{k\neq n}y_k
+\end{bmatrix}.\]</span> 等号右边第一个矩阵在经过 <span
+class="math inline">\((n-1)+(n-2)+\cdots+1=n(n-1)/2\)</span>
+次列轮换之后就是范德蒙行列式，它与等号右边的第二个矩阵一起对 <span
+class="math inline">\(\det(A&#39;)\)</span> 贡献了一个 <span
+class="math inline">\(\prod_{i&lt;j}(x_j-x_i)\)</span> 的因子、</p>
+<p>我们将等号右侧第三个矩阵记为 <span
+class="math inline">\(D_n\)</span>，现在就只需证明 <span
+class="math display">\[\det(D_n)=(-1)^{n(n-1)/2}\prod_{i&lt;j}(y_j-y_i).\]</span>
+可以采用数学归纳法。</p>
+<p>首先，在 <span class="math inline">\(n=2\)</span> 时，<span
+class="math inline">\(\det(D_2)=(y_1-y_2)=(-1)^{2\times
+1/2}(y_2-y_1)\)</span>。</p>
+<p>假设 <span class="math inline">\(D_2,\cdots,D_{n-1}\)</span>
+都满足以上结果。对于 <span
+class="math inline">\(D_n\)</span>，将最后一列乘以 <span
+class="math inline">\((-1)\)</span> 加到之前的每一列上。</p>
+<p>不难算出： <span class="math display">\[\begin{align*}
+\displaystyle\sum_{k}^{k\neq 1}y_k-\displaystyle\sum_{k}^{k\neq
+n}y_k&amp;=\left(\displaystyle\sum_{k}y_k-y_1\right)-\left(\displaystyle\sum_{k}y_k-y_n\right)=y_n-y_1,
+\end{align*}\]</span> 以及： <span class="math display">\[\begin{align*}
+\displaystyle\sum_{k&lt;l}^{k,l\neq
+1}y_ky_l-\displaystyle\sum_{k&lt;l}^{k,l\neq
+n}y_ky_l&amp;=\left(\displaystyle\sum_{k&lt;l}y_ky_l-y_1\sum_{l}^{l\neq
+1}y_l\right)-\left(\displaystyle\sum_{k&lt;l}y_ky_l-y_n\sum_{k}^{k\neq
+n}y_k\right)\\
+&amp;=y_n\sum_{k}^{k\neq n}y_k-y_1\sum_{k}^{k\neq 1}y_k\\
+&amp;=y_n\sum_{k}^{k\neq 1,n}y_k+y_ny_1-y_1\sum_{k}^{k\neq
+1,n}y_k-y_1y_n\\
+&amp;=(y_n-y_1)\sum_{k}^{k\neq 1,n}y_k,
+\end{align*}\]</span> 还有： <span class="math display">\[\begin{align*}
+\displaystyle\sum_{k&lt;l&lt;m}^{k,l,m\neq
+1}y_ky_ly_m-\displaystyle\sum_{k&lt;l&lt;m}^{k,l,m\neq
+n}y_ky_ly_m&amp;=\left(\displaystyle\sum_{k&lt;l&lt;m}y_ky_ly_m-y_1\displaystyle\sum_{l&lt;m}^{l,m\neq
+1}y_ly_m\right)-\left(\displaystyle\sum_{k&lt;l&lt;m}y_ky_ly_m-y_n\displaystyle\sum_{k&lt;l}^{k,l\neq
+n}y_ky_l\right)\\
+&amp;=y_n\sum_{k&lt;l}^{k,l\neq n}y_ky_l-y_1\sum_{k&lt;l}^{k,l\neq
+1}y_ky_l\\
+&amp;=y_n\sum_{k&lt;l}^{k,l\neq 1,n}y_ky_l+y_ny_1\sum_l^{l\neq
+1,n}y_l-y_1\sum_{k&lt;l}^{k,l\neq 1,n}y_ky_l-y_ny_1\sum_{k}^{k\neq
+1,n}y_k\\
+&amp;=(y_n-y_1)\sum_{k&lt;l}^{k\neq 1,n}y_ky_l,
+\end{align*}\]</span> 等等等等。</p>
+<p>利用这些结果，就能看出： <span class="math display">\[\det(D_n)=
+\begin{bmatrix}
+0&amp;0&amp;\cdots&amp;0&amp;1\\
+y_n-y_1&amp;y_n-y_2&amp;\cdots&amp;y_n-y_{n-1}&amp;\displaystyle\sum_{k}^{k\neq
+n}y_k\\
+(y_n-y_1)\displaystyle\sum_{k}^{k\neq
+1,n}y_k&amp;(y_n-y_2)\displaystyle\sum_{k}^{k\neq
+2,n}y_k&amp;\cdots&amp;(y_n-y_{n-1})\displaystyle\sum_{k}^{k\neq
+n-1,n}y_k&amp;\displaystyle\sum_{k&lt;l}^{k,l\neq n}y_ky_l\\
+\vdots&amp;\vdots&amp;\ddots&amp;\vdots&amp;\vdots\\[0.5em]
+\displaystyle(y_n-y_1)\prod_{k}^{k\neq
+1,n}y_k&amp;\displaystyle(y_n-y_2)\prod_{k}^{k\neq
+2,n}y_k&amp;\cdots&amp;\displaystyle(y_n-y_{n-1})\prod_{k}^{k\neq
+n-1,n}y_k&amp;\displaystyle\prod_{k}^{k\neq n}y_k
+\end{bmatrix}.\]</span> 关于第一行做展开，就能发现： <span
+class="math display">\[\begin{align*}
+\det(D_n)&amp;=(-1)^{n-1}\left[\prod_{i=1}^{n-1}(y_n-y_{n-1})\right]\cdot\det(D_{n-1})\\
+&amp;=(-1)^{n-1}\left[\prod_{i=1}^{n-1}(y_n-y_{n-1})\right]\cdot(-1)^{(n-1)(n-2)/2}\prod_{1\leqslant
+i&lt;j\leqslant n-1}(y_j-y_i)\\
+&amp;=(-1)^{n(n-1)/2}\prod_{1\leqslant i&lt;j\leqslant n}(y_j-y_i).
+\end{align*}\]</span> 这样就完成了证明。</p>
+<hr />
+<p><strong>机智的证明思路</strong>：</p>
+<p>另有一个证明思路。重新写下 <span
+class="math inline">\(A&#39;\)</span> 的形式： <span
+class="math display">\[A&#39;=\begin{bmatrix}
+\dfrac{\prod_{k}(x_1-y_k)}{x_1-y_1}&amp;\cdots&amp;\dfrac{\prod_{k}(x_1-y_k)}{x_1-y_n}\\
+\vdots&amp;\ddots&amp;\vdots\\
+\dfrac{\prod_{k}(x_n-y_k)}{x_n-y_1}&amp;\cdots&amp;\dfrac{\prod_{k}(x_n-y_k)}{x_n-y_n}\\
+\end{bmatrix}\]</span> 不难看出，<span
+class="math inline">\(\det(A&#39;)\)</span> 一定是 <span
+class="math inline">\(x\)</span> 或 <span
+class="math inline">\(y\)</span> 的 <span
+class="math inline">\(n(n-1)\)</span> 阶多项式。如果存在一对 <span
+class="math inline">\(i,j\)</span> 使得 <span
+class="math inline">\(x_i=x_j\)</span> 或 <span
+class="math inline">\(y_i=y_j\)</span>，那么 <span
+class="math inline">\(\det(A&#39;)=0\)</span>，因此 <span
+class="math inline">\(\det(A&#39;)\)</span> 必然具有 <span
+class="math inline">\((x_i-x_j)\)</span> 与 <span
+class="math inline">\((y_i-y_j)\)</span> 的因子。注意到满足 <span
+class="math inline">\(i&lt;j\)</span> 的 <span
+class="math inline">\((i,j)\)</span> 对恰好有 <span
+class="math inline">\(n(n-1)/2\)</span> 组，所以可以断定 <span
+class="math display">\[\det(A&#39;)=c\prod_{i&lt;j}(x_i-x_j)(y_i-y_j),\]</span>
+再通过一些计算确定系数 <span class="math inline">\(c\)</span> 即可。</p>
+
+    </div>
+</div>
+<h2 id="分块矩阵的行列式schur-补的应用">分块矩阵的行列式（Schur
+补的应用）</h2>
+<p><span class="math display">\[\begin{align*}
+\det\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}=\det(X)\det(W-ZX^{-1}Y)=\det(W)\det(X-YW^{-1}Z),
+\end{align*}\]</span></p>
+<p><span class="math inline">\(W-ZX^{-1}Y\)</span> 称为 <span
+class="math inline">\(X\)</span> 的 <strong>Schur 补</strong>，<span
+class="math inline">\(X-YW^{-1}Z\)</span> 称为 <span
+class="math inline">\(W\)</span> 的 Schur 补。</p>
+<p>取 <span class="math inline">\(X\)</span> 与 <span
+class="math inline">\(W\)</span> 为单位矩阵 <span
+class="math inline">\(I\)</span>（阶数不一定相同），令 <span
+class="math inline">\(Z=A\)</span>，<span
+class="math inline">\(Y=B\)</span>，就会发现： <span
+class="math display">\[\det(I-AB)=\det(I-BA).\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>不难验证： <span class="math display">\[\begin{align*}
+\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}&amp;=\begin{bmatrix}I&amp;0\\ZX^{-1}&amp;I\end{bmatrix}\begin{bmatrix}X&amp;0\\0&amp;W-ZX^{-1}Y\end{bmatrix}\begin{bmatrix}I&amp;X^{-1}Y\\0&amp;I\end{bmatrix},\\
+\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}&amp;=\begin{bmatrix}I&amp;YW^{-1}\\0&amp;I\end{bmatrix}\begin{bmatrix}X-YW^{-1}Z&amp;0\\0&amp;W\end{bmatrix}\begin{bmatrix}I&amp;0\\W^{-1}Z&amp;I\end{bmatrix}.
+\end{align*}\]</span></p>
+
+    </div>
+</div>
+<hr />
+<h1 id="一些逆矩阵公式">一些逆矩阵公式</h1>
+<h2 id="逆矩阵的子式">逆矩阵的子式</h2>
+<p>假设 <span class="math inline">\(A\)</span> 是一个 <span
+class="math inline">\(n\times n\)</span> 的可逆矩阵，我们把它的位于第
+<span class="math inline">\(I:=(i_1,i_2,\cdots,i_k)\)</span> 行与第
+<span class="math inline">\(J:=(j_1,j_2\cdots,j_k)\)</span> 的 <span
+class="math inline">\(k^2\)</span> 个元素构成的 <span
+class="math inline">\(k\times k\)</span> 矩阵的行列式记为 <span
+class="math inline">\([A]_{I,J}\)</span>，将取出这些元素之后剩下的矩阵的行列式记为
+<span class="math inline">\([A]_{I&#39;,J&#39;}\)</span>。我们还假定
+<span class="math inline">\(I\)</span>、<span
+class="math inline">\(J\)</span>、<span
+class="math inline">\(I&#39;\)</span>、<span
+class="math inline">\(J&#39;\)</span>
+中的指标都是按升序排列的。那么可以证明： <span
+class="math display">\[\begin{align*}
+[A^{-1}]_{I,J}=\dfrac{(-1)^{\sum I+\sum J}}{\det(A)}[A]_{I&#39;,J&#39;},
+\end{align*}\]</span> 其中 <span class="math inline">\(\sum
+I:=\sum_{r=1}^ki_{r}\)</span> 以及 <span class="math inline">\(\sum
+J:=\sum_{r=1}^kj_{r}\)</span>。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>证明参考了<a
+target="_blank" rel="noopener" href="https://mathoverflow.net/questions/87877/jacobis-equality-between-complementary-minors-of-inverse-matrices">这里</a>。</p>
+<p>我们首先利用行置换 <span class="math inline">\(P_{J&#39;}^L\)</span>
+与列置换 <span class="math inline">\(P_{I&#39;}^R\)</span> 将 <span
+class="math inline">\(A\)</span> 的第 <span
+class="math inline">\(J&#39;\)</span> 行与第 <span
+class="math inline">\(I&#39;\)</span> 列构成的矩阵移动到左上角： <span
+class="math display">\[\begin{align*}
+P_{J&#39;}^LAP_{I&#39;}^R=\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix},\quad
+\det X=[A]_{J&#39;I&#39;},\quad \det W=[A]_{JI},
+\end{align*}\]</span> 其中： <span class="math display">\[\begin{align*}
+P_J^L:=(k,j_k)\cdots(2,j_2)(1,j_1),\quad
+P_I^R=(1,i_1)(2,i_2)\cdots(k,i_k),\end{align*}\]</span> <span
+class="math inline">\((i,j)\)</span> 意为在单位矩阵 <span
+class="math inline">\(I\)</span> 中将第 <span
+class="math inline">\(i,j\)</span> 两行或两列交换后得到的矩阵。</p>
+<p>利用如下等式： <span class="math display">\[\begin{align*}
+\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}=\begin{bmatrix}I&amp;0\\ZX^{-1}&amp;I\end{bmatrix}\begin{bmatrix}X&amp;0\\0&amp;W-ZX^{-1}Y\end{bmatrix}\begin{bmatrix}I&amp;X^{-1}Y\\0&amp;I\end{bmatrix},
+\end{align*}\]</span> 我们发现： <span
+class="math display">\[\begin{align*}
+\det[(W-ZX^{-1}Y)^{-1}]=\dfrac{\det(X)}{\det(A)\det(P_{J&#39;}^LP_{I&#39;}^R)}=\dfrac{[A]_{J&#39;I&#39;}}{\det(A)\det(P_{J}^LP_{I}^R)}.
+\end{align*}\]</span> 再对 <span
+class="math inline">\(P_{J&#39;}^LAP_{I&#39;}^R\)</span> 求逆： <span
+class="math display">\[\begin{align*}
+P_{I&#39;}^LA^{-1}P_{J&#39;}^R=&amp;\;(P_{J&#39;}^LAP_{I&#39;}^R)^{-1}=\begin{bmatrix}I&amp;-X^{-1}Y\\0&amp;I\end{bmatrix}\begin{bmatrix}X^{-1}&amp;0\\0&amp;(W-ZX^{-1}Y)^{-1}\end{bmatrix}\begin{bmatrix}I&amp;0\\-ZX^{-1}&amp;I\end{bmatrix}\\
+=&amp;\;\begin{bmatrix}\cdots&amp;\cdots\\0&amp;(W-ZX^{-1}Y)^{-1}\end{bmatrix}\begin{bmatrix}I&amp;0\\-ZX^{-1}&amp;I\end{bmatrix}=\begin{bmatrix}\cdots&amp;\cdots\\
+\cdots&amp;(W-ZX^{-1}Y)^{-1}\end{bmatrix}.
+\end{align*}\]</span> 这意味着 <span
+class="math inline">\(\det[(W-ZX^{-1}Y)^{-1}]=[A^{-1}]_{IJ}\)</span>
+（类比于 <span class="math inline">\(\det W=[A]_{JI}\)</span>），于是：
+<span class="math display">\[\begin{align*}
+[A^{-1}]_{IJ}=\dfrac{[A]_{J&#39;I&#39;}}{\det(A)\det(P_{J&#39;}^LP_{I&#39;}^R)}.
+\end{align*}\]</span></p>
+<p>最后，我们来计算 <span class="math inline">\(\det
+P_{I}^R\)</span>，它显然不会是 <span
+class="math inline">\((-1)^k\)</span>，因为 <span
+class="math inline">\(i_m\)</span> 可能等于 <span
+class="math inline">\(m\)</span>。在 <span
+class="math inline">\((1,2,\cdots,i_1,\cdots,i_k,\cdots,n)\)</span>
+中，将 <span class="math inline">\(i_{1}\)</span> 移动到最前面需要移动
+<span class="math inline">\((i_1-1)\)</span> 次。在将 <span
+class="math inline">\(i_1\)</span> 移动到最前面之后，将 <span
+class="math inline">\(i_2\)</span> 移动到 <span
+class="math inline">\(i_1\)</span> 后面需要的移动次数就是 <span
+class="math inline">\((i_2-2)\)</span>，这个次数等于移动后的 <span
+class="math inline">\(i_1\)</span> 与未移动的 <span
+class="math inline">\(i_2\)</span> 之间的数字的个数。同理，在将 <span
+class="math inline">\(i_1i_2\)</span> 移动到最前面之后，将 <span
+class="math inline">\(i_3\)</span> 移动到 <span
+class="math inline">\(i_2\)</span> 后面需要移动的次数为 <span
+class="math inline">\((i_3-3)\)</span>。就这样，我们发现： <span
+class="math display">\[\begin{align*}
+\det P_I^R=\det P_{I&#39;}^R=(-1)^{\sum I+k(k+1)/2}.
+\end{align*}\]</span> <span class="math inline">\(P_{J&#39;}\)</span>
+同理。这样一来我们就完成了证明。</p>
+
+    </div>
+</div>
+<h2 id="a-xry--1-的计算schur-补的应用"><span class="math inline">\((A +
+XRY )^{-1}\)</span> 的计算（Schur 补的应用）</h2>
+<p><span class="math display">\[(A + XRY )^{-1}= A^{-1}-A^{-1}X(R^{-1}+
+Y A^{-1}X)^{-1}Y A^{-1}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>考虑如下等式： <span class="math display">\[\begin{align*}
+\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}&amp;=\begin{bmatrix}I&amp;0\\ZX^{-1}&amp;I\end{bmatrix}\begin{bmatrix}X&amp;0\\0&amp;W-ZX^{-1}Y\end{bmatrix}\begin{bmatrix}I&amp;X^{-1}Y\\0&amp;I\end{bmatrix},\\
+\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}&amp;=\begin{bmatrix}I&amp;YW^{-1}\\0&amp;I\end{bmatrix}\begin{bmatrix}X-YW^{-1}Z&amp;0\\0&amp;W\end{bmatrix}\begin{bmatrix}I&amp;0\\W^{-1}Z&amp;I\end{bmatrix}.
+\end{align*}\]</span></p>
+<p>然后对两个式子同时求逆矩阵： <span
+class="math display">\[\begin{align*}
+\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}^{-1}&amp;=\begin{bmatrix}I&amp;-X^{-1}Y\\0&amp;I\end{bmatrix}\begin{bmatrix}X^{-1}&amp;0\\0&amp;(W-ZX^{-1}Y)^{-1}\end{bmatrix}\begin{bmatrix}I&amp;0\\-ZX^{-1}&amp;I\end{bmatrix},\\
+\begin{bmatrix}X&amp;Y\\Z&amp;W\end{bmatrix}^{-1}&amp;=\begin{bmatrix}I&amp;0\\-W^{-1}Z&amp;I\end{bmatrix}\begin{bmatrix}(X-YW^{-1}Z)^{-1}&amp;0\\0&amp;W^{-1}\end{bmatrix}\begin{bmatrix}I&amp;-YW^{-1}\\0&amp;I\end{bmatrix}.
+\end{align*}\]</span></p>
+<p>这意味着： <span class="math display">\[\begin{align*}
+\begin{bmatrix}X^{-1}&amp;0\\0&amp;(W-ZX^{-1}Y)^{-1}\end{bmatrix}=&amp;\;\begin{bmatrix}I&amp;X^{-1}Y\\0&amp;I\end{bmatrix}\begin{bmatrix}I&amp;0\\-W^{-1}Z&amp;I\end{bmatrix}\times\begin{bmatrix}(X-YW^{-1}Z)^{-1}&amp;0\\0&amp;W^{-1}\end{bmatrix}\times\begin{bmatrix}I&amp;-YW^{-1}\\0&amp;I\end{bmatrix}\begin{bmatrix}I&amp;0\\
+ZX^{-1}&amp;I\end{bmatrix}\\
+=&amp;\;\begin{bmatrix}\cdots&amp;\cdots\\-W^{-1}Z&amp;I\end{bmatrix}\times\begin{bmatrix}(X-YW^{-1}Z)^{-1}&amp;0\\0&amp;W^{-1}\end{bmatrix}\times\begin{bmatrix}\cdots&amp;-YW^{-1}\\
+\cdots&amp;I\end{bmatrix}\\
+=&amp;\;\begin{bmatrix}\cdots&amp;\cdots\\-W^{-1}Z(X-YW^{-1}Z)^{-1}&amp;W^{-1}\end{bmatrix}\times\begin{bmatrix}\cdots&amp;-YW^{-1}\\
+\cdots&amp;I\end{bmatrix}\\
+=&amp;\;\begin{bmatrix}\cdots&amp;\cdots\\\cdots&amp;W^{-1}Z(X-YW^{-1}Z)^{-1}YW^{-1}+W^{-1}\end{bmatrix}
+\end{align*}\]</span></p>
+<p>所以我们发现： <span
+class="math display">\[(W-ZX^{-1}Y)^{-1}=W^{-1}Z(X-YW^{-1}Z)^{-1}YW^{-1}+W^{-1}.\]</span>
+令 <span class="math inline">\(X^{-1}=-R\)</span>，<span
+class="math inline">\(W=A\)</span>，就有： <span
+class="math display">\[(A+ZRY)^{-1}=-A^{-1}Z(R^{-1}+YA^{-1}Z)^{-1}YA^{-1}+A^{-1}.\]</span>
+这样就完成了证明。</p>
+
+    </div>
+</div>
+<hr />
+<h1 id="其他公式">其他公式</h1>
+<h2 id="baker-hausdorff-公式">Baker-Hausdorff 公式</h2>
+<p><span class="math display">\[\begin{align*}
+\mathrm e^{A} B\mathrm e^{-A}=B+ [A,B]+\dfrac{1}{2!} [ A,  [A,B  ]
+]+\dfrac{1}{3!}  [ A, [A,  [A,B  ] ] ] +\cdots.
+\end{align*}\]</span></p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明思路
+    </div>
+    <div class='spoiler-content'>
+        <p>将 <span class="math inline">\(A\)</span> 替换为 <span
+class="math inline">\(\lambda A\)</span>，然后对 <span
+class="math inline">\(\lambda\)</span> 做泰勒展开即可。</p>
+
+    </div>
+</div>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-ghost"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XMQ</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
