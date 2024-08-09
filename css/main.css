@@ -659,6 +659,10 @@ pre code {
   background-color: #f0f0f0;
   line-numbers: true;
 }
+.colorquote.none {
+  border-color: #fff;
+  background-color: #fff;
+}
 .group-picture {
   margin-bottom: 20px;
 }
@@ -1267,7 +1271,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #ff2e0a;
+    background: #4e4d6b;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
