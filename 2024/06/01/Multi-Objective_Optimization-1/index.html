@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+Simplified+Chinese:300,300italic,400,400italic,700,700italic%7CMicrosoft+YaHei:300,300italic,400,400italic,700,700italic%7CNoto+Serif+SC:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"xmq-servicecenter.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本概念 多目标优化问题与帕雷托最优性 多目标优化问题（multi-objective optimization, MOP） 的一般形式为： \[\begin{align*} &amp;\min \;F(x):&#x3D;[f_1(x),\;f_2(x),\;\cdots,f_m(x)],\\[2mm] &amp;\text{其中}\;x\in\mathbb R^n\;\text{满足}\;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多目标优化问题的进化算法">
+<meta property="og:url" content="https://xmq-servicecenter.github.io/2024/06/01/Multi-Objective_Optimization-1/index.html">
+<meta property="og:site_name" content="XMQ-维修中心">
+<meta property="og:description" content="基本概念 多目标优化问题与帕雷托最优性 多目标优化问题（multi-objective optimization, MOP） 的一般形式为： \[\begin{align*} &amp;\min \;F(x):&#x3D;[f_1(x),\;f_2(x),\;\cdots,f_m(x)],\\[2mm] &amp;\text{其中}\;x\in\mathbb R^n\;\text{满足}\;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xmq-servicecenter.github.io/picture/MOEA_D-decomposition.png">
+<meta property="article:published_time" content="2024-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-01T09:06:00.474Z">
+<meta property="article:author" content="XMQ">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xmq-servicecenter.github.io/picture/MOEA_D-decomposition.png">
+
+
+<link rel="canonical" href="https://xmq-servicecenter.github.io/2024/06/01/Multi-Objective_Optimization-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://xmq-servicecenter.github.io/2024/06/01/Multi-Objective_Optimization-1/","path":"2024/06/01/Multi-Objective_Optimization-1/","title":"多目标优化问题的进化算法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>多目标优化问题的进化算法 | XMQ-维修中心</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">XMQ-维修中心</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-考前预习"><a href="/%E8%80%83%E5%89%8D%E9%A2%84%E4%B9%A0/" rel="section"><i class="fa fa-th fa-fw"></i>考前预习</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%9B%AE%E6%A0%87%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%E4%B8%8E%E5%B8%95%E9%9B%B7%E6%89%98%E6%9C%80%E4%BC%98%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">多目标优化问题与帕雷托最优性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">遗传算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%A6%82%E5%BF%B5%E4%B8%8E%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">常用概念与操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-%E5%85%83%E9%94%A6%E6%A0%87%E9%80%89%E6%8B%A9%E5%8F%8A%E5%90%8E%E4%BB%A3%E7%9A%84%E4%BA%A7%E7%94%9F"><span class="nav-number">2.1.</span> <span class="nav-text">\(k\)
+元锦标选择及后代的产生</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E6%94%AF%E9%85%8D%E6%8E%92%E5%BA%8F"><span class="nav-number">2.2.</span> <span class="nav-text">非支配排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E7%82%B9"><span class="nav-number">2.3.</span> <span class="nav-text">参考点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E7%A9%BA%E9%97%B4%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">2.3.1.</span> <span class="nav-text">目标空间归一化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AA%E4%BD%93%E6%89%80%E5%BD%92%E5%B1%9E%E7%9A%84%E5%8F%82%E8%80%83%E7%82%B9%E7%BA%BF"><span class="nav-number">2.3.2.</span> <span class="nav-text">个体所归属的参考点&#x2F;线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-number">2.5.</span> <span class="nav-text">约束条件的处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8E%E7%BA%A6%E6%9D%9F%E7%9B%B8%E5%85%B3%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.5.1.</span> <span class="nav-text">与约束相关的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E7%BA%A6%E6%9D%9F%E6%9D%A1%E4%BB%B6%E7%9A%84%E6%80%9D%E8%B7%AF"><span class="nav-number">2.5.2.</span> <span class="nav-text">处理约束条件的思路</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%9B%E5%8C%96%E7%AE%97%E6%B3%95%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="nav-number">3.</span> <span class="nav-text">进化算法的例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%88%86%E7%B1%BB"><span class="nav-number">3.1.</span> <span class="nav-text">简单分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nsga-ii-%E7%AE%97%E6%B3%95"><span class="nav-number">3.2.</span> <span class="nav-text">NSGA-II 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nsga-iii-%E7%AE%97%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">NSGA-III 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%87%B4%E6%A1%86%E6%9E%B6"><span class="nav-number">3.3.1.</span> <span class="nav-text">大致框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E7%85%A7%E5%8F%82%E8%80%83%E7%82%B9%E7%9A%84%E9%80%89%E6%8B%A9%E6%96%B9%E6%B3%95"><span class="nav-number">3.3.2.</span> <span class="nav-text">依照参考点的选择方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E7%BA%A6%E6%9D%9F%E7%9A%84-nsga-iii-%E7%AE%97%E6%B3%95"><span class="nav-number">3.3.3.</span> <span class="nav-text">有约束的 NSGA-III 算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#moead-%E7%AE%97%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">MOEA&#x2F;D 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ibea-%E7%AE%97%E6%B3%95"><span class="nav-number">3.5.</span> <span class="nav-text">IBEA 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sms-emoa-%E7%AE%97%E6%B3%95"><span class="nav-number">3.6.</span> <span class="nav-text">SMS-EMOA 算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">XMQ</p>
+  <div class="site-description" itemprop="description">奇怪的小网站</div>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://xmq-servicecenter.github.io/2024/06/01/Multi-Objective_Optimization-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="XMQ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XMQ-维修中心">
+      <meta itemprop="description" content="奇怪的小网站">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="多目标优化问题的进化算法 | XMQ-维修中心">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多目标优化问题的进化算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-06-01T00:00:00+08:00">2024-06-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-09-01 17:06:00" itemprop="dateModified" datetime="2024-09-01T17:06:00+08:00">2024-09-01</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><hr />
+<h1 id="基本概念">基本概念</h1>
+<h2 id="多目标优化问题与帕雷托最优性">多目标优化问题与帕雷托最优性</h2>
+<p><strong>多目标优化问题（multi-objective optimization, MOP）</strong>
+的一般形式为：</p>
+<blockquote class="colorquote definition" ><p><span class="math display">\[\begin{align*}
+&amp;\min \;F(x):=[f_1(x),\;f_2(x),\;\cdots,f_m(x)],\\[2mm]
+&amp;\text{其中}\;x\in\mathbb R^n\;\text{满足}\;\begin{cases}
+E_i(x)=0:\quad i\in\mathcal E,\\
+I_j(x)\leqslant0:\quad j\in\mathcal I.
+\end{cases}
+\end{align*}\]</span></p>
+</blockquote>
+<p>为了明确起见，我们把 <span class="math inline">\(F(x)\)</span>
+及它的各个分量 <span class="math inline">\(f_i(x)\)</span> 称为
+<strong>目标函数</strong>，将 <span class="math inline">\(F(x)\)</span>
+的取值范围即 <span class="math inline">\(\mathbb R^m\)</span> 称为
+<strong>目标空间</strong>，将 <span class="math inline">\(x\)</span>
+称为决策变量，将 <span class="math inline">\(x\)</span> 的取值范围 <span
+class="math inline">\(\mathbb R^n\)</span> 称为
+<strong>决策空间</strong>。</p>
+<p><span class="math inline">\(m\geqslant4\)</span>
+时的（不能简单地可视化的）多目标优化问题称为<strong>高维多目标优化（many-objective
+optimization, MaOP）问题</strong>。由于目标函数的增多，<span
+class="math inline">\(m\)</span>
+特别大的高维多目标优化问题会遇到更多的困难，此处不做过多讨论。</p>
+<p>通常，不会存在某个 <span class="math inline">\(x^\ast\)</span> 使得
+<span class="math inline">\(f_{1\sim m}(x)\)</span>
+同时取最小，因此，人们往往只关心所谓的
+<strong>帕雷托（Pareto）最优解（集）</strong>：</p>
+<blockquote class="colorquote definition" ><ul>
+<li>对于决策空间内的两个点 <span
+class="math inline">\(x_{1,2}\)</span>，如果以下两个条件同时成立：
+<ul>
+<li>对每一个 <span class="math inline">\(i\in\{1,2,\cdots,m\}\)</span>
+都有 <span class="math inline">\(f_i(x_1)\leqslant
+f_i(x_2)\)</span>，</li>
+<li>存在某个 <span class="math inline">\(j\in\{1,2,\cdots,m\}\)</span>
+使得 <span class="math inline">\(f_j(x_1)&lt; f_j(x_2)\)</span>， 就说
+<span class="math inline">\(x_1\)</span> <strong>支配</strong> 或优于
+<span class="math inline">\(x_2\)</span>（<span
+class="math inline">\(x_1\)</span> <strong>dominates</strong> <span
+class="math inline">\(x_2\)</span>），记为 <span
+class="math inline">\(x_1\preccurlyeq x_2\)</span>（有些文献也记为 <span
+class="math inline">\(x_1\succcurlyeq x_2\)</span>）。<br />
+</li>
+</ul></li>
+<li>如果对一个 <span class="math inline">\(x^\ast\)</span>
+而言找不到支配它的 <span class="math inline">\(x\)</span>，就说 <span
+class="math inline">\(x^\ast\)</span> 是一个
+<strong>帕雷托最优解</strong>。<br />
+</li>
+<li>全体帕雷托最优解构成的集合称为 <strong>帕雷托最优解集</strong>
+，通常记为 <span class="math inline">\(PS\)</span>。<span
+class="math inline">\(PS\)</span> 中的元素对应的目标函数 <span
+class="math inline">\(F(PS)\)</span> 构成的集合称为
+<strong>帕雷托边界</strong>，通常记为 <span
+class="math inline">\(PF\)</span>。</li>
+</ul>
+</blockquote>
+<p>一般情况下，帕雷托最优解集中不会仅包含一个元素。因此，在评估一个针对多目标优化问题的算法时，人们会关心两个因素：</p>
+<ul>
+<li>收敛性：算法的输出结果应当尽可能接近真实的帕雷托边界。</li>
+<li>多样性：算法的输出结果应当尽可能全面且均匀地覆盖整个真实的帕雷托边界。</li>
+</ul>
+<p>相较于单目标优化问题，多目标优化问题对多样性有更高的要求。因为在很多现实问题中，多目标优化问题的目标函数往往是互相冲突的，最终方案的敲定需要决策者根据自身情报在多个目标之间做出权衡。为了给决策者提供全面的信息与充分的选择空间，一个好的算法给出的解必须具备良好的多样性。</p>
+<p>或许正是因为对多样性的要求，<strong>进化算法（evolutionary algorithm,
+EA）</strong>
+才获得了广泛的关注——因为进化算法能够同时产生多组解，具备同时保持收敛性与多样性的潜力。至今，人们已经提出了大量
+<strong>多目标进化算法（multi-objective evolutionary algorithm,
+MOEA）</strong>。</p>
+<h2 id="遗传算法">遗传算法</h2>
+<p><strong>遗传算法（genetic algorithm, GA）</strong>
+是最重要的进化算法之一，其基本思路参照了达尔文的自然选择理论。</p>
+<p>遗传算法操作关心的基本对象是个体与种群：</p>
+<blockquote class="colorquote definition" ><ul>
+<li>遗传算法通常会生成许多
+<strong>个体（individuals）</strong>，这些个体将构成一个
+<strong>种群（population）</strong>。</li>
+<li>每个个体通常可由字符串、二进制数或浮点数等数据刻画，这些数据就称为
+<strong>基因型（genotype）</strong>。每个基因型由一个或多个
+<strong>染色体（chromosome）</strong> 构成，每个染色体中又含有多个
+<strong>基因（gene）</strong>。</li>
+<li>基因型取值的空间称为编码空间，将决策变量 <span
+class="math inline">\(x\in\mathbb R^n\)</span> 映射到编码空间的过程就是
+<strong>编码（encoding）</strong>
+过程，将编码空间中的数据还原到原始数据的过程就是
+<strong>解码（decoding）</strong> 过程。</li>
+</ul>
+</blockquote>
+<p>遗传算法的基本操作为以下三种：</p>
+<blockquote class="colorquote definition" ><ul>
+<li><strong>选择（selection）</strong>：在已有的种群中根据某种方法选出一些个体的过程。通常，算法在决定哪些个体可以产生后代、哪些个体可以保留到下一代时会做出选择操作。通常人们会参照目标函数
+<span class="math inline">\(F(x)\)</span> 定义一个
+<strong>适应度（fitness）</strong>，适应度更好的个体将有更高的几率存活下来或产生后代。</li>
+<li><strong>重组（recombination</strong> 或
+<strong>crossover）</strong>：从旧的个体产生新的个体的过程，常用的重组做法就是选定两个个体然后交换部分基因。</li>
+<li><strong>变异（mutation）</strong>：随机修改一个个体的基因，以便保持种群的多样性。</li>
+</ul>
+</blockquote>
+<p>遗传算法的基本思路就是：通过选择、重组、变异等操作不断地更新种群，使种群朝着帕雷托前沿不断演化。</p>
+<h1 id="常用概念与操作">常用概念与操作</h1>
+<p>为了在下文更好地描述一些具体的遗传算法，此处列举一些出现在很多遗传算法中的概念与操作。</p>
+<p><span id="tournament_selection"></p>
+<h2 id="k-元锦标选择及后代的产生"><span class="math inline">\(k\)</span>
+元锦标选择及后代的产生</h2>
+<p></span></p>
+<p>从一个集合 <span class="math inline">\(S\)</span> 中进行一次
+<strong><span class="math inline">\(k\)</span> 元锦标选择（tournament
+selection）</strong> 的基本步骤是：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>从 <span class="math inline">\(S\)</span> 中随机挑出 <span
+class="math inline">\(k\)</span> 个个体。</li>
+<li>通过两两比较从这 <span class="math inline">\(k\)</span>
+个个体中挑出最优的那个。</li>
+</ol>
+</blockquote>
+<p>有许多算法利用 2 元锦标选择来挑选出有资格产生后代的个体：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>进行两次 2 元锦标选择选出两个个体。</li>
+<li>以这两个个体为父母产生后代。</li>
+</ol>
+</blockquote>
+<p>采用这种做法时，只要在 <span class="math inline">\(k\)</span>
+元锦标选择的比较过程中将目标函数/适应度等因素考虑进来，就能让更优的个体有更高的几率产生后代，进而驱动种群朝向预期目标演化，实现算法的收敛性目标。</p>
+<p><span id="non-dominated_sorting"></p>
+<h2 id="非支配排序">非支配排序</h2>
+<p></span></p>
+<p>对一个种群或集合 <span class="math inline">\(S\)</span> 进行
+<strong>非支配排序（non-dominated sorting）</strong> 的意思是将 <span
+class="math inline">\(S\)</span> 分解为一系列不交子集的并： <span
+class="math display">\[S=F_1\cup F_2\cup\cdots\]</span> 其中 <span
+class="math inline">\(F_{1,2,\cdots}\)</span> 的计算方法为：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>在 <span class="math inline">\(S\)</span>
+中找出所有不被其他个体支配的个体组成 <span
+class="math inline">\(F_1\)</span>。</li>
+<li>在 <span class="math inline">\(S\backslash F_1\)</span>
+中找出所有不被其他个体支配的个体组成 <span
+class="math inline">\(F_2\)</span>。</li>
+<li>在 <span class="math inline">\(S\backslash(F_1\cup F_2)\)</span>
+中找出所有不被其他个体支配的个体组成 <span
+class="math inline">\(F_3\)</span>。</li>
+<li><span class="math inline">\(\cdots\)</span></li>
+</ol>
+</blockquote>
+<p>如果个体 <span class="math inline">\(x\in F_i\)</span>，就说 <span
+class="math inline">\(x\)</span> 的 <strong>秩</strong> 为 <span
+class="math inline">\(i\)</span>。个体 <span
+class="math inline">\(x\)</span> 的秩越小，<span
+class="math inline">\(F(x)\)</span>
+就越接近帕雷托前沿。不难看出，如果要对 <span
+class="math inline">\(S\)</span>
+做自然选择，一个明智的选择就是优先选择秩更小的 <span
+class="math inline">\(x\)</span>，以便驱使种群向帕雷托前沿进化。</p>
+<p>当然，以上做法的时间复杂度非常高，会达到 <span
+class="math inline">\(O(mN^3)\)</span> 量级：<span
+class="math inline">\(m\)</span> 是优化目标的维数，<span
+class="math inline">\(N=|S|\)</span>。这是因为：</p>
+<ul>
+<li>判断任两个个体间的支配关系需要进行 <span
+class="math inline">\(m\)</span> 次比较。</li>
+<li><ul>
+<li>找出 <span class="math inline">\(S\)</span> 中所有不被支配的个体即
+<span class="math inline">\(F_1\)</span> 需要做 <span
+class="math inline">\(N(N-1)/2\)</span> 次两两比较；</li>
+<li>找出 <span class="math inline">\(S\backslash F_1\)</span>
+中所有不被支配的个体即 <span class="math inline">\(F_2\)</span> 需要做
+<span class="math inline">\((N-|F_1|)(N-|F_1|-1)/2\)</span>
+次两两比较；</li>
+<li>……</li>
+<li>最坏的情况下所有 <span class="math inline">\(F_i\)</span>
+都只有一个元素，此时仅确定 <span class="math inline">\(F_i\)</span>
+就需要进行 <span class="math inline">\((N-i+1)(N-i)/2\)</span>
+次比较。</li>
+</ul></li>
+<li>最终，最坏情况下整个算法的时间复杂度会达到 <span
+class="math inline">\(O(mN^3)\)</span>。</li>
+</ul>
+<p>显然，以上算法做了很多重复操作。著名的 NSGA-II
+算法针对这一问题提出了一种改进：在对个体进行比较的同时，记录下被个体
+<span class="math inline">\(x\)</span> 支配的个体集合 <span
+class="math inline">\(D_x\)</span>，以及个体 <span
+class="math inline">\(x\)</span> 受支配的次数 <span
+class="math inline">\(n_x\)</span>。然后：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li><span class="math inline">\(i=1\)</span>。</li>
+<li><span class="math inline">\(F_i\)</span> 由 <span
+class="math inline">\(n_x=0\)</span> 的那些 <span
+class="math inline">\(x\)</span> 构成。</li>
+<li>对 <span class="math inline">\(F_i\)</span> 中的每一个 <span
+class="math inline">\(x\)</span>，将 <span
+class="math inline">\(D_x\)</span> 中的个体的受支配次数减一。</li>
+<li><span class="math inline">\(i=i+1\)</span>，回到步骤 <span
+class="math inline">\(2\)</span>，直到完成分层。</li>
+</ol>
+</blockquote>
+<p>不难看出，这一做法将时间复杂度压缩为 <span
+class="math inline">\(O(mN^2)\)</span>，空间复杂度提升为 <span
+class="math inline">\(O(N^2)\)</span>。</p>
+<p><span id="reference_point"></p>
+<h2 id="参考点">参考点</h2>
+<p></span></p>
+<p>为了保证种群的多样性，许多算法会引入一些参考点/参考线来辅助演化：如果参考点/参考线在目标空间中是“均匀”分布的，而算法要求种群尽可能“均匀”地分布于每个参考点/参考线周围，那么种群的多样性就能得到一定程度的保证。注意，不同的算法对“均匀”的刻画可能有差异。</p>
+<h3 id="目标空间归一化">目标空间归一化</h3>
+<p>引入参考点之前往往会对种群 <span class="math inline">\(S\)</span>
+的目标空间做归一化操作： <span class="math display">\[\tilde
+f_i(x)=\dfrac{f_i(x)-z_i^\ast}{a_i}.\]</span></p>
+<p>这里的 <span class="math inline">\(z_i^\ast\)</span> 一般取为
+<strong>理想点（ideal point）</strong>： <span
+class="math display">\[z_i^\ast=\min_{x\in S}f_i(x).\]</span> 通常将以
+<span class="math inline">\(z_i^\ast\)</span> 为坐标分量的点直接记为
+<span class="math inline">\(z^\ast\)</span>。与之相应的还有 <span
+class="math inline">\(z^{\mathrm{nadir}}\)</span>，不过它一般不会被用作归一化操作中的基准点：
+<span class="math display">\[z_i^{\mathrm{nadir}}=\max_{x\in
+S}f_i(x).\]</span></p>
+<p>参数 <span class="math inline">\(a_i\)</span> 的确定需要用到一些
+<strong>extreme points</strong>：在将坐标原点移动至 <span
+class="math inline">\(z^\ast\)</span>
+处之后，会有一些个体的（在目标空间中的）数据点离坐标轴很近，我们将离第
+<span class="math inline">\(i\)</span> 个坐标轴“最近”的数据点称为第
+<span class="math inline">\(i\)</span> 个 extreme
+point——注意不同的算法对“最近”可能有不同的刻画。由这 <span
+class="math inline">\(m\)</span> 个 extreme points 可以在 <span
+class="math inline">\(\mathbb R^m\)</span>
+中确定出一个超平面，这个超平面在第 <span
+class="math inline">\(i\)</span> 个坐标轴上的截距就是 <span
+class="math inline">\(a_i\)</span>。</p>
+<p>具体地，假设第 <span class="math inline">\(i\)</span> 个 extreme
+point 在以 <span class="math inline">\(z^\ast\)</span>
+为原点的坐标系中的坐标为 <span
+class="math inline">\((z_{i,1},z_{i,2},\cdots)\)</span>，那么由这 <span
+class="math inline">\(m\)</span> 个 extreme points 都将满足以下方程
+（截距式平面方程）： <span
+class="math display">\[\sum_{j=1}^m\dfrac{z_{i,j}}{a_j}=1,\]</span> 其中
+<span class="math inline">\(a_j\)</span>
+就是我们要计算的截距。这是一个关于 <span
+class="math inline">\(1/a_i\)</span>
+的线性方程组，如果有退化（没有解等情形）则需要单独讨论——此时一种常用的做法就是选取
+<span class="math inline">\(a_j =
+z_j^{\mathrm{nadir}}-z_j^\ast\)</span>。</p>
+<p>在完成以上 scale 过程之后，<span
+class="math inline">\(z^\ast\)</span> 会变成原点，而所有的 extreme
+points 都落在了与所有坐标轴的截距都为 <span
+class="math inline">\(1\)</span> 的超平面上。</p>
+<h3 id="个体所归属的参考点线">个体所归属的参考点/线</h3>
+<p>在通过某种方式引入参考点后，总是需要明确每个个体属于哪个参考点。一种做法是：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>在目标空间中进行归一化操作。</li>
+<li>在归一化之后的目标空间中，画出原点到参考点的连线（参考线）。</li>
+<li>在归一化之后的目标空间中，个体离哪条参考线最近，它就从属于对应的参考点。</li>
+</ol>
+</blockquote>
+<h2 id="聚合函数">聚合函数</h2>
+<p>早期，人们处理多目标优化问题的思路是：将多个目标函数通过某种方式加以组合，并不断地改变组合过程中的参数，使多目标优化问题转化为一系列单目标优化问题（优化目标称为
+<strong>聚合函数</strong>），再通过求解这些单目标优化问题就能得到帕雷托前沿。常用的聚合函数有以下几种：</p>
+<p>第一种是权重方法（weighted sum approach）： <span
+class="math display">\[g(x,\lambda)=\sum_{i=1}^m\lambda_if_i(x),\]</span>
+其中每个 <span class="math inline">\(\lambda_i\)</span> 都不小于 <span
+class="math inline">\(0\)</span> 且 <span
+class="math inline">\(\sum_i\lambda_i=1\)</span>。如下图所示，在明确了
+<span
+class="math inline">\(\lambda=(\lambda_1,\cdots,\lambda_m)\)</span>
+之后（图中的红色实线），权重方法相当于是在用垂直于 <span
+class="math inline">\(\lambda\)</span>
+的超平面（图中的黑色斜线）去截取帕雷托前沿面（图中的蓝色虚线），当这一超平面与帕雷托前沿面相切时，就找到了帕雷托前沿的一个点。通过不断调节
+<span
+class="math inline">\(\lambda\)</span>，就能逐步勾画出帕雷托前沿的范围。但这一做法存在重要的缺陷：如果帕雷托前沿面中有一段不是凸的，那么权重方法将找不到这一段。</p>
+<center>
+<p><img src="/picture/MOEA_D-decomposition.png" width="75%"></p>
+<div
+style="display: inline-block; width: 75%; text-align: center; color: #999999; font-size: 8">
+<p>图片来源：<a
+target="_blank" rel="noopener" href="https://link.springer.com/article/10.1007/s10489-018-1183-5">这篇文章</a>。</p>
+</div>
+</center>
+<p>第二种是切比雪夫方法（Tchebycheff approach，TCH）： <span
+class="math display">\[g(x,\lambda,z)=\max_{i}\left\lbrace
+\lambda_i|f_i(x)-z_i|\right\rbrace,\]</span> 其中 <span
+class="math inline">\(z\)</span>
+是某个指定的参考点（通常是理想点），<span
+class="math inline">\(\lambda_i\)</span>
+应当满足的要求与权重方法相同。切比雪夫方法中，<span
+class="math inline">\(g(x,\lambda,z)\)</span>
+的等值面就是上图中的黑色折线，它实际上就是一个立方体的“上半”表面。与权重方法类似，切比雪夫方法相当于是在用一个以参考点为顶点、<span
+class="math inline">\(\lambda\)</span>
+为主对角线的立方体去截取帕雷托前沿面，当这一立方体即将离开帕雷托前沿面时，就找到了帕雷托前沿的一个点。相较于权重方法，帕雷托前沿面的凹凸性对切比雪夫方法的影响会更小。</p>
+<p>第三种是基于惩罚的边界交叉方法（penalty-based boundary intersection
+approach），比较复杂且没找到图，暂且搁置。</p>
+<h2 id="约束条件的处理">约束条件的处理</h2>
+<p>对约束条件的处理可参考 <a
+target="_blank" rel="noopener" href="https://link.springer.com/content/pdf/10.1007/s44336-024-00006-5.pdf">这篇综述</a>
+和 <a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9723472">这篇综述</a>。</p>
+<h3 id="与约束相关的基本概念">与约束相关的基本概念</h3>
+<p>在讨论约束条件的处理方法之前，需要先给出一些概念。</p>
+<p>满足约束条件的区域或个体称为 feasible
+区域或个体，不满足约束条件的区域或个体称为 infeasible
+区域或个体。对于以下形式的约束条件：</p>
+<p><span class="math display">\[\begin{cases}
+E_i(x)=0:\quad i\in\mathcal E,\\
+I_j(x)\leqslant0:\quad j\in\mathcal I,
+\end{cases}\]</span></p>
+<p>我们可以采用如下方式定量刻画 infeasible
+的点对约束条件的违背程度（constraint violation）： <span
+class="math display">\[
+CV(x):=\sum_{i\in \mathcal E}cv_i(x)+\sum_{j\in \mathcal
+I}cv_j(x),\]</span> 其中 <span class="math display">\[\begin{cases}
+cv_i(x):=\max\left(0,|E_i(x)|-\delta\right)\quad&amp; j\in\mathcal E,\\
+cv_j(x):=\max\left(0,I_j(x)\right)\quad&amp; j\in\mathcal I,
+\end{cases}
+\]</span> 这里的 <span class="math inline">\(\delta\)</span>
+是一个近似为 <span class="math inline">\(0\)</span> 的小参数。</p>
+<p>带约束条件的多目标优化问题可记为 <strong>CMOP（constrained
+multi-objective optimization
+problem）</strong>。对约束条件的处理方法可记为 <strong>CHT（constraint
+handling technology）</strong>。</p>
+<h3 id="处理约束条件的思路">处理约束条件的思路</h3>
+<p>与单目标优化问题一样，多目标优化问题也可引入 <strong>罚函数</strong>
+来处理约束条件。如何选择惩罚因子即约束项前面的系数是这一类思路面临的主要困难，固定不变的、逐渐增加的、动态调整的惩罚因子都是可尝试的选项。此外，将约束条件以其他形式加入优化目标或适应度函数的做法也是可行思路之一。</p>
+<p>Deb 等人在设计 NSGA-II 算法时引入了
+<strong>“约束支配准则（constrained dominance principle, CDP）”</strong>
+来作为比较两个个体优劣程度的依据：</p>
+<p><span id="CDP"></p>
+<blockquote class="colorquote definition" ><ol type="1">
+<li>如果两个个体都满足约束条件（feasible），那么依据支配关系排序。</li>
+<li>如果两个个体中一个满足约束条件另一个不满足（infeasible），那么满足约束条件的个体优于不满足的。</li>
+<li>如果两个个体都不满足约束条件，那么对约束条件违背程度小的个体更优。</li>
+</ol>
+</blockquote>
+<p></span></p>
+<p>在算法中使用 CDP
+有助于满足约束条件的个体在选择中有更大的几率产生后代或存活下来。这一思路的问题在于：CDP
+过分强调了对约束条件的遵从，不利于跨越 infeasible
+区域（不满足约束条件的区域），探索更广阔的空间。</p>
+<p><strong><span
+class="math inline">\(\varepsilon\)</span>-约束</strong>
+方法采用的是逐步放松约束的思路：例如，可将 <span
+class="math inline">\(I_j(x)\leqslant0\)</span> 与 <span
+class="math inline">\(E_i(x)=0\)</span> 的条件放松为 <span
+class="math inline">\(I_j(x)\leqslant\varepsilon_j\)</span> 与 <span
+class="math inline">\(|E_i(x)|\leqslant\varepsilon_i\)</span>，在算法开始时选取较大的
+<span class="math inline">\(\varepsilon\)</span>，然后逐步将 <span
+class="math inline">\(\varepsilon\)</span> 减小到 <span
+class="math inline">\(0\)</span>。这一做法的优势在于可以帮助随机产生的初值跨越
+infeasible
+区域进而保证了解的多样性。这一方法面临的问题就是如何适当地调节 <span
+class="math inline">\(\varepsilon\)</span>。</p>
+<p><strong>随机排序（random sorting, SR）</strong> 方法与 CDP
+一样也是通过个体间的比较过程来施加约束条件。其具体做法是：在比较两个个体时，以
+<span class="math inline">\(p_f\)</span>
+的概率只比较优化目标而不考虑约束条件，以 <span
+class="math inline">\((1-p_f)\)</span> 的概率依据 CDP
+进行比较。显然，这一在某种程度上能够减轻 CDP 过于强调约束条件的问题，但
+<span class="math inline">\(p_f\)</span> 的选择是一个问题。</p>
+<p><strong>多目标方法（multi‑objective method）</strong> 将约束条件即
+<span class="math inline">\(CV(x)\)</span> 或者各个 <span
+class="math inline">\(cv_i(x)\)</span>
+也纳入优化目标中，进而将问题转化为无约束优化问题。但这一做法的问题在于约束条件最终不一定能够得到满足，并且会将原来的多目标优化问题转化为维数更高的问题，导致求解更困难。</p>
+<p><strong>两阶段方法（two‑stage optimization）</strong>
+将求解过程分为两个阶段，用第一个阶段的结果来为第二个阶段做指引。例如 <a
+target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S2210650218300233"><strong>推拉搜索（push
+and pull search , PPS）</strong></a>
+在第一阶段忽略约束条件，找出无约束情形下的最优解并把它作为第二阶段的初值，然后再通过
+<span
+class="math inline">\(\varepsilon\)</span>-约束方法或逐个加上约束等方法将约束条件考虑进来，进而达到求解目的。</p>
+<p><strong>辅助种群（auxiliary population）方法</strong>
+与两阶段方法有某种相似性，只不过在这一思路中的辅助种群往往与正式的种群同时存在，前者往往负责探索
+infeasible 区域，而后者则用于生成结果。</p>
+<p>除此之外还有许多其他思路，如对产生后代的重组/变异等算符进行修改、将多种
+CHT 组合使用等等。</p>
+<hr />
+<h1 id="进化算法的例子">进化算法的例子</h1>
+<h2 id="简单分类">简单分类</h2>
+<p>常见的进化算法可以分为 3 类：</p>
+<ul>
+<li>基于支配（domination-based）的进化算法。</li>
+<li>基于分解（decomposition-based）的进化算法。</li>
+<li>基于性能指标（indicator-based）的进化算法。</li>
+</ul>
+<p>基于支配的进化算法的基本思路是：在演化过程中根据 Pareto
+支配关系对种群中的个体进行排序，并根据排序关系保留更优解。这一类算法的代表是
+<strong>NSGA-II</strong> 与 <strong>SPEA2</strong> 等。</p>
+<p>早期，人们处理多目标优化问题的思路是将多个目标函数通过聚合函数转化为单目标优化问题。在此思路的基础上，张青富与李辉等提出了基于分解的
+<strong>多目标进化算法（MOEA based on decomposition,
+MOEA/D）</strong>。</p>
+<p>基于性能指标的算法的基本思路是：由于多目标优化算法的收敛性、多样性等特性可以用一些指标衡量，所以可利用这些指标直接指导种群的搜索过程。这一类算法的代表是
+<strong>IBEA</strong> 与 <strong>SMS-EMOA</strong> 等。</p>
+<h2 id="nsga-ii-算法">NSGA-II 算法</h2>
+<p>NSGA 的全称为 nondominated sorting genetic algorithm。NSGA-II
+或许是最适合萌新入门的算法，它是基于支配的进化算法的代表，其基本框架被许多算法沿用。此处先说明
+<a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/996017">NSGA-II 算法</a>
+的大致框架，再解释每一步的具体含义。</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>随机生成 <span class="math inline">\(N\)</span> 个个体形成初始种群
+<span class="math inline">\(P_0\)</span>，令 <span
+class="math inline">\(t=0\)</span>。</li>
+<li>利用 <span class="math inline">\(2\)</span> 元锦标选择从 <span
+class="math inline">\(P_t\)</span> 生成 <span
+class="math inline">\(N\)</span> 个后代 <span
+class="math inline">\(Q_t\)</span>，再将二者合并为 <span
+class="math inline">\(R_t:=P_t\cup Q_t\)</span>。</li>
+<li>基于支配关系将 <span class="math inline">\(R_t\)</span> 分层：<span
+class="math inline">\(R_t=F_1\cup F_2\cup
+\cdots\)</span>，并在每一层内将个体按“拥挤程度”排序。</li>
+<li>找出 <span class="math inline">\(l\)</span>，使得 <span
+class="math inline">\(|F_1\cup\cdots F_{l-1}|\leqslant N\)</span> 且
+<span class="math inline">\(|F_1\cup\cdots F_{l}|&gt; N\)</span>。</li>
+<li><ul>
+<li>如果 <span class="math inline">\(|F_1\cup\cdots\cup
+F_{l-1}|=N\)</span>，那么令 <span
+class="math inline">\(P_{t+1}=F_1\cup\cdots F_{l-1}\)</span>。</li>
+<li>如果 <span class="math inline">\(|F_1\cup\cdots\cup
+F_{l-1}|&lt;N\)</span>，那么在 <span class="math inline">\(F_l\)</span>
+中选出最不拥挤的若干个个体与 <span
+class="math inline">\(F_1\cup\cdots\cup F_{l-1}\)</span> 一起形成 <span
+class="math inline">\(P_{t+1}\)</span>。</li>
+</ul></li>
+<li>判断 <span class="math inline">\(P_{t+1}\)</span>
+能否作为最终结果。能则输出结果并终止算法，不能则令 <span
+class="math inline">\(t=t+1\)</span> 并进入步骤 2。</li>
+</ol>
+</blockquote>
+<p><a href="#tournament_selection"><span
+class="math inline">\(2\)</span> 元锦标赛</a> 与 <a
+href="#non-dominated_sorting">基于支配关系的分层</a>
+已在前面讨论过，以下只说明“拥挤程度”的计算：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>将所有 <span class="math inline">\(x\in S\)</span> 的 <span
+class="math inline">\(I_x\)</span> 设为 <span
+class="math inline">\(0\)</span>。</li>
+<li><strong>for</strong> <span
+class="math inline">\(i\in\{1,2,\cdots,m\}\)</span>:</li>
+<li><span class="math inline">\(\qquad\)</span>将所有个体的 <span
+class="math inline">\(f_i\)</span> 排序，记录最大、最小值 <span
+class="math inline">\(f_{i,\max}\)</span>、<span
+class="math inline">\(f_{i,\min}\)</span>。</li>
+<li><span class="math inline">\(\qquad\)</span><strong>for</strong>
+<span class="math inline">\(x\in S\)</span>：</li>
+<li><span class="math inline">\(\qquad\qquad\)</span><strong>if</strong>
+<span class="math inline">\(f(x)\)</span> == <span
+class="math inline">\(f_{i,\max}\)</span> <strong>or</strong> <span
+class="math inline">\(f(x)\)</span> == <span
+class="math inline">\(f_{i,\min}\)</span>:</li>
+<li><span class="math inline">\(\qquad\qquad\qquad\)</span><span
+class="math inline">\(I_x\leftarrow+\infty\)</span></li>
+<li><span
+class="math inline">\(\qquad\qquad\)</span><strong>else</strong>:</li>
+<li><span
+class="math inline">\(\qquad\qquad\qquad\)</span>找出排序结果：<span
+class="math inline">\(\cdots&lt;f_i(y)&lt;f_i(x)&lt;f_i(z)&lt;\cdots\)</span></li>
+<li><span class="math inline">\(\qquad\qquad\qquad I_x\leftarrow
+I_x+\dfrac{f_i(z)-f_i(y)}{f_{i,\max}-f_{i,\min}}\)</span></li>
+</ol>
+</blockquote>
+<p>显然，<span class="math inline">\(I_x\)</span> 越大就说明个体 <span
+class="math inline">\(x\)</span>
+距离其他个体就越遥远，它感受到的“拥挤程度”就越小。将这些远离其它个体的点留存到下一代有助于提高结果的多样性。</p>
+<p>对于有约束的问题，Deb等人（NSGA-II 算法的发明人）建议使用 <a
+href="#CDP">CDP</a>
+来进行非支配排序，算法的整体框架无需改动。需要注意的是，在基于 CDP
+进行分层时，每个 infeasible
+的个体几乎总是占有单独的一层，因而无需计算“拥挤程度”。</p>
+<h2 id="nsga-iii-算法">NSGA-III 算法</h2>
+<p>NSGA-III 算法是一个针对高维多目标优化问题的算法，既有针对<a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/6600851">无约束问题的版本</a>
+，也有针对<a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/6595567">有约束问题的版本</a>。NSGA-III
+的框架与 NSGA-II 大致相同，二者的差异中最主要的一个就是 NSGA-III
+在保证多样性时没有采用“拥挤程度”的做法，而是引入了一系列的参考点——这些参考点可自动生成，也可由用户指定，利用这些参考点可保证结果的多样性。由于
+NSGA-III 算法比较复杂，此处仅作简单说明。</p>
+<h3 id="大致框架">大致框架</h3>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>随机生成 <span class="math inline">\(N\)</span> 个个体形成初始种群
+<span class="math inline">\(P_0\)</span>，令 <span
+class="math inline">\(t=0\)</span>。</li>
+<li>利用随机抽取的方法从 <span class="math inline">\(P_t\)</span> 生成
+<span class="math inline">\(N\)</span> 个后代 <span
+class="math inline">\(Q_t\)</span>，再将二者合并成规模为 <span
+class="math inline">\(2N\)</span> 的 <span
+class="math inline">\(R_t:=P_t\cup Q_t\)</span>。</li>
+<li>基于支配关系将 <span class="math inline">\(R_t\)</span> 分层：<span
+class="math inline">\(R_t=F_1\cup F_2\cup \cdots\)</span>。</li>
+<li>找出 <span class="math inline">\(l\)</span>，使得 <span
+class="math inline">\(|F_1\cup\cdots F_{l-1}|\leqslant N\)</span> 且
+<span class="math inline">\(|F_1\cup\cdots F_{l}|&gt; N\)</span>。</li>
+<li><ul>
+<li>如果 <span class="math inline">\(|F_1\cup\cdots F_{l-1}|=
+N\)</span>，那么令 <span class="math inline">\(P_{t+1}=F_1\cup\cdots
+F_{l-1}\)</span>。</li>
+<li>如果 <span class="math inline">\(|F_1\cup\cdots F_{l-1}|&lt;
+N\)</span>，那么在 <span class="math inline">\(F_l\)</span>
+中，基于参考点选出若干个个体与 <span class="math inline">\(F_1\cup\cdots
+F_{l-1}\)</span> 一起形成 <span
+class="math inline">\(P_{t+1}\)</span>。</li>
+</ul></li>
+<li>判断 <span class="math inline">\(P_{t+1}\)</span>
+能否作为最终结果。能则输出结果并终止算法，不能则令 <span
+class="math inline">\(t=t+1\)</span> 并进入步骤 2。</li>
+</ol>
+</blockquote>
+<p>相较于 NSGA-II，无约束的 NSGA-III 方法建议在产生后代即第 2
+步中直接采用随机抽取的方法确定父母，而不是像 NSGA-II
+那样采用二元锦标赛的方法确定父母。</p>
+<p>除此之外，NSGA-III 与 NSGA-II 的差别就在于第 5
+步，即基于参考点的选点方法。</p>
+<h3 id="依照参考点的选择方法">依照参考点的选择方法</h3>
+<p>接下来说明第 5 步是如何从 <span class="math inline">\(F_l\)</span>
+内基于参考点选出进入 <span class="math inline">\(P_{t+1}\)</span>
+的个体的。</p>
+<p>我们将 NSGA-III 算法中的 <span class="math inline">\(F_1\cup\cdots
+F_{l-1}\cup F_l\)</span> 记为 <span
+class="math inline">\(S_t\)</span>，再将 <span
+class="math inline">\(P_{t+1}\)</span> 的初值设置为 <span
+class="math inline">\(S_t\backslash F_l\)</span>。注意 <span
+class="math inline">\(|P_{t+1}|\leqslant N&lt;|S_t|\)</span>，其中 <span
+class="math inline">\(N\)</span> 是种群规模。</p>
+<p>NSGA-III 算法首先对 <span class="math inline">\(S_t\)</span>
+进行归一化操作，然后生成参考点，并将将每个个体关联到某个参考点。这些流程与
+<a href="#reference_point">前面</a>
+提到的流程相同。只不过归一化操作中，extreme points 由如下方法确定：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>对每一个 <span class="math inline">\(x\in S_t\)</span>，计算 <span
+class="math display">\[\mathrm{ASF}_i(x):=\max\left(\dfrac{f_1(x)}{w_{i,1}},\dfrac{f_2(x)}{w_{i,2}},\cdots,\dfrac{f_m(x)}{w_{i,m}}\right),\]</span>
+其中 <span class="math inline">\(w_{i,i}=1\)</span>，<span
+class="math inline">\(i\neq j\)</span> 时 <span
+class="math inline">\(w_{i,j}=10^{-6}\)</span>。</li>
+<li>遍历所有 <span class="math inline">\(x\in S_t\)</span>，找出使得
+<span class="math inline">\(\mathrm{ASF}_i(x)\)</span> 最小的个体：
+<span class="math display">\[\arg\min\mathrm{ASF}_i(x),\]</span>
+这个个体的目标函数就是第 <span class="math inline">\(i\)</span> 个
+extreme point。</li>
+</ol>
+</blockquote>
+<p>假设在完成以上操作后，个体 <span class="math inline">\(x\)</span>
+所属的参考点为 <span class="math inline">\(\pi(x)\)</span>，从属于第
+<span class="math inline">\(k\)</span> 个参考点的个体的集合记为 <span
+class="math inline">\(A_k\)</span>，（归一化之后的目标空间中）原点到第
+<span class="math inline">\(k\)</span> 个参考点的连线为 <span
+class="math inline">\(\tilde l_k\)</span>。那么，根据参考点从 <span
+class="math inline">\(F_l\)</span> 中选点进入 <span
+class="math inline">\(P_{t+1}\)</span> 的方法是：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li><span class="math inline">\(Z\leftarrow\)</span>参考点指标集</li>
+<li>对 <span class="math inline">\(Z\)</span> 中的每一个 <span
+class="math inline">\(k\)</span>，计算 <span
+class="math inline">\(\rho_k\leftarrow|A_k|\)</span>。</li>
+<li><strong>while</strong> <span
+class="math inline">\(|P_{t+1}|\)</span>&lt;<span
+class="math inline">\(N\)</span>:</li>
+<li><span class="math inline">\(\qquad\)</span><span
+class="math inline">\(j=\displaystyle\arg\min_{k\in Z}
+\rho_k\)</span>，如有多个最小值则随机挑选一个。</li>
+<li><span class="math inline">\(\qquad\)</span><span
+class="math inline">\(A_j&#39;\leftarrow A_j\cap F_l\)</span>。</li>
+<li><span class="math inline">\(\qquad\)</span><strong>if</strong> <span
+class="math inline">\(A_j&#39;\)</span> == <span
+class="math inline">\(\varnothing\)</span>:</li>
+<li><span class="math inline">\(\qquad\qquad\)</span><span
+class="math inline">\(Z\leftarrow Z\backslash\{j\}\)</span></li>
+<li><span
+class="math inline">\(\qquad\)</span><strong>else</strong>:</li>
+<li><span class="math inline">\(\qquad\qquad\)</span><strong>if</strong>
+<span class="math inline">\(\rho_j\)</span> == <span
+class="math inline">\(0\)</span>:</li>
+<li><span class="math inline">\(\qquad\qquad\qquad\)</span>从 <span
+class="math inline">\(A_j&#39;\)</span> 中选出与 <span
+class="math inline">\(\tilde l_j\)</span> 最近的点 <span
+class="math inline">\(x\)</span></li>
+<li><span
+class="math inline">\(\qquad\qquad\)</span><strong>else</strong>:</li>
+<li><span class="math inline">\(\qquad\qquad\qquad\)</span>从 <span
+class="math inline">\(A_j&#39;\)</span> 中选出与 <span
+class="math inline">\(\tilde l_j\)</span> 最近的点或随机选出一个点 <span
+class="math inline">\(x\)</span></li>
+<li><span class="math inline">\(\qquad\qquad\)</span><span
+class="math inline">\(P_{t+1}\leftarrow P_{t+1}\cup\{x\}\)</span>，<span
+class="math inline">\(F_l\leftarrow F_l\backslash\{x\}\)</span>，<span
+class="math inline">\(\rho_j\leftarrow\rho_j+1\)</span>。</li>
+</ol>
+</blockquote>
+<h3 id="有约束的-nsga-iii-算法">有约束的 NSGA-III 算法</h3>
+<p>相较于无约束的 NSGA-III 算法，有约束的 NSGA-III 算法有两个改动：</p>
+<p>第一个改动发生在从种群 <span class="math inline">\(P_t\)</span>
+产生后代 <span class="math inline">\(Q_t\)</span> 的过程中。无约束的
+NSGA-III 算法从 <span class="math inline">\(P_t\)</span>
+中随机抽取两个个体作为父母然后产生后代。对于有约束的情形，则需要通过两轮二元锦标赛的方法产生父母。对于个体
+<span class="math inline">\(p_1\)</span> 与 <span
+class="math inline">\(p_2\)</span> 而言，它们的锦标结果是：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>如果 <span class="math inline">\(p_1\)</span> 与 <span
+class="math inline">\(p_2\)</span>
+都满足约束条件则随机挑选，进而与无约束时的 NSGA-III 一致。</li>
+<li>如果 <span class="math inline">\(p_1\)</span> 与 <span
+class="math inline">\(p_2\)</span>
+中一个满足约束条件而另一个不满足，则挑选满足约束条件的那个。</li>
+<li>如果 <span class="math inline">\(p_1\)</span> 与 <span
+class="math inline">\(p_2\)</span>
+都不满足约束条件则选出对约束条件违背程度较弱的那个。</li>
+</ol>
+</blockquote>
+<p>第二个改动发生在从 <span class="math inline">\(R_t=P_t\cup
+Q_t\)</span> 确定 <span class="math inline">\(P_{t+1}\)</span> 时：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>计算 <span class="math inline">\(R_t\)</span>
+中满足约束条件的个体的数量 <span
+class="math inline">\(N_f\)</span>。</li>
+<li><ul>
+<li>如果 <span class="math inline">\(N_f\leqslant
+N\)</span>，那么满足约束条件的个体全部进入 <span
+class="math inline">\(P_{t+1}\)</span>，并将对约束条件违背程度最弱的若干个个体加入
+<span class="math inline">\(P_{t+1}\)</span>。</li>
+<li>如果 <span class="math inline">\(N_f&gt;N\)</span>
+则只考虑满足约束条件的个体，参照无约束的 NSGA-III 选择出 <span
+class="math inline">\(P_{t+1}\)</span>。</li>
+</ul></li>
+</ol>
+</blockquote>
+<h2 id="moead-算法">MOEA/D 算法</h2>
+<p>MOEA/D 算法属于基于分解的进化算法。它的基本框架可参考 <a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8998284">这篇文献</a>。</p>
+<p>算法的输入包括：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>种群规模 <span class="math inline">\(N\)</span>。</li>
+<li>尽可能均匀分布的权重向量 <span
+class="math inline">\(\lambda^1\sim\lambda^N\)</span>。</li>
+<li>某种聚合函数 <span
+class="math inline">\(g(x,\lambda,z)\)</span>，其中 <span
+class="math inline">\(z\)</span> 为初始点。</li>
+<li>邻域规模 <span class="math inline">\(T\)</span>。</li>
+<li>某种结束算法的判断条件。</li>
+</ol>
+</blockquote>
+<p>算法的初始化过程包括：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>将记录结果的精英种群 <span class="math inline">\(EP\)</span>
+设为空集。</li>
+<li>计算各个 <span class="math inline">\(\lambda^j\)</span>
+之间的距离，将距离 <span class="math inline">\(\lambda^j\)</span> 最近的
+<span class="math inline">\(T\)</span> 个权重的指标保存在集合 <span
+class="math inline">\(B_j\)</span> 中（含 <span
+class="math inline">\(\lambda^j\)</span> 自己）。</li>
+<li>随机生成种群 <span
+class="math inline">\(P=\{x^1,\cdots,x^N\}\)</span>，并对每一个 <span
+class="math inline">\(x\in P\)</span> 计算优化目标 <span
+class="math inline">\(F(x)\)</span>。</li>
+<li>设置初始参考点 <span class="math inline">\(z^\ast\)</span>，其第
+<span class="math inline">\(i\)</span> 个分量为 <span
+class="math inline">\(\displaystyle\min_{x\in P}f_i(x)\)</span>。</li>
+</ol>
+</blockquote>
+<p>具体的更新操作为：对 <span class="math inline">\(P\)</span>
+中的每一个 <span class="math inline">\(x^i\)</span> 执行以下操作：
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>从 <span class="math inline">\(B_i\)</span> 中随机选取两个指标 <span
+class="math inline">\(k,l\)</span>。</li>
+<li>利用某种重组、变异等操作，如果有约束条件就再利用某种方法考虑约束条件，从
+<span class="math inline">\(x^k\)</span> 与 <span
+class="math inline">\(x^l\)</span> 得到新个体 <span
+class="math inline">\(y\)</span>。</li>
+<li>将 <span class="math inline">\(F(y)\)</span> 与 <span
+class="math inline">\(z^\ast\)</span> 做比较，如果 <span
+class="math inline">\(F(y)\)</span> 有某个分量小于 <span
+class="math inline">\(z^\ast\)</span>，就用这个分量替换 <span
+class="math inline">\(z^\ast\)</span> 中相应的分量。</li>
+<li>对 <span class="math inline">\(B_i\)</span> 中的每一个指标 <span
+class="math inline">\(j\)</span>，如果 <span
+class="math inline">\(g(y,\lambda^j,z^\ast)&lt;g(x^j,\lambda^j,z^\ast)\)</span>，那么令
+<span class="math inline">\(x^j\leftarrow y\)</span>。</li>
+<li>更新 <span class="math inline">\(EP\)</span>：如果 <span
+class="math inline">\(EP\)</span> 中有被 <span
+class="math inline">\(y\)</span> 支配的个体就从 <span
+class="math inline">\(EP\)</span> 中删掉，如果 <span
+class="math inline">\(y\)</span> 不被 <span
+class="math inline">\(EP\)</span> 中任意一个个体支配就将 <span
+class="math inline">\(y\)</span> 加入其中。</li>
+<li>不断执行以上这些操作，直到算法的结束条件得以满足。</li>
+</ol>
+</blockquote></p>
+<p>在 MOEA/D 算法中，<span class="math inline">\(\lambda^i\)</span>
+的均匀性有助于提高解的多样性。每个个体仅对相邻的若干个个体有影响也会在某种程度上保证解的多样性与收敛性。</p>
+<h2 id="ibea-算法">IBEA 算法</h2>
+<p>IBEA 算法与 SMS-EMOA
+算法是基于性能指标的算法的代表例子，相关综述可参考 <a
+target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3376916">这篇文献</a>。IBEA
+算法的基本框架是：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>随机生成一个规模为 <span class="math inline">\(N\)</span> 的种群
+<span class="math inline">\(P\)</span>。</li>
+<li>利用 <span class="math inline">\(P\)</span> 中生成后代 <span
+class="math inline">\(Q\)</span>，定义 <span
+class="math inline">\(R=P\cup Q\)</span>。</li>
+<li>对 <span class="math inline">\(R\)</span> 中的每一个个体 <span
+class="math inline">\(x\)</span>，计算 <span
+class="math display">\[\mathrm{fitness}(x):=-\sum_{y\in
+R\backslash\{x\}}\mathrm e^{-I(y,x)/\kappa}.\]</span></li>
+<li>从 <span class="math inline">\(R\)</span> 中删去 <span
+class="math inline">\(\mathrm{fitness}\)</span>
+最低的个体，并更新所有剩余个体的 <span
+class="math inline">\(\mathrm{fitness}\)</span>。重复此操作直到 <span
+class="math inline">\(|R|=N\)</span>。</li>
+<li>如果满足终止条件则终止算法，否则令 <span
+class="math inline">\(P=R\)</span> 并回到步骤 2。</li>
+</ol>
+</blockquote>
+<p>第三行的 <span class="math inline">\(\kappa\)</span>
+是一个正数，可手动设定也可自动调整。<span
+class="math inline">\(I(y,x)\)</span>
+是一个性能指标，它应当满足以下两个条件（dominance preserving）：</p>
+<blockquote class="colorquote definition" ><ul>
+<li>只要 <span class="math inline">\(x\)</span> 支配 <span
+class="math inline">\(y\)</span>，就有 <span
+class="math inline">\(I(x,y)&lt;I(y,x)\)</span></li>
+<li>只要 <span class="math inline">\(x\)</span> 支配 <span
+class="math inline">\(y\)</span>，那么对任意一个 <span
+class="math inline">\(z\)</span> 都有 <span
+class="math inline">\(I(z,y)\leqslant I(z,x)\)</span>。</li>
+</ul>
+</blockquote>
+<p>不难验证，如果 <span class="math inline">\(x\)</span> 支配 <span
+class="math inline">\(y\)</span> 就必然有 <span
+class="math inline">\(\mathrm{fitness}(x)&gt;\mathrm{fitness}(y)\)</span>。</p>
+<p>满足以上两个条件的性能指标的例子有：</p>
+<ul>
+<li><span class="math inline">\(I(y,x)=\mathrm{HV}[D_x\backslash(D_y\cap
+D_x)]\)</span>，其中 <span class="math inline">\(D_x\)</span> 为 <span
+class="math inline">\(R^m\)</span> 中所有被 <span
+class="math inline">\(F(x)\)</span> 支配的区域，即 <span
+class="math inline">\(F(x)\)</span> 右上角的区域。<span
+class="math inline">\(\mathrm{HV}\)</span>
+意为体积（hypervolume）。</li>
+<li><span class="math inline">\(I(y,x)=\displaystyle\max_{i=1\sim
+m}[f_i(y)-f_i(x)]\)</span>。</li>
+</ul>
+<h2 id="sms-emoa-算法">SMS-EMOA 算法</h2>
+<p>IBEA 算法与 SMS-EMOA
+算法是基于性能指标的算法的代表例子，相关综述可参考 <a
+target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3376916">这篇文献</a>。</p>
+<p>SMS-EMOA 算法的基本框架与 NSGA-II
+基本相同，不同之处在于：每次仅生成一个后代而不是 <span
+class="math inline">\(N\)</span> 个（<span
+class="math inline">\(N\)</span>
+为种群规模），以及在基于支配关系分层后采用性能指标而非“拥挤程度”对个体进行排序。</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>随机生成一个规模为 <span class="math inline">\(N\)</span> 的种群
+<span class="math inline">\(P\)</span>。</li>
+<li>从 <span class="math inline">\(P\)</span> 中生成一个新个体 <span
+class="math inline">\(a_{\mathrm{new}}\)</span>，考虑 <span
+class="math inline">\(R=P\cup\{a_{\mathrm{new}}\}\)</span>。</li>
+<li>基于支配关系对 <span class="math inline">\(R\)</span>
+分层，最后一层记为 <span class="math inline">\(F_k\)</span>。</li>
+<li><ul>
+<li>如果 <span class="math inline">\(|F_k|=1\)</span>：<span
+class="math inline">\(P=R\backslash F_k\)</span>。</li>
+<li>如果 <span class="math inline">\(|F_k|&gt;1\)</span>：指定参考点
+<span class="math inline">\(z^{\max}\)</span>，其第 <span
+class="math inline">\(i\)</span> 个分量为 <span
+class="math inline">\(\displaystyle\max_{x\in R} f_i(x)\)</span>。然后对
+<span class="math inline">\(R\)</span> 中的每一个 <span
+class="math inline">\(x\)</span>，计算 <span
+class="math display">\[\mathrm{HV}(R,z^{\max})-\mathrm{HV}(R\backslash\{x\},z^{\max}).\]</span>
+找出使得以上指标最小的 <span class="math inline">\(x\)</span>，令 <span
+class="math inline">\(P=R\backslash\{x\}\)</span>。</li>
+</ul></li>
+<li>如果满足终止条件则终止，否则回到步骤 2。</li>
+</ol>
+</blockquote>
+<p>这里的 <span class="math inline">\(\mathrm{HV}(R,z)\)</span>
+意为以下区域的体积： <span class="math display">\[\bigcup_{x\in
+R}[x_1,z_1]\times[x_2,z_2]\times\cdots\times[x_m,z_m],\]</span>
+也就是将所有以 <span class="math inline">\(xz\)</span>
+连线为主对角线的立方体的并集。</p>
+<h1 id="参考文献">参考文献</h1>
+<p>中文书籍：</p>
+<ul>
+<li>《<a
+target="_blank" rel="noopener" href="https://github.com/Asurada2015/Some_resource/blob/main/%E5%A4%9A%E7%9B%AE%E6%A0%87%E8%BF%9B%E5%8C%96%E4%BC%98%E5%8C%96(2017)-%E9%83%91%E9%87%91%E5%8D%8E%EF%BC%8C%E9%82%B9%E5%A8%9F-.pdf">多目标进化优化</a>》郑金华，邹娟.<span
+class="math inline">\(\;\;\)</span>北京：科学出版社，2017.</li>
+</ul>
+<p>基于支配的进化算法：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/996017">A Fast and
+Elitist Multiobjective Genetic Algorithm: NSGA-II.</a> Kalyanmoy Deb,
+Amrit Pratap, Sameer Agarwal, and T. Meyarivan. IEEE Trans. Evol.
+Comput. <strong>6</strong>, 182-197 (2002).</li>
+<li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/6600851">An
+Evolutionary Many-Objective Optimization Algorithm Using
+ReferencePoint-Based Nondominated Sorting Approach, Part I: Solving
+Problems With Box Constraints.</a> Kalyanmoy Deb and Himanshu Jain. IEEE
+Trans. Evol. Comput. <strong>18</strong>, 577-601 (2014).</li>
+<li><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/6595567">An
+Evolutionary Many-Objective Optimization Algorithm Using Reference-Point
+Based Nondominated Sorting Approach, Part II: Handling Constraints and
+Extending to an Adaptive Approach.</a> Himanshu Jain and Kalyanmoy Deb.
+IEEE Trans. Evol. Comput. <strong>18</strong>, 602-622 (2014).</li>
+</ul>
+<p>基于分解的进化算法（Open access）：</p>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=8998284">A
+Survey of Multiobjective Evolutionary Algorithms Based on Decomposition:
+Variants, Challenges and Future Directions.</a> Qian Xu, Zhanqi Xu, Tao
+Ma. IEEE Access, <strong>8</strong>, 41588-41614 (2020).</li>
+</ul>
+<p>基于指标的进化算法：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3376916">Indicator-based
+Multi-objective Evolutionary Algorithms: A Comprehensive Survey.</a>
+Jesús Guillermo Falcón-Cardona and Carlos A. Coello Coello. Association
+for Computing Machinery, <strong>9</strong>, 39 (2020).</li>
+</ul>
+<p>约束条件的处理（Open access）：</p>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://link.springer.com/content/pdf/10.1007/s44336-024-00006-5.pdf">Evolutionary
+constrained multi-objective optimization: a review.</a> Jing Liang,
+Hongyu Lin, Caitong Yue, Xuanxuan Ban, and Kunjie Yu. Vicinagearth
+<strong>1</strong>, 5 (2024).</li>
+<li><a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9723472">A
+Survey on Evolutionary Constrained Multiobjective Optimization.</a> Jing
+Liang, Xuanxuan Ban, Kunjie Yu, Boyang Qu, Kangjia Qiao, Caitong Yue, Ke
+Chen, and Kay Chen Tan. IEEE Trans. Evol. Comput. <strong>27</strong>,
+201-221 (2023).</li>
+</ul>
+<link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-ghost"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">XMQ</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"ams","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
