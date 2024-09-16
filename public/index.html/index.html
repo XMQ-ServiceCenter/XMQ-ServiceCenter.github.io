@@ -6670,7 +6670,7 @@ Representations of Clifford Algebras</a></li>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-03 22:21:50" itemprop="dateModified" datetime="2024-09-03T22:21:50+08:00">2024-09-03</time>
+      <time title="修改时间：2024-09-14 20:15:48" itemprop="dateModified" datetime="2024-09-14T20:15:48+08:00">2024-09-14</time>
     </span>
 
   
@@ -6930,6 +6930,7 @@ class="math inline">\(\dot{\boldsymbol{r}}^2=1\)</span>，这样就得到了<str
 <span class="math display">\[\dfrac{\mathrm d}{\mathrm
 ds}\left[n(\boldsymbol{r})\dfrac{\mathrm d\boldsymbol{r}}{\mathrm
 ds}\right]=\nabla n(\boldsymbol{r}).\]</span></p>
+<h1 id="透镜系统">透镜系统</h1>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
@@ -6992,7 +6993,7 @@ ds}\right]=\nabla n(\boldsymbol{r}).\]</span></p>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-09-01 17:06:00" itemprop="dateModified" datetime="2024-09-01T17:06:00+08:00">2024-09-01</time>
+      <time title="修改时间：2024-09-15 11:03:07" itemprop="dateModified" datetime="2024-09-15T11:03:07+08:00">2024-09-15</time>
     </span>
 
   
@@ -7031,8 +7032,17 @@ class="math inline">\(\mathbb R^n\)</span> 称为
 optimization, MaOP）问题</strong>。由于目标函数的增多，<span
 class="math inline">\(m\)</span>
 特别大的高维多目标优化问题会遇到更多的困难，此处不做过多讨论。</p>
-<p>通常，不会存在某个 <span class="math inline">\(x^\ast\)</span> 使得
-<span class="math inline">\(f_{1\sim m}(x)\)</span>
+<p>有约束，即 <span class="math inline">\(\mathcal E\cup\mathcal
+I\neq\varnothing\)</span> 的多目标优化问题称为
+<strong>约束多目标优化问题（constrained multi-objective optimization
+problem,
+CMOP）</strong>。在约束多目标优化问题中，满足约束条件的区域或个体称为
+feasible 区域或个体，不满足约束条件的区域或个体称为 infeasible
+区域或个体。对约束条件的处理方法可记为 <strong>CHT（constraint handling
+technology）</strong>。</p>
+<p>在多目标优化问题中，通常不会存在某个 <span
+class="math inline">\(x^\ast\)</span> 使得 <span
+class="math inline">\(f_{1\sim m}(x)\)</span>
 同时取最小，因此，人们往往只关心所谓的
 <strong>帕雷托（Pareto）最优解（集）</strong>：</p>
 <blockquote class="colorquote definition" ><ul>
@@ -7206,6 +7216,20 @@ class="math inline">\(2\)</span>，直到完成分层。</li>
 class="math inline">\(O(mN^2)\)</span>，空间复杂度提升为 <span
 class="math inline">\(O(N^2)\)</span>。</p>
 <p><span id="reference_point"></p>
+<h2 id="理想点与-nadir-点">理想点与 nadir 点</h2>
+<p>一个种群 <span class="math inline">\(S\)</span> 在目标空间中的
+<strong>理想点（ideal point）</strong> <span
+class="math inline">\(z^\ast\)</span> 是指分量由各个目标函数在 <span
+class="math inline">\(S\)</span> 中的最小值给出的点： <span
+class="math display">\[z_i^\ast=\min_{x\in S}f_i(x).\]</span>
+与之相应的还有 <span class="math inline">\(z^{\mathrm{nadir}}\)</span>：
+<span class="math display">\[z_i^{\mathrm{nadir}}=\max_{x\in
+S}f_i(x).\]</span> 理想点经常会被用作目标空间中的基准。</p>
+<p>此外，有许多算法还会将这两个点的变化率，即 <span
+class="math display">\[\max_i\left\lbrace\dfrac{\left|\text{第}\;k\;\text{步的}\;z_i-\text{第}\;(k-l)\;\text{步的}\;z_i\right|}{\max(|\text{第}\;(k-l)\;\text{步的}\;z_i|,\delta)}\right\rbrace\]</span>
+用作收敛或切换阶段的判据。这里的 <span
+class="math inline">\(\delta\)</span> 是一个小参数，用于避免分母为 <span
+class="math inline">\(0\)</span> 的情况。</p>
 <h2 id="参考点">参考点</h2>
 <p></span></p>
 <p>为了保证种群的多样性，许多算法会引入一些参考点/参考线来辅助演化：如果参考点/参考线在目标空间中是“均匀”分布的，而算法要求种群尽可能“均匀”地分布于每个参考点/参考线周围，那么种群的多样性就能得到一定程度的保证。注意，不同的算法对“均匀”的刻画可能有差异。</p>
@@ -7213,14 +7237,8 @@ class="math inline">\(O(N^2)\)</span>。</p>
 <p>引入参考点之前往往会对种群 <span class="math inline">\(S\)</span>
 的目标空间做归一化操作： <span class="math display">\[\tilde
 f_i(x)=\dfrac{f_i(x)-z_i^\ast}{a_i}.\]</span></p>
-<p>这里的 <span class="math inline">\(z_i^\ast\)</span> 一般取为
-<strong>理想点（ideal point）</strong>： <span
-class="math display">\[z_i^\ast=\min_{x\in S}f_i(x).\]</span> 通常将以
-<span class="math inline">\(z_i^\ast\)</span> 为坐标分量的点直接记为
-<span class="math inline">\(z^\ast\)</span>。与之相应的还有 <span
-class="math inline">\(z^{\mathrm{nadir}}\)</span>，不过它一般不会被用作归一化操作中的基准点：
-<span class="math display">\[z_i^{\mathrm{nadir}}=\max_{x\in
-S}f_i(x).\]</span></p>
+<p>这里的 <span class="math inline">\(z_i^\ast\)</span> 一般取为理想点
+<span class="math inline">\(z_i^\ast=\min_{x\in S}f_i(x)\)</span>。</p>
 <p>参数 <span class="math inline">\(a_i\)</span> 的确定需要用到一些
 <strong>extreme points</strong>：在将坐标原点移动至 <span
 class="math inline">\(z^\ast\)</span>
@@ -7243,7 +7261,7 @@ class="math display">\[\sum_{j=1}^m\dfrac{z_{i,j}}{a_j}=1,\]</span> 其中
 <span class="math inline">\(a_j\)</span>
 就是我们要计算的截距。这是一个关于 <span
 class="math inline">\(1/a_i\)</span>
-的线性方程组，如果有退化（没有解等情形）则需要单独讨论——此时一种常用的做法就是选取
+的线性方程组，可通过高斯消元法等方法求解。如果方程组有退化（没有解等情形），则需要单独讨论——此时一种常用的做法就是选取
 <span class="math inline">\(a_j =
 z_j^{\mathrm{nadir}}-z_j^\ast\)</span>。</p>
 <p>在完成以上 scale 过程之后，<span
@@ -7294,16 +7312,8 @@ class="math inline">\(\lambda\)</span>
 为主对角线的立方体去截取帕雷托前沿面，当这一立方体即将离开帕雷托前沿面时，就找到了帕雷托前沿的一个点。相较于权重方法，帕雷托前沿面的凹凸性对切比雪夫方法的影响会更小。</p>
 <p>第三种是基于惩罚的边界交叉方法（penalty-based boundary intersection
 approach），比较复杂且没找到图，暂且搁置。</p>
-<h2 id="约束条件的处理">约束条件的处理</h2>
-<p>对约束条件的处理可参考 <a
-target="_blank" rel="noopener" href="https://link.springer.com/content/pdf/10.1007/s44336-024-00006-5.pdf">这篇综述</a>
-和 <a
-target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9723472">这篇综述</a>。</p>
-<h3 id="与约束相关的基本概念">与约束相关的基本概念</h3>
-<p>在讨论约束条件的处理方法之前，需要先给出一些概念。</p>
-<p>满足约束条件的区域或个体称为 feasible
-区域或个体，不满足约束条件的区域或个体称为 infeasible
-区域或个体。对于以下形式的约束条件：</p>
+<h2 id="约束违反度">约束违反度</h2>
+<p>对于以下形式的约束条件：</p>
 <p><span class="math display">\[\begin{cases}
 E_i(x)=0:\quad i\in\mathcal E,\\
 I_j(x)\leqslant0:\quad j\in\mathcal I,
@@ -7318,11 +7328,11 @@ cv_j(x):=\max\left(0,I_j(x)\right)\quad&amp; j\in\mathcal I,
 \end{cases}
 \]</span> 这里的 <span class="math inline">\(\delta\)</span>
 是一个近似为 <span class="math inline">\(0\)</span> 的小参数。</p>
-<p>带约束条件的多目标优化问题可记为 <strong>CMOP（constrained
-multi-objective optimization
-problem）</strong>。对约束条件的处理方法可记为 <strong>CHT（constraint
-handling technology）</strong>。</p>
-<h3 id="处理约束条件的思路">处理约束条件的思路</h3>
+<h2 id="处理约束条件的思路">处理约束条件的思路</h2>
+<p>对约束条件的处理可参考 <a
+target="_blank" rel="noopener" href="https://link.springer.com/content/pdf/10.1007/s44336-024-00006-5.pdf">这篇综述</a>
+和 <a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9723472">这篇综述</a>。</p>
 <p>与单目标优化问题一样，多目标优化问题也可引入 <strong>罚函数</strong>
 来处理约束条件。如何选择惩罚因子即约束项前面的系数是这一类思路面临的主要困难，固定不变的、逐渐增加的、动态调整的惩罚因子都是可尝试的选项。此外，将约束条件以其他形式加入优化目标或适应度函数的做法也是可行思路之一。</p>
 <p>Deb 等人在设计 NSGA-II 算法时引入了
@@ -7364,18 +7374,7 @@ class="math inline">\((1-p_f)\)</span> 的概率依据 CDP
 <span class="math inline">\(CV(x)\)</span> 或者各个 <span
 class="math inline">\(cv_i(x)\)</span>
 也纳入优化目标中，进而将问题转化为无约束优化问题。但这一做法的问题在于约束条件最终不一定能够得到满足，并且会将原来的多目标优化问题转化为维数更高的问题，导致求解更困难。</p>
-<p><strong>两阶段方法（two‑stage optimization）</strong>
-将求解过程分为两个阶段，用第一个阶段的结果来为第二个阶段做指引。例如 <a
-target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S2210650218300233"><strong>推拉搜索（push
-and pull search , PPS）</strong></a>
-在第一阶段忽略约束条件，找出无约束情形下的最优解并把它作为第二阶段的初值，然后再通过
-<span
-class="math inline">\(\varepsilon\)</span>-约束方法或逐个加上约束等方法将约束条件考虑进来，进而达到求解目的。</p>
-<p><strong>辅助种群（auxiliary population）方法</strong>
-与两阶段方法有某种相似性，只不过在这一思路中的辅助种群往往与正式的种群同时存在，前者往往负责探索
-infeasible 区域，而后者则用于生成结果。</p>
-<p>除此之外还有许多其他思路，如对产生后代的重组/变异等算符进行修改、将多种
-CHT 组合使用等等。</p>
+<p>除此之外还有许多其他思路，如两阶段方法、辅助种群方法、对产生后代的重组/变异等算符进行修改、将多种方法组合使用等等。</p>
 <hr />
 <h1 id="进化算法的例子">进化算法的例子</h1>
 <h2 id="简单分类">简单分类</h2>
@@ -7463,7 +7462,7 @@ I_x+\dfrac{f_i(z)-f_i(y)}{f_{i,\max}-f_{i,\min}}\)</span></li>
 <p>显然，<span class="math inline">\(I_x\)</span> 越大就说明个体 <span
 class="math inline">\(x\)</span>
 距离其他个体就越遥远，它感受到的“拥挤程度”就越小。将这些远离其它个体的点留存到下一代有助于提高结果的多样性。</p>
-<p>对于有约束的问题，Deb等人（NSGA-II 算法的发明人）建议使用 <a
+<p>对于有约束的问题，Deb 等人（NSGA-II 算法的发明人）建议使用 <a
 href="#CDP">CDP</a>
 来进行非支配排序，算法的整体框架无需改动。需要注意的是，在基于 CDP
 进行分层时，每个 infeasible
@@ -7591,13 +7590,10 @@ class="math inline">\(\rho_j\leftarrow\rho_j+1\)</span>。</li>
 <p>第一个改动发生在从种群 <span class="math inline">\(P_t\)</span>
 产生后代 <span class="math inline">\(Q_t\)</span> 的过程中。无约束的
 NSGA-III 算法从 <span class="math inline">\(P_t\)</span>
-中随机抽取两个个体作为父母然后产生后代。对于有约束的情形，则需要通过两轮二元锦标赛的方法产生父母。对于个体
-<span class="math inline">\(p_1\)</span> 与 <span
-class="math inline">\(p_2\)</span> 而言，它们的锦标结果是：</p>
+中随机抽取两个个体作为父母然后产生后代。对于有约束的情形，则需要通过两轮二元锦标赛方法产生父母：</p>
 <blockquote class="colorquote algorithm" ><ol type="1">
 <li>如果 <span class="math inline">\(p_1\)</span> 与 <span
-class="math inline">\(p_2\)</span>
-都满足约束条件则随机挑选，进而与无约束时的 NSGA-III 一致。</li>
+class="math inline">\(p_2\)</span> 都满足约束条件则随机挑选。</li>
 <li>如果 <span class="math inline">\(p_1\)</span> 与 <span
 class="math inline">\(p_2\)</span>
 中一个满足约束条件而另一个不满足，则挑选满足约束条件的那个。</li>
@@ -7661,10 +7657,10 @@ class="math inline">\(\displaystyle\min_{x\in P}f_i(x)\)</span>。</li>
 <blockquote class="colorquote algorithm" ><ol type="1">
 <li>从 <span class="math inline">\(B_i\)</span> 中随机选取两个指标 <span
 class="math inline">\(k,l\)</span>。</li>
-<li>利用某种重组、变异等操作，如果有约束条件就再利用某种方法考虑约束条件，从
-<span class="math inline">\(x^k\)</span> 与 <span
+<li>利用某种重组、变异等操作，从 <span
+class="math inline">\(x^k\)</span> 与 <span
 class="math inline">\(x^l\)</span> 得到新个体 <span
-class="math inline">\(y\)</span>。</li>
+class="math inline">\(y\)</span>。如果有约束条件就再利用某种方法考虑约束条件。</li>
 <li>将 <span class="math inline">\(F(y)\)</span> 与 <span
 class="math inline">\(z^\ast\)</span> 做比较，如果 <span
 class="math inline">\(F(y)\)</span> 有某个分量小于 <span
@@ -7777,6 +7773,226 @@ class="math inline">\(P=R\backslash\{x\}\)</span>。</li>
 R}[x_1,z_1]\times[x_2,z_2]\times\cdots\times[x_m,z_m],\]</span>
 也就是将所有以 <span class="math inline">\(xz\)</span>
 连线为主对角线的立方体的并集。</p>
+<h2 id="c-taea-算法">C-TAEA 算法</h2>
+<p>引入辅助种群是处理约束多目标问题的基本思路之一，其中的代表就是 <a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/8413136">C-TAEA
+算法（two-archive EA）</a>。C-TAEA
+同时考虑两个种群：一个种群以收敛为目标并作为最终的输出结果，记为 <span
+class="math inline">\(\text{CA}\)</span>（convergence-oriented
+archive）；另一个种群以多样性为演化目标，记为 <span
+class="math inline">\(\text{DA}\)</span>（diversity-oriented
+archive）。</p>
+<p>C-TAEA 算法主要由 4 个部分构成：对种群密度的估计、<span
+class="math inline">\(\text{CA}\)</span> 的更新、<span
+class="math inline">\(\text{DA}\)</span> 的更新以及后代的产生。此外，和
+MOEA/D 方法类似，C-TAEA 也需要引入权重 <span
+class="math inline">\(w_j\)</span> 和聚合函数 <span
+class="math inline">\(g(x;w,z^\ast)\)</span>。</p>
+<h3 id="控制种群密度">控制种群密度</h3>
+<p>为了控制种群密度，C-TAEA 采用了参考点策略：引入 <span
+class="math inline">\(N\)</span> 个均匀分布的权重 <span
+class="math inline">\(w_j\)</span>（<span
+class="math inline">\(N\)</span> 为种群规模），利用 <span
+class="math inline">\(w_j\)</span> 将目标空间分为 <span
+class="math inline">\(N\)</span> 份，然后找出关联到 <span
+class="math inline">\(w_j\)</span> 的个体的集合 <span
+class="math inline">\(A_j\)</span>。</p>
+<p>这一策略的具体流程与 <a href="#reference_point">前面</a>
+提到的相同，只不过计算超平面截距的时候直接令 <span
+class="math inline">\(a_i=z^{\text{nadir}}_i-z_i^\ast\)</span>。</p>
+<h3 id="后代的产生">后代的产生</h3>
+<p>C-TAEA 中后代的产生是通过如下算法实现的：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>忽略约束条件，统计 <span class="math inline">\(\text{CA}\)</span> 与
+<span class="math inline">\(\text{DA}\)</span> 中分别有多少解在 <span
+class="math inline">\(\text{CA}\cup\text{DA}\)</span>
+中不被任何其他元素支配/占优，统计结果除以 <span
+class="math inline">\(|\text{CA}\cup\text{DA}|\)</span>，得到 <span
+class="math inline">\(\rho_c\)</span> 与 <span
+class="math inline">\(\rho_d\)</span>。</li>
+<li>如果 <span
+class="math inline">\(\rho_c&gt;\rho_d\)</span>，那么通过二元锦标选择从
+<span class="math inline">\(\text{CA}\)</span> 中选出 <span
+class="math inline">\(p_1\)</span>，否则从 <span
+class="math inline">\(\text{DA}\)</span> 中选出 <span
+class="math inline">\(p_1\)</span>。</li>
+<li>生成一个随机数，如果小于 <span class="math inline">\(\rho_c\)</span>
+就通过二元锦标选择从 <span class="math inline">\(\text{CA}\)</span>
+中选出 <span class="math inline">\(p_2\)</span>，否则从 <span
+class="math inline">\(\text{DA}\)</span> 中选出 <span
+class="math inline">\(p_2\)</span>。</li>
+<li>根据 <span class="math inline">\(p_1\)</span> 与 <span
+class="math inline">\(p_2\)</span> 产生一个后代。</li>
+</ol>
+</blockquote>
+<p>以上算法中，两个个体 <span class="math inline">\(x_{1,2}\)</span>
+之间的二元锦标选择的过程是：</p>
+<blockquote class="colorquote algorithm" ><ul>
+<li>如果 <span class="math inline">\(x_1\)</span> 与 <span
+class="math inline">\(x_2\)</span> 都不满足约束条件，那么随机选取。</li>
+<li>如果 <span class="math inline">\(x_1\)</span> 与 <span
+class="math inline">\(x_2\)</span>
+中只有一个满足约束条件，那么选取满足约束条件的那个。</li>
+<li>如果 <span class="math inline">\(x_1\)</span> 与 <span
+class="math inline">\(x_2\)</span>
+都满足约束条件且有支配关系，就选择支配的一个。</li>
+<li>如果 <span class="math inline">\(x_1\)</span> 与 <span
+class="math inline">\(x_2\)</span>
+都满足约束条件且没有支配关系，就随机选择一个。</li>
+</ul>
+</blockquote>
+<p>设计这一算法的主要目的是为了将两个种群中的支配解尽可能地保留下来。</p>
+<h3 id="ca-的更新">CA 的更新</h3>
+<p>在产生后代 <span class="math inline">\(Q\)</span> 之后，<span
+class="math inline">\(\text{CA}\)</span> 的更新必须发生在 DA
+之前。在更新 <span class="math inline">\(\text{CA}\)</span>
+时，要首先考虑 <span class="math inline">\(H_c=\text{CA}\cup
+Q\)</span>，并找出 <span class="math inline">\(H_c\)</span>
+中所有满足约束条件的解形成集合 <span
+class="math inline">\(S_c\)</span>，然后： <blockquote class="colorquote algorithm" ><ul>
+<li>如果 <span class="math inline">\(|S_c|=N\)</span>（<span
+class="math inline">\(N\)</span> 为种群数量），那么 <span
+class="math inline">\(S_c\)</span> 就是下一步的 <span
+class="math inline">\(\text{CA}\)</span>。</li>
+<li>如果 <span class="math inline">\(|S_c|&lt;N\)</span>：
+<ol type="1">
+<li>在 <span class="math inline">\(H_c\backslash S_c\)</span> 中以 <span
+class="math inline">\((CV(x),g(x;w,z^\ast))\)</span>
+为目标进行非支配排序，将 <span class="math inline">\(H_c\backslash
+S_c\)</span> 分层为 <span
+class="math inline">\(F_1,F_2\cdots\)</span>。</li>
+<li>逐次将 <span class="math inline">\(F_1, F_2,\cdots\)</span> 加入
+<span class="math inline">\(S_c\)</span>，直到遇到不能完全加入的 <span
+class="math inline">\(F_l\)</span>。</li>
+<li>将 <span class="math inline">\(F_{l}\)</span> 中具有最小 <span
+class="math inline">\(CV\)</span> 值的若干个点加入 <span
+class="math inline">\(S_c\)</span> 形成下一代的 <span
+class="math inline">\(\text{CA}\)</span>。</li>
+</ol></li>
+<li>如果 <span class="math inline">\(|S_c|&gt;N\)</span>：
+<ol type="1">
+<li>对 <span class="math inline">\(S_c\)</span> 进行非支配排序，将 <span
+class="math inline">\(S_c\)</span> 分层为 <span
+class="math inline">\(F_1,F_2\cdots\)</span>。</li>
+<li>将 <span class="math inline">\(\text{CA}\)</span>
+设置为空集，然后逐次将 <span class="math inline">\(F_1, F_2\)</span>
+加入 <span
+class="math inline">\(\text{CA}\)</span>，直到遇到第一个不能完全加入的
+<span class="math inline">\(F_l\)</span>，然后将 <span
+class="math inline">\(F_l\)</span> 也加入 <span
+class="math inline">\(\text{CA}\)</span>。</li>
+<li>找出 <span class="math inline">\(\text{CA}\)</span>
+中每一个个体分别被哪个权重控制，进而计算出每一个权重的 <span
+class="math inline">\(A_i\)</span>。</li>
+<li>在个体数量最多也就是最拥挤的 <span
+class="math inline">\(A_i\)</span> 中，中找出距离最近的一对点，然后从
+<span class="math inline">\(\text{CA}\)</span> 中删去二者中 <span
+class="math inline">\(g(x;w_i,z^\ast)\)</span> 更大的那个个体。</li>
+<li>重复步骤 4 直到 <span
+class="math inline">\(|\text{CA}|=N\)</span>。</li>
+</ol></li>
+</ul>
+</blockquote></p>
+<h3 id="da-的更新">DA 的更新</h3>
+<p>在更新 <span class="math inline">\(\text{DA}\)</span>
+时，不需要考虑约束条件的限制，以便提高种群的多样性。在更新 <span
+class="math inline">\(\text{DA}\)</span> 时，与 <span
+class="math inline">\(\text{CA}\)</span> 一样，先考虑 <span
+class="math inline">\(H_d=\text{DA}\cup Q\)</span>，然后：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>对每一个权重 <span class="math inline">\(w_i\)</span>，计算 <span
+class="math inline">\(H_d\)</span> 与 <span
+class="math inline">\(\text{CA}\)</span> 中与它关联的个体 <span
+class="math inline">\(A_{d,i}\)</span> 与 <span
+class="math inline">\(A_{c,i}\)</span>。</li>
+<li><span
+class="math inline">\(\text{DA}\leftarrow\varnothing\)</span>，<span
+class="math inline">\(\text{iter}\leftarrow1\)</span>。</li>
+<li><strong>while</strong> <span
+class="math inline">\(|\text{DA}|&lt;N\)</span>:</li>
+<li><span class="math inline">\(\qquad\)</span><strong>for</strong>
+<span class="math inline">\(i\in\{1,2,\cdots,N\}\)</span>:</li>
+<li><span class="math inline">\(\qquad\qquad\)</span><strong>if</strong>
+<span class="math inline">\(|A_{c,i}|\geqslant N\)</span>:</li>
+<li><span
+class="math inline">\(\qquad\qquad\qquad\)</span><strong>continue</strong></li>
+<li><span
+class="math inline">\(\qquad\qquad\)</span><strong>for</strong> <span
+class="math inline">\(j\in
+\{1,2,\cdots,\text{iter}-|A_{c,i}|\}\)</span>:</li>
+<li><span
+class="math inline">\(\qquad\qquad\qquad\)</span><strong>if</strong>
+<span class="math inline">\(A_{d,i}=\varnothing\)</span>:</li>
+<li><span
+class="math inline">\(\qquad\qquad\qquad\qquad\)</span><strong>break</strong></li>
+<li><span class="math inline">\(\qquad\qquad\qquad\)</span>找出 <span
+class="math inline">\(A_{d,i}\)</span> 全部的非支配个体 <span
+class="math inline">\(O_i\)</span>。</li>
+<li><span class="math inline">\(\qquad\qquad\qquad\)</span>在 <span
+class="math inline">\(O_i\)</span> 中找出 <span
+class="math inline">\(x_b=\displaystyle\arg\min_{x\in
+O_i}g(x;w_i,z^\ast)\)</span>。</li>
+<li><span class="math inline">\(\qquad\qquad\qquad\)</span><span
+class="math inline">\(\text{DA}\leftarrow\text{DA}\cup\{x_b\}\)</span>，<span
+class="math inline">\(A_{d,i}\leftarrow
+A_{d,i}\backslash\{x_b\}\)</span>。</li>
+<li><span
+class="math inline">\(\qquad\qquad\qquad\)</span><strong>if</strong>
+<span class="math inline">\(|\text{DA}|\)</span> == <span
+class="math inline">\(N\)</span>:</li>
+<li><span
+class="math inline">\(\qquad\qquad\qquad\qquad\)</span><strong>return</strong>
+<span class="math inline">\(\text{DA}\)</span></li>
+<li><span class="math inline">\(\qquad\)</span><span
+class="math inline">\(\text{iter}\leftarrow\text{iter}+1\)</span></li>
+</ol>
+</blockquote>
+<p>这一算法的特征是：在第 <span
+class="math inline">\(\text{iter}\)</span>
+论循环中，每个权重控制的区域内最多只有 <span
+class="math inline">\(\text{iter}\)</span> 个个体可以进入下一代的 <span
+class="math inline">\(\text{CA}\cup\text{DA}\)</span>，进而保持种群在空间中的均匀性。</p>
+<h2 id="ccmo-算法框架">CCMO 算法框架</h2>
+<p><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/9122020">CCMO
+算法框架</a> 也是约束多目标问题的多种群算法的代表。它的基本流程是：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>为原（origin）问题找到一个相关且更好求解的辅助（help）问题（通常是没有约束的原问题），并选定一种多目标演化算法
+MOEA。</li>
+<li>随机生成两个种群 <span
+class="math inline">\(P_{\text{origin}}\)</span> 与 <span
+class="math inline">\(P_{\text{help}}\)</span>
+分别求解以上两个问题。</li>
+<li>基于 MOEA，从 <span class="math inline">\(P_{\text{origin}}\)</span>
+与 <span class="math inline">\(P_{\text{help}}\)</span> 分别产生后代
+<span class="math inline">\(Q_{\text{origin}}\)</span> 与 <span
+class="math inline">\(Q_{\text{help}}\)</span>。</li>
+<li>基于 MOEA，从 <span class="math inline">\(P_{\text{origin}}\cup
+Q_{\text{origin}}\cup Q_{\text{help}}\)</span> 中选出新的 <span
+class="math inline">\(P_{\text{origin}}\)</span>，从 <span
+class="math inline">\(P_{\text{help}}\cup Q_{\text{origin}}\cup
+Q_{\text{help}}\)</span> 中选出新的 <span
+class="math inline">\(P_{\text{help}}\)</span></li>
+<li>回到步骤 3，直到达到结束标准。</li>
+</ol>
+</blockquote>
+<h2 id="pps-算法框架">PPS 算法框架</h2>
+<p><a
+target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/abs/pii/S2210650218300233"><strong>推拉搜索（push
+and pull search , PPS）</strong></a>
+是约束多目标问题的多阶段算法的代表。它的基本流程为：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>第一阶段：求解无约束的多目标优化问题。</li>
+<li>第二阶段：以第一阶段的结果为初值，求解约束多目标优化问题。</li>
+</ol>
+</blockquote>
+<h2 id="top-算法框架">ToP 算法框架</h2>
+<p><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/document/8624421">ToP
+算法框架</a> 也是约束多目标问题的多阶段算法的代表。它的基本流程是：</p>
+<blockquote class="colorquote algorithm" ><ol type="1">
+<li>第一阶段：利用进化算法求解与原问题具有相同约束条件的单目标优化问题（例如，将各个优化目标简单相加），探索可行区域。</li>
+<li>第二阶段：以第一阶段的结果为初值，求解约束多目标优化问题。</li>
+</ol>
+</blockquote>
 <h1 id="参考文献">参考文献</h1>
 <p>中文书籍：</p>
 <ul>
@@ -7856,7 +8072,7 @@ Chen, and Kay Chen Tan. IEEE Trans. Evol. Comput. <strong>27</strong>,
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://xmq-servicecenter.github.io/2024/05/29/about_next/">
+    <link itemprop="mainEntityOfPage" href="https://xmq-servicecenter.github.io/2024/06/01/Meteorology-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -7874,7 +8090,7 @@ Chen, and Kay Chen Tan. IEEE Trans. Evol. Comput. <strong>27</strong>,
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/29/about_next/" class="post-title-link" itemprop="url">关于 hexo 与 next 的配置问题</a>
+          <a href="/2024/06/01/Meteorology-1/" class="post-title-link" itemprop="url">天气学</a>
         </h2>
 
         <div class="post-meta-container">
@@ -7885,14 +8101,14 @@ Chen, and Kay Chen Tan. IEEE Trans. Evol. Comput. <strong>27</strong>,
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-05-29 16:34:18" itemprop="dateCreated datePublished" datetime="2024-05-29T16:34:18+08:00">2024-05-29</time>
+      <time title="创建时间：2024-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2024-06-01T00:00:00+08:00">2024-06-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-07-24 11:40:06" itemprop="dateModified" datetime="2024-07-24T11:40:06+08:00">2024-07-24</time>
+      <time title="修改时间：2024-09-16 08:26:03" itemprop="dateModified" datetime="2024-09-16T08:26:03+08:00">2024-09-16</time>
     </span>
 
   
@@ -7905,127 +8121,12 @@ Chen, and Kay Chen Tan. IEEE Trans. Evol. Comput. <strong>27</strong>,
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="自定义主页">自定义主页</h2>
-<p>自定义主页可参考 <a
-target="_blank" rel="noopener" href="https://blog.csdn.net/tujidi1csd/article/details/120180779">这篇文章</a>。这里的做法是：</p>
-<ul>
-<li><p>在根目录的 <code>source</code> 文件夹下新建 <code>index.md</code>
-文件，并写入</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">center</span>&gt;</span></span><span class="language-xml"><span class="tag">&lt;<span class="name">font</span> <span class="attr">size</span>=<span class="string">15</span>&gt;</span></span>奇怪的小网站<span class="language-xml"><span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><span class="language-xml"><span class="tag">&lt;/<span class="name">center</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-<p>等相关内容</p></li>
-<li><p>在根目录的 <code>_config.yml</code> 文件中，将
-<code>index_generator</code> 项的 <code>path</code> 项修改为
-<code>/public/index.html</code></p></li>
-<li><p>在根目录的 <code>_config.next.yml</code> 文件中，将
-<code>menu</code> 项中的 <code>home</code> 项修改为
-<code>/ || fa fa-home</code></p></li>
-</ul>
-<h2 id="使用-canvas_nest-动画背景">使用 canvas_nest 动画背景</h2>
-<p>有许多讲 canvas_nest 动画背景的文章都过时了，因为 <a
-target="_blank" rel="noopener" href="https://hexo-next.readthedocs.io/zh-cn/latest/next/advanced/%E5%8A%A8%E6%80%81%E8%83%8C%E6%99%AF/">NexT
-8.0.0-rc.2移除了canvas-nest集成</a>。</p>
-<p>为了使用 canvas_nest，可以参考 <a
-target="_blank" rel="noopener" href="https://github.com/theme-next/theme-next-canvas-nest">github
-上的教程</a>。具体操作为：</p>
-<ul>
-<li><p>在 <code>hexo/source/_data</code>
-文件夹（如果不存在这一文件夹就创建一个）中创建 <code>footer.swig</code>
-文件，并写入：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">color</span>=<span class="string">&quot;0,0,255&quot;</span> <span class="attr">opacity</span>=<span class="string">&quot;0.5&quot;</span> <span class="attr">zIndex</span>=<span class="string">&quot;-1&quot;</span> <span class="attr">count</span>=<span class="string">&quot;99&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js&quot;</span>&gt;</span></span><span class="language-xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
-<li><p>在根目录的 <code>_config.next.yml</code> 文件中，将
-<code>custom_file_path</code> 项中的 <code>footer</code> 项修改为
-<code>source/_data/footer.swig</code></p></li>
-</ul>
-<h2 id="使用数学公式">使用数学公式</h2>
-<p>为了在 hexo 与 next 中愉快地使用数学公式，我们需要参考 next 文档中的
-<a
-target="_blank" rel="noopener" href="https://github.com/theme-next/hexo-theme-next/blob/master/docs/MATH.md">Math
-Equations</a> 部分。</p>
-<p>建议使用 hexo-renderer-pandoc，而非 hexo-renderer-kramed。</p>
-<p>具体操作为：</p>
-<ul>
-<li><p>移除 hexo-renderer-marked 并安装 hexo-renderer-pandoc：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked</span><br><span class="line">npm install hexo-renderer-pandoc</span><br></pre></td></tr></table></figure></li>
-<li><p>在根目录的 <code>_config.next.yml</code> 文件中，将
-<code>math</code> 项中的 <code>mathjax</code> 项中的 <code>enable</code>
-修改为 <code>true</code>，并且将 <code>math</code> 项中的
-<code>every_page</code> 也修改为
-<code>true</code>，因为预期每一页都会有数学公式。</p></li>
-<li><p>在每一个 md 文件的开头，两个<code>---</code>之间的部分，添加</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mathjax: true</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="使用折叠">使用折叠</h2>
-<p>参考 <a
-target="_blank" rel="noopener" href="https://github.com/fletchto99/hexo-sliding-spoiler/tree/master">github上的教程</a>。具体操作步骤为：</p>
-<ul>
-<li><p>直接</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-sliding-spoiler --save</span><br></pre></td></tr></table></figure></li>
-<li><p>然后在
-<code>/node_modules/hexo-sliding-spoiler/assets/spoiler.css</code>
-文件中：</p>
-<ul>
-<li>将 <code>.spoiler.collapsed .spoiler-title:before</code> 内的
-<code>content</code> 修改为 <code>[展开]：</code></li>
-<li>将 <code>.spoiler.expanded .spoiler-title:before</code> 内的
-<code>content</code> 修改为 <code>[收起]：</code></li>
-</ul></li>
-</ul>
-<h2 id="使用定理环境">使用定理环境</h2>
-<p>如果需要为定理、定义等自动编号，可以参考 <a
-target="_blank" rel="noopener" href="https://jp.v2ex.com/t/1036101">这篇文章</a>。</p>
-<p>这里的操作为：</p>
-<ul>
-<li><p>移除 hexo-renderer-marked 并安装 hexo-renderer-pandoc
-（同上）</p></li>
-<li><p>在根目录（与 <code>_config.next.yml</code> 和
-<code>_config.yml</code> 同级的目录）中，使用：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/dialoa/statement/</span><br></pre></td></tr></table></figure>
-<p>然后就会多出来一个 <code>statement</code> 文件夹。</p></li>
-<li><p>还是在根目录中，新建一个
-<code>metadata.yml</code>，里面写上：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">link-citations:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">reference-section-title:</span> <span class="string">&quot;References&quot;</span></span><br><span class="line"><span class="attr">bibliography:</span> <span class="string">&quot;./ref.bib&quot;</span></span><br><span class="line"><span class="attr">statement:</span></span><br><span class="line">  <span class="attr">supply-header:</span> <span class="literal">no</span></span><br><span class="line">  <span class="attr">count-within:</span> <span class="number">1</span></span><br><span class="line">  <span class="attr">crossref-prefixes:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">statement-kinds:</span></span><br><span class="line">  <span class="attr">definition:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">定义</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">definition</span></span><br><span class="line">  <span class="attr">theorem:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">定理</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">theorem</span></span><br><span class="line">  <span class="attr">lemma:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">引理</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">theorem</span></span><br><span class="line">  <span class="attr">proposition:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">命题</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">theorem</span></span><br><span class="line">  <span class="attr">corollary:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">推论</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">theorem</span></span><br><span class="line">  <span class="attr">proof:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">证明</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">none</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">definition</span></span><br><span class="line">  <span class="attr">note:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">注记</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">none</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">definition</span></span><br><span class="line">  <span class="attr">example:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">例子</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">none</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">definition</span></span><br><span class="line">  <span class="attr">question:</span></span><br><span class="line">    <span class="attr">label:</span> <span class="string">问题</span></span><br><span class="line">    <span class="attr">counter:</span> <span class="string">theorem</span></span><br><span class="line">    <span class="attr">style:</span> <span class="string">definition</span></span><br><span class="line"><span class="attr">statement-styles:</span></span><br><span class="line">  <span class="attr">definition:</span></span><br><span class="line">    <span class="attr">punctuation:</span> <span class="string">&#x27;：&#x27;</span></span><br><span class="line">  <span class="attr">note:</span></span><br><span class="line">    <span class="attr">punctuation:</span> <span class="string">&#x27;：&#x27;</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在 <code>_config.yml</code> 中加上：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pandoc</span></span><br><span class="line"><span class="attr">pandoc:</span></span><br><span class="line">  <span class="attr">args:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;--to&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;html5&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;-L&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;./statement/statement.lua&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;--citeproc&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;--metadata-file&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;./metadata.yml&#x27;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">&#x27;--mathjax&#x27;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>在 <code>/themes/next/source/css/main.styl</code>
-文件中加上：</p>
-<figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://jp.v2ex.com/t/1036101</span></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.plain</span></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">175</span>, <span class="number">238</span>, <span class="number">238</span>);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.0rem</span> <span class="number">0.6rem</span> <span class="number">0.0rem</span> <span class="number">0.6rem</span>;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">5px</span> solid <span class="built_in">rgb</span>(<span class="number">135</span>, <span class="number">206</span>, <span class="number">235</span>);</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0em</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.example</span><span class="selector-class">.definition</span></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">193</span>, <span class="number">255</span>, <span class="number">193</span>);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.0rem</span> <span class="number">0.6rem</span> <span class="number">0.0rem</span> <span class="number">0.6rem</span>;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">5px</span> solid <span class="built_in">rgb</span>(<span class="number">180</span>, <span class="number">238</span>, <span class="number">180</span>);</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0em</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.definition</span></span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">253</span>, <span class="number">245</span>, <span class="number">230</span>);</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.0rem</span> <span class="number">0.6rem</span> <span class="number">0.0rem</span> <span class="number">0.6rem</span>;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">5px</span> solid <span class="built_in">rgb</span>(<span class="number">255</span>, <span class="number">228</span>, <span class="number">196</span>);</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0em</span> <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.plain</span> <span class="selector-class">.statement-label</span></span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.note</span><span class="selector-class">.unnumbered</span></span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">2em</span> auto;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0.5em</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">85%</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90%</span>;</span><br><span class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>);</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">5px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">10px</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.definition</span> <span class="selector-class">.statement-label</span></span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.proof</span> <span class="selector-class">.statement-label</span></span><br><span class="line">    <span class="attribute">font-weight</span>: bold;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.plain</span> <span class="selector-tag">p</span><span class="selector-pseudo">:first-child</span></span><br><span class="line">     <span class="attribute">text-indent</span>: <span class="number">0pt</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="selector-class">.statement</span><span class="selector-class">.plain</span> <span class="selector-class">.statement-info</span></span><br><span class="line">    <span class="attribute">font-style</span>: normal;</span><br><span class="line">    <span class="attribute">font-weight</span>: normal;</span><br><span class="line">    <span class="attribute">font-variant</span>: normal;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.csl-entry</span></span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">1px</span> solid <span class="number">#777</span>;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">1em</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: <span class="number">2em</span>;</span><br><span class="line">    <span class="attribute">margin-top</span>: <span class="number">1.5em</span>;</span><br><span class="line">    <span class="attribute">margin-bottom</span>: <span class="number">1.5em</span>;</span><br><span class="line">    <span class="attribute">margin-right</span>: <span class="number">0em</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">150%</span>;</span><br></pre></td></tr></table></figure></li>
-<li><p>使用方法：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">::: &#123;.definition #label1&#125;</span><br><span class="line">$\,\!$<span class="strong">**（定义 1）**</span></span><br><span class="line">测试</span><br><span class="line">:::</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="折叠与定理环境的冲突">折叠与定理环境的冲突</h2>
-<p>不知为何，被折叠起来的内容中不能通过 <code>@xxx</code>
-来引用定理编号。该问题尚未解决。</p>
-<h2 id="文本框背景颜色设置">文本框背景颜色设置</h2>
-<p>如果只是需要一个有颜色的文本框，就可参考 <a
-target="_blank" rel="noopener" href="https://ellis-wu.github.io/2018/06/13/hexo-color-quote/">这篇文章</a>。</p>
-<p>这里的操作为：</p>
-<ul>
-<li><p>在 <code>/themes/next/scripts</code> 文件夹中新建
-<code>colorquote.js</code> 文件，并写入：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* Color Quote Block Tag</span></span><br><span class="line"><span class="comment">* <span class="doctag">@description</span> Color Quote Block</span></span><br><span class="line"><span class="comment">* <span class="doctag">@example</span></span></span><br><span class="line"><span class="comment">*     &lt;% colorquote [type] %&gt;</span></span><br><span class="line"><span class="comment">*     content</span></span><br><span class="line"><span class="comment">*     &lt;% endcolorquote %&gt;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">hexo.<span class="property">extend</span>.<span class="property">tag</span>.<span class="title function_">register</span>(<span class="string">&#x27;colorquote&#x27;</span>, <span class="keyword">function</span> (<span class="params">args, content</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> type =  args[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> mdContent = hexo.<span class="property">render</span>.<span class="title function_">renderSync</span>(&#123;<span class="attr">text</span>: content, <span class="attr">engine</span>: <span class="string">&#x27;markdown&#x27;</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&lt;blockquote class=&quot;colorquote &#x27;</span> + type + <span class="string">&#x27;&quot;&gt;&#x27;</span> + mdContent + <span class="string">&#x27;&lt;/blockquote&gt;&#x27;</span>;</span><br><span class="line">&#125;, &#123;<span class="attr">ends</span>: <span class="literal">true</span>&#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p>在
-<code>/themes/next/source/css/_common/scaffolding/tags/blockquote-center.styl</code>
-文件中加上：</p>
-<figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// https://ellis-wu.github.io/2018/06/13/hexo-color-quote/</span></span><br><span class="line"><span class="selector-class">.colorquote</span></span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0.1em</span> <span class="number">1.5em</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#4a4a4a</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">1em</span>;</span><br><span class="line">  <span class="attribute">margin-left</span>: <span class="number">2em</span>;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">2em</span>;</span><br><span class="line">  &amp;<span class="selector-class">.definition</span></span><br><span class="line">    <span class="attribute">border-color</span>: <span class="built_in">rgb</span>(<span class="number">255</span>, <span class="number">228</span>, <span class="number">196</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">253</span>, <span class="number">245</span>, <span class="number">230</span>);</span><br><span class="line">  &amp;<span class="selector-class">.theorem</span></span><br><span class="line">    <span class="attribute">border-color</span>: <span class="built_in">rgb</span>(<span class="number">135</span>, <span class="number">206</span>, <span class="number">235</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">175</span>, <span class="number">238</span>, <span class="number">238</span>);</span><br><span class="line">  &amp;<span class="selector-class">.example</span></span><br><span class="line">    <span class="attribute">border-color</span>: <span class="built_in">rgb</span>(<span class="number">180</span>, <span class="number">238</span>, <span class="number">180</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgb</span>(<span class="number">193</span>, <span class="number">255</span>, <span class="number">193</span>);</span><br><span class="line">  &amp;<span class="selector-class">.warning</span></span><br><span class="line">    <span class="attribute">border-color</span>: <span class="built_in">hsl</span>(<span class="number">348</span>, <span class="number">100%</span>, <span class="number">61%</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">hsl</span>(<span class="number">348</span>, <span class="number">100%</span>, <span class="number">85%</span>);</span><br><span class="line">  &amp;<span class="selector-class">.algorithm</span></span><br><span class="line">    <span class="attribute">border-color</span>: <span class="built_in">hsl</span>(<span class="number">0</span>, <span class="number">0%</span>, <span class="number">71%</span>);</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="built_in">hsl</span>(<span class="number">0</span>, <span class="number">0%</span>, <span class="number">94%</span>);</span><br></pre></td></tr></table></figure></li>
-<li><p>使用方法：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% colorquote theorem %&#125;</span><br><span class="line">测试</span><br><span class="line">&#123;% endcolorquote %&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="字体设置">字体设置</h2>
-<p>Next 的字体设置可以参考 <a
-target="_blank" rel="noopener" href="https://hexo-next.readthedocs.io/zh-cn/latest/next/advanced/%E5%AD%97%E4%BD%93%E8%AE%BE%E7%BD%AE/">这篇文章</a></p>
-<p>这里的操作为：</p>
-<ul>
-<li><p>在根目录的 <code>_config.next.yml</code> 文件中，对
-<code>font</code> 项做如下修改：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">font:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Uri of fonts host, e.g. https://fonts.googleapis.com (Default).</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">https://fonts.googleapis.com</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font options:</span></span><br><span class="line">  <span class="comment"># `external: true` will load this font family from `host` above.</span></span><br><span class="line">  <span class="comment"># `family: Times New Roman`. Without any quotes.</span></span><br><span class="line">  <span class="comment"># `size: x.x`. Use `em` as unit. Default: 1 (16px)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Global font settings used for all elements inside &lt;body&gt;.</span></span><br><span class="line">  <span class="attr">global:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="comment"># family: Lato</span></span><br><span class="line">    <span class="attr">family:</span> <span class="string">Noto</span> <span class="string">Serif</span> <span class="string">Simplified</span> <span class="string">Chinese</span></span><br><span class="line">    <span class="attr">size:</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for site title (.site-title).</span></span><br><span class="line">  <span class="attr">title:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">family:</span> <span class="string">Microsoft</span> <span class="string">YaHei</span></span><br><span class="line">    <span class="attr">size:</span> <span class="string">2em</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for headlines (&lt;h1&gt; to &lt;h6&gt;).</span></span><br><span class="line">  <span class="attr">headings:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">family:</span> <span class="string">Microsoft</span> <span class="string">YaHei</span></span><br><span class="line">    <span class="attr">size:</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for posts (.post-body).</span></span><br><span class="line">  <span class="attr">posts:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">family:</span> <span class="string">Noto</span> <span class="string">Serif</span> <span class="string">SC</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Font settings for &lt;code&gt; and code blocks.</span></span><br><span class="line">  <span class="attr">codes:</span></span><br><span class="line">    <span class="attr">external:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">family:</span></span><br></pre></td></tr></table></figure></li>
-<li><p>如果还需要进一步修改，那么：</p>
-<ul>
-<li><p>在 <code>/themes/next/source/css/_variables/base.styl</code>
-中，找到 <code>// Font families.</code> 一项，对其进行修改</p></li>
-<li><p>在 <code>/themes/next/layout/_partials/head/head.njk</code>
-中，找到 <code>&#123;&#123; next_font() &#125;&#125;</code> 一项，对其进行修改</p></li>
-</ul></li>
-</ul>
+          <hr />
+<h1 id="基本概念">基本概念</h1>
+<h2 id="位势高度">位势高度</h2>
+<h2 id="气压坐标系">气压坐标系</h2>
+<h2 id="风速的分解">风速的分解</h2>
+<h2 id="位温">位温</h2>
 <link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
       
     </div>
@@ -8044,6 +8145,9 @@ target="_blank" rel="noopener" href="https://hexo-next.readthedocs.io/zh-cn/late
 
 
 
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/public/index.html/page/2/">2</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/public/index.html/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
 
 </div>
   </main>
